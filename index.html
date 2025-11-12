@@ -194,10 +194,9 @@ th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left}
   <div class="gate-box">
     <h3>Accès audit</h3>
     <p>Entrez le code transmis par Numérion.</p>
-    <input id="gateInput" type="password" placeholder="Code d’accès" autocomplete="one-time-code">
+    <input id="gateInput" type="password" placeholder="Code d’accès" autocomplete="one-time-code" autofocus>
     <button id="gateBtn" class="btn">Entrer</button>
     <p id="gateErr" class="err"></p>
-    <p id="gateDbg" class="muted small" style="display:none"></p>
   </div>
 </div>
 
@@ -231,77 +230,39 @@ th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left}
   const line=(sel,cfg)=>{ if(!$(sel)) return; new Chart($(sel),{type:'line',data:{labels:cfg.labels,datasets:cfg.datasets},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#e6e6e6'}}},scales:{x:{ticks:{color:'#9ca3af'},grid:{color:'#222'}},y:{ticks:{color:'#9ca3af'},grid:{color:'#222'}}}}); }
   const bar=(sel,labels,dataArr)=>{ if(!$(sel)) return; new Chart($(sel),{type:'bar',data:{labels,datasets:[{label:'Montants',data:dataArr}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#e6e6e6'}}},scales:{x:{ticks:{color:'#9ca3af'},grid:{color:'#222'}},y:{ticks:{color:'#9ca3af'},grid:{color:'#222'}}}}); }
 
-  // ===== Safe storage (bloqué dans iframes/Safari privé)
-  const safeStorage = (()=> {
-    try {
-      const k='__t'; localStorage.setItem(k,'1'); localStorage.removeItem(k);
-      return {
-        get:(k)=>localStorage.getItem(k),
-        set:(k,v)=>localStorage.setItem(k,v),
-        remove:(k)=>localStorage.removeItem(k)
-      };
-    } catch(e) {
-      let mem = {};
-      return {
-        get:(k)=>mem[k]||null,
-        set:(k,v)=>{mem[k]=String(v)},
-        remove:(k)=>{delete mem[k]}
-      };
-    }
-  })();
-  const LS_KEY='ne_audit_ok_v3';
-
-  // ===== Load data
+  // ===== Data
   let data={}; try{ data=JSON.parse(id('AUDIT_DATA').textContent) }catch(e){ alert('Config JSON invalide.'); return; }
 
-  // ===== Gate
-  const gate=id('gate'), btn=id('gateBtn'), inp=id('gateInput'), err=id('gateErr'), dbgEl=id('gateDbg');
-  const norm = s => (s??'').normalize('NFKC').replace(/[\u00A0\u2000-\u200B\u202F\u205F\u3000]/g,'').replace(/[\-‐-‒–—―]/g,'-').replace(/\s+/g,'').toUpperCase();
+  // ===== Gate sans stockage
+  const gate=id('gate'), btn=id('gateBtn'), inp=id('gateInput'), err=id('gateErr');
+  const norm = s => (s??'')
+    .normalize('NFKC')
+    .replace(/[\u00A0\u2000-\u200B\u202F\u205F\u3000]/g,'')
+    .replace(/[\-‐-‒–—―]/g,'-')
+    .replace(/\s+/g,'')
+    .toUpperCase();
+
   const codesRaw = Array.isArray(data.accessCodes)?data.accessCodes:(data.accessCode?[data.accessCode]:[]);
   const targets = new Set(codesRaw.map(norm));
 
-  // Params depuis search ET hash (Super.so peut supprimer ?)
+  // Lecture param depuis query OU hash
   const getParam = (key) => {
-    const fromSearch = new URLSearchParams(location.search).get(key);
-    if (fromSearch) return fromSearch;
-    const hash = location.hash.startsWith('#') ? location.hash.slice(1) : location.hash;
-    const fromHash = new URLSearchParams(hash).get(key);
-    return fromHash;
+    const qs = new URLSearchParams(location.search).get(key);
+    if (qs) return qs;
+    const h = location.hash.startsWith('#')?location.hash.slice(1):location.hash;
+    return new URLSearchParams(h).get(key);
   };
-  const debug = getParam('debug')==='1';
-  const unlock = getParam('unlock')==='1';
+
   const codeParam = getParam('code');
-
-  if (debug) {
-    dbgEl.style.display='block';
-    dbgEl.textContent='DEBUG • codes acceptés: '+codesRaw.join(', ');
-    console.log('[NE] RAW codes =', codesRaw, '| TARGETS =', [...targets]);
-  }
-
-  // Bypass
-  if (unlock) {
-    gate.style.display='none';
-    safeStorage.set(LS_KEY,'1');
-  }
-
-  // Auto via URL
   if (codeParam && targets.has(norm(codeParam))) {
-    gate.style.display='none';
-    safeStorage.set(LS_KEY,'1');
-  }
-
-  // Déjà validé
-  if (safeStorage.get(LS_KEY)==='1') {
-    gate.style.display='none';
+    gate.style.display='none'; // pas de persistance
   }
 
   function tryLogin(){
     const typed = norm(inp.value);
-    if (debug) console.log('[NE] typed =', typed);
     if (targets.has(typed)) {
       gate.style.display='none';
       err.textContent='';
-      safeStorage.set(LS_KEY,'1');
     } else {
       err.textContent='Code incorrect. Utilise "-" et aucun espace.';
     }
@@ -309,12 +270,11 @@ th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left}
   btn?.addEventListener('click', tryLogin);
   inp?.addEventListener('keydown', e => { if(e.key==='Enter') tryLogin(); });
 
-  // ===== Bind
+  // ===== Bind contenu
   setText('#companyName', data.company?.name);
   setText('#period', data.company?.period);
   setText('#auditId', data.company?.auditId);
   setText('#auditDate', data.company?.date);
-  const eur = v => Number(v).toLocaleString('fr-FR',{style:'currency',currency:'EUR'});
   setText('#kpiCash', eur(data.company?.cash||0));
   setText('#kpiImpact', `${data.executive?.impactScore||0}/100`);
   setText('#kpiDD', `${Number(data.executive?.drawdownMaxPct||0).toFixed(1)} %`);
@@ -331,7 +291,9 @@ th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left}
   listTo('#methodo', data.methodology);
 
   // QR
-  if (document.getElementById('qrcode')) new QRCode(document.getElementById('qrcode'), { text: data.reportUrl, width: 92, height: 92 });
+  try {
+    if (document.getElementById('qrcode')) new QRCode(document.getElementById('qrcode'), { text: data.reportUrl, width: 92, height: 92 });
+  } catch(e){ /* ignore */ }
 
   // Charts
   const scen = data.scenarios||{};
@@ -342,6 +304,7 @@ th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left}
     ds('Scénario 3 %', scen.series?.[1]?.monthly||[]),
     ds('Scénario 5 %', scen.series?.[2]?.monthly||[]),
   ]});
+
   function buildScenario(key, serie, baseline, startCash){
     if(!serie) return;
     line('#chart'+key,{labels:labelsMonths((serie.monthly||[]).length),datasets:[ds('Baseline',baseline||[]),ds(`Scénario ${serie.name}`,serie.monthly||[])]});
@@ -367,7 +330,6 @@ th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left}
     const hex = [...new Uint8Array(hash)].map(b=>b.toString(16).padStart(2,'0')).join('');
     setText('#pdfHash', hex);
   });
-
 })();
 </script>
 </body>
