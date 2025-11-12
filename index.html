@@ -190,13 +190,14 @@ th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left}
 </section>
 
 <!-- Passcode -->
-<div id="gate" class="gate">
+<div id="gate" class="gate" role="dialog" aria-modal="true">
   <div class="gate-box">
     <h3>Accès audit</h3>
     <p>Entrez le code transmis par Numérion.</p>
-    <input id="gateInput" type="password" placeholder="Code d’accès" autocomplete="one-time-code" autofocus>
+    <input id="gateInput" type="text" inputmode="latin" placeholder="Code d’accès" autocomplete="one-time-code" autofocus>
     <button id="gateBtn" class="btn">Entrer</button>
     <p id="gateErr" class="err"></p>
+    <p id="gateDbg" class="muted small" style="display:none"></p>
   </div>
 </div>
 
@@ -218,44 +219,61 @@ th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left}
 
 <script>
 (function(){
-  // ===== Helpers
+  // ===== Utils
   const $ = s=>document.querySelector(s);
   const id = s=>document.getElementById(s);
   const setText=(sel,v)=>{const el=$(sel); if(el) el.textContent=v;}
-  const listTo=(sel,items)=>{const el=$(sel); if(!el) return; el.innerHTML=''; (items||[]).forEach(t=>{const li=document.createElement('li'); li.textContent=t; el.appendChild(li);});}
-  const orderedListTo=(sel,items)=>{const el=$(sel); if(!el) return; el.innerHTML=''; (items||[]).forEach(t=>{const li=document.createElement('li'); li.textContent=t; el.appendChild(li);});}
-  const eur=v=>Number(v).toLocaleString('fr-FR',{style:'currency',currency:'EUR'});
+  const listTo=(sel,items=[])=>{const el=$(sel); if(!el) return; el.innerHTML=''; items.forEach(t=>{const li=document.createElement('li'); li.textContent=t; el.appendChild(li);});}
+  const orderedListTo=(sel,items=[])=>{const el=$(sel); if(!el) return; el.innerHTML=''; items.forEach(t=>{const li=document.createElement('li'); li.textContent=t; el.appendChild(li);});}
+  const eur=v=>Number(v||0).toLocaleString('fr-FR',{style:'currency',currency:'EUR'});
   const labelsMonths=n=>Array.from({length:n},(_,i)=>`M${i+1}`);
-  const ds=(label,data)=>({label,data,tension:.25,pointRadius:0});
-  const line=(sel,cfg)=>{ if(!$(sel)) return; new Chart($(sel),{type:'line',data:{labels:cfg.labels,datasets:cfg.datasets},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#e6e6e6'}}},scales:{x:{ticks:{color:'#9ca3af'},grid:{color:'#222'}},y:{ticks:{color:'#9ca3af'},grid:{color:'#222'}}}}); }
-  const bar=(sel,labels,dataArr)=>{ if(!$(sel)) return; new Chart($(sel),{type:'bar',data:{labels,datasets:[{label:'Montants',data:dataArr}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#e6e6e6'}}},scales:{x:{ticks:{color:'#9ca3af'},grid:{color:'#222'}},y:{ticks:{color:'#9ca3af'},grid:{color:'#222'}}}}); }
+  const ds=(label,data)=>({label,data:(data||[]),tension:.25,pointRadius:0});
+  const line=(sel,cfg)=>{ const el=$(sel); if(!el) return;
+    new Chart(el,{type:'line',data:{labels:cfg.labels,datasets:cfg.datasets},
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#e6e6e6'}}},
+      scales:{x:{ticks:{color:'#9ca3af'},grid:{color:'#222'}},y:{ticks:{color:'#9ca3af'},grid:{color:'#222'}}}}); }
+  const bar=(sel,labels,dataArr)=>{ const el=$(sel); if(!el) return;
+    new Chart(el,{type:'bar',data:{labels,datasets:[{label:'Montants',data:dataArr}]},
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#e6e6e6'}}},
+      scales:{x:{ticks:{color:'#9ca3af'},grid:{color:'#222'}},y:{ticks:{color:'#9ca3af'},grid:{color:'#222'}}}}); }
 
   // ===== Data
   let data={}; try{ data=JSON.parse(id('AUDIT_DATA').textContent) }catch(e){ alert('Config JSON invalide.'); return; }
 
-  // ===== Gate sans stockage
-  const gate=id('gate'), btn=id('gateBtn'), inp=id('gateInput'), err=id('gateErr');
+  // ===== Gate logic — sans stockage, multi-params, bypass
+  const gate=id('gate'), btn=id('gateBtn'), inp=id('gateInput'), err=id('gateErr'), dbg=id('gateDbg');
+
   const norm = s => (s??'')
-    .normalize('NFKC')
-    .replace(/[\u00A0\u2000-\u200B\u202F\u205F\u3000]/g,'')
-    .replace(/[\-‐-‒–—―]/g,'-')
-    .replace(/\s+/g,'')
-    .toUpperCase();
+      .normalize('NFKC')
+      .replace(/[\u00A0\u2000-\u200B\u202F\u205F\u3000]/g,'')   // espaces spéciaux
+      .replace(/[\-‐-‒–—―]/g,'-')                               // tirets -> "-"
+      .replace(/\s+/g,'')
+      .toUpperCase();
 
   const codesRaw = Array.isArray(data.accessCodes)?data.accessCodes:(data.accessCode?[data.accessCode]:[]);
   const targets = new Set(codesRaw.map(norm));
 
-  // Lecture param depuis query OU hash
-  const getParam = (key) => {
+  // Lire query + fragment avec plusieurs clés
+  const getParam = key => {
     const qs = new URLSearchParams(location.search).get(key);
     if (qs) return qs;
     const h = location.hash.startsWith('#')?location.hash.slice(1):location.hash;
     return new URLSearchParams(h).get(key);
   };
 
-  const codeParam = getParam('code');
-  if (codeParam && targets.has(norm(codeParam))) {
-    gate.style.display='none'; // pas de persistance
+  const isOpenPath = location.pathname.endsWith('/open') || location.pathname.endsWith('/open/');
+  const unlock = getParam('unlock')==='1' || isOpenPath;
+  const debug = getParam('debug')==='1';
+
+  if (debug) { dbg.style.display='block'; dbg.textContent='DEBUG • Codes: '+codesRaw.join(', '); }
+
+  if (unlock) {
+    gate.style.display='none';
+  } else {
+    const codeParam = getParam('code') || getParam('c') || getParam('pass');
+    if (codeParam && targets.has(norm(codeParam))) {
+      gate.style.display='none';
+    }
   }
 
   function tryLogin(){
@@ -264,19 +282,19 @@ th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left}
       gate.style.display='none';
       err.textContent='';
     } else {
-      err.textContent='Code incorrect. Utilise "-" et aucun espace.';
+      err.textContent='Code incorrect. Utilise "-" et aucun espace. Ex: NE-TRESOREUFR';
     }
   }
-  btn?.addEventListener('click', tryLogin);
-  inp?.addEventListener('keydown', e => { if(e.key==='Enter') tryLogin(); });
+  btn.addEventListener('click', tryLogin);
+  inp.addEventListener('keydown', e => { if(e.key==='Enter') tryLogin(); });
 
   // ===== Bind contenu
   setText('#companyName', data.company?.name);
   setText('#period', data.company?.period);
   setText('#auditId', data.company?.auditId);
   setText('#auditDate', data.company?.date);
-  setText('#kpiCash', eur(data.company?.cash||0));
-  setText('#kpiImpact', `${data.executive?.impactScore||0}/100`);
+  setText('#kpiCash', eur(data.company?.cash));
+  setText('#kpiImpact', `${data.executive?.impactScore}/100`);
   setText('#kpiDD', `${Number(data.executive?.drawdownMaxPct||0).toFixed(1)} %`);
   setText('#kpiExit', data.executive?.exitWindow);
   setText('#commitHash', data.security?.commitHash);
@@ -291,26 +309,23 @@ th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left}
   listTo('#methodo', data.methodology);
 
   // QR
-  try {
-    if (document.getElementById('qrcode')) new QRCode(document.getElementById('qrcode'), { text: data.reportUrl, width: 92, height: 92 });
-  } catch(e){ /* ignore */ }
+  try { new QRCode(document.getElementById('qrcode'), { text: data.reportUrl, width: 92, height: 92 }); } catch(e){}
 
   // Charts
   const scen = data.scenarios||{};
-  const labels = labelsMonths(scen.horizonMonths||24);
-  line('#chartOverview',{labels,datasets:[
-    ds('Baseline', scen.baseline||[]),
-    ds('Scénario 1 %', scen.series?.[0]?.monthly||[]),
-    ds('Scénario 3 %', scen.series?.[1]?.monthly||[]),
-    ds('Scénario 5 %', scen.series?.[2]?.monthly||[]),
+  line('#chartOverview',{labels:labelsMonths(scen.horizonMonths||24),datasets:[
+    ds('Baseline', scen.baseline),
+    ds('Scénario 1 %', scen.series?.[0]?.monthly),
+    ds('Scénario 3 %', scen.series?.[1]?.monthly),
+    ds('Scénario 5 %', scen.series?.[2]?.monthly),
   ]});
 
   function buildScenario(key, serie, baseline, startCash){
     if(!serie) return;
+    const sum=a=>(a||[]).reduce((x,y)=>x+y,0);
     line('#chart'+key,{labels:labelsMonths((serie.monthly||[]).length),datasets:[ds('Baseline',baseline||[]),ds(`Scénario ${serie.name}`,serie.monthly||[])]});
     const t=document.getElementById('table'+key); if(!t) return;
     const bl = baseline||[];
-    const sum=a=>(a||[]).reduce((x,y)=>x+y,0);
     t.innerHTML = `
       <thead><tr><th>Mois</th><th>Baseline</th><th>Scénario ${serie.name}</th><th>Écart</th></tr></thead>
       <tbody>${
@@ -321,6 +336,9 @@ th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left}
   buildScenario('S1', scen.series?.[0], scen.baseline, data.company?.cash||0);
   buildScenario('S3', scen.series?.[1], scen.baseline, data.company?.cash||0);
   buildScenario('S5', scen.series?.[2], scen.baseline, data.company?.cash||0);
+
+  // Liquidity
+  bar('#chartLiquidity', (data.liquidity?.buckets||[]).map(b=>b.label), (data.liquidity?.buckets||[]).map(b=>b.amount));
 
   // PDF + Hash
   document.getElementById('btnDownload')?.addEventListener('click', ()=>window.print());
@@ -334,3 +352,4 @@ th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left}
 </script>
 </body>
 </html>
+
