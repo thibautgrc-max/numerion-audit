@@ -55,7 +55,6 @@ th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left}
 @media (max-width:980px){.grid-2,.grid-3,.hero-grid,.risk-grid{grid-template-columns:1fr}nav{display:none}}
 @media print{.no-print,.gate{display:none !important}body{print-color-adjust:exact;-webkit-print-color-adjust:exact}.card{page-break-inside:avoid}.hero{padding:20px 0}.table-wrap{overflow:visible}}
 </style>
-<!-- Libs -->
 <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
 </head>
@@ -195,16 +194,17 @@ th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left}
   <div class="gate-box">
     <h3>Accès audit</h3>
     <p>Entrez le code transmis par Numérion.</p>
-    <input id="gateInput" type="password" placeholder="Code d’accès">
+    <input id="gateInput" type="password" placeholder="Code d’accès" autofocus>
     <button id="gateBtn" class="btn">Entrer</button>
     <p id="gateErr" class="err"></p>
+    <p id="gateDbg" class="muted small" style="display:none"></p>
   </div>
 </div>
 
 <!-- ======= DATA JSON inline ======= -->
 <script id="AUDIT_DATA" type="application/json">
 {
-  "accessCode": "NE-TRESOREUFR",
+  "accessCodes": ["NE-TRESOREUFR","NE-2025"],
   "reportUrl": "https://audit.client.numerion.education/ACME",
   "company": { "name": "ACME Industries", "period": "Jan 2025 – Déc 2026", "auditId": "AUD-2025-001", "date": "12/11/2025", "cash": 1250000 },
   "executive": {
@@ -249,122 +249,142 @@ th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left}
 
 <script>
 (function(){
-  // ===== Helpers
+  // ===== Utils
   const $ = s=>document.querySelector(s);
+  const byId = id => document.getElementById(id);
   function setText(sel, v){ const el=$(sel); if(el) el.textContent=v; }
-  function listTo(sel, items){ const ul=$(sel); ul.innerHTML=''; items.forEach(t=>{const li=document.createElement('li'); li.textContent=t; ul.appendChild(li);});}
-  function orderedListTo(sel, items){ const ol=$(sel); ol.innerHTML=''; items.forEach(t=>{const li=document.createElement('li'); li.textContent=t; ol.appendChild(li);});}
-  function eur(v){ return v.toLocaleString('fr-FR',{style:'currency',currency:'EUR'}); }
+  function listTo(sel, items){ const el=$(sel); if(!el) return; el.innerHTML=''; (items||[]).forEach(t=>{const li=document.createElement('li'); li.textContent=t; el.appendChild(li);});}
+  function orderedListTo(sel, items){ const el=$(sel); if(!el) return; el.innerHTML=''; (items||[]).forEach(t=>{const li=document.createElement('li'); li.textContent=t; el.appendChild(li);});}
+  function eur(v){ return Number(v).toLocaleString('fr-FR',{style:'currency',currency:'EUR'}); }
   function labelsMonths(n){ return Array.from({length:n},(_,i)=>`M${i+1}`); }
   function ds(label, data){ return {label, data, tension:.25, pointRadius:0}; }
-  function line(sel, cfg){ new Chart($(sel),{type:'line',data:{labels:cfg.labels,datasets:cfg.datasets},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#e6e6e6'}}},scales:{x:{ticks:{color:'#9ca3af'},grid:{color:'#222'}},y:{ticks:{color:'#9ca3af'},grid:{color:'#222'}}}}); }
-  function bar(sel, labels, dataArr){ new Chart($(sel),{type:'bar',data:{labels,datasets:[{label:'Montants',data:dataArr}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#e6e6e6'}}},scales:{x:{ticks:{color:'#9ca3af'},grid:{color:'#222'}},y:{ticks:{color:'#9ca3af'},grid:{color:'#222'}}}}); }
-  function sum(a){ return a.reduce((x,y)=>x+y,0); }
+  function line(sel, cfg){ if(!$(sel)) return; new Chart($(sel),{type:'line',data:{labels:cfg.labels,datasets:cfg.datasets},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#e6e6e6'}}},scales:{x:{ticks:{color:'#9ca3af'},grid:{color:'#222'}},y:{ticks:{color:'#9ca3af'},grid:{color:'#222'}}}}); }
+  function bar(sel, labels, dataArr){ if(!$(sel)) return; new Chart($(sel),{type:'bar',data:{labels,datasets:[{label:'Montants',data:dataArr}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#e6e6e6'}}},scales:{x:{ticks:{color:'#9ca3af'},grid:{color:'#222'}},y:{ticks:{color:'#9ca3af'},grid:{color:'#222'}}}}); }
+  function sum(a){ return (a||[]).reduce((x,y)=>x+y,0); }
   async function sha256(blob){ const buf=await blob.arrayBuffer(); const hash=await crypto.subtle.digest('SHA-256',buf); return [...new Uint8Array(hash)].map(b=>b.toString(16).padStart(2,'0')).join(''); }
+  const LS_KEY='ne_audit_ok_v2';
 
-  // ===== Data
-  const data = JSON.parse(document.getElementById('AUDIT_DATA').textContent);
+  // ===== Data safe-parse
+  let data;
+  try{
+    data = JSON.parse(byId('AUDIT_DATA').textContent);
+  }catch(e){
+    alert('Erreur de configuration du rapport. JSON invalide.');
+    return;
+  }
 
-  // ===== Gate améliorée (robuste)
-  const gate = $('#gate'), btn = $('#gateBtn'), inp = $('#gateInput'), err = $('#gateErr');
-
-  // Normalisation forte: espaces insécables, tirets exotiques, casse
+  // ===== Gate robuste
+  const gate = byId('gate'), btn = byId('gateBtn'), inp = byId('gateInput'), err = byId('gateErr'), dbgEl = byId('gateDbg');
   const norm = s => (s ?? '')
     .normalize('NFKC')
-    .replace(/[\u00A0\u2000-\u200B\u202F\u205F\u3000]/g,'') // espaces spéciaux
-    .replace(/[\-‐-‒–—―]/g,'-')                              // tous tirets -> "-"
+    .replace(/[\u00A0\u2000-\u200B\u202F\u205F\u3000]/g,'')
+    .replace(/[\-‐-‒–—―]/g,'-')
     .replace(/\s+/g,'')
     .toUpperCase();
 
-  const target = norm(data.accessCode);
+  const codesRaw = Array.isArray(data.accessCodes) ? data.accessCodes : [data.accessCode];
+  const targets = new Set(codesRaw.map(norm));
   const params = new URLSearchParams(location.search);
-  const dbg = params.get('debug') === '1';
+  const debug = params.get('debug')==='1';
+  const unlock = params.get('unlock')==='1';
+  const codeFromUrl = params.get('code');
 
-  if (dbg) console.log('[NE] accessCode RAW =', data.accessCode, '| TARGET =', target);
+  if(debug){
+    dbgEl.style.display='block';
+    dbgEl.textContent = 'DEBUG • codes acceptés: ' + codesRaw.join(', ');
+    console.log('[NE] RAW codes =', codesRaw, '| TARGETS =', [...targets]);
+  }
+
+  // Bypass produit si ?unlock=1
+  if(unlock){
+    gate.style.display='none';
+    localStorage.setItem(LS_KEY,'1');
+  }
 
   // Auto via URL ?code=
-  const codeFromUrl = params.get('code');
-  if (codeFromUrl && norm(codeFromUrl) === target) {
+  if(codeFromUrl && targets.has(norm(codeFromUrl))){
     gate.style.display='none';
-    localStorage.setItem('ne_audit_ok','1');
+    localStorage.setItem(LS_KEY,'1');
   }
 
   // Auto-unlock si déjà validé
-  if(localStorage.getItem('ne_audit_ok')==='1') gate.style.display='none';
+  if(localStorage.getItem(LS_KEY)==='1') gate.style.display='none';
 
   function tryLogin(){
     const typed = norm(inp.value);
-    if (dbg) console.log('[NE] typed =', typed);
-    if(typed === target){
+    if(debug) console.log('[NE] typed =', typed);
+    if(targets.has(typed)){
       gate.style.display='none';
       err.textContent='';
-      localStorage.setItem('ne_audit_ok','1');
+      localStorage.setItem(LS_KEY,'1');
     } else {
-      err.textContent='Code incorrect. Vérifie le tiret et les espaces.';
+      err.textContent='Code incorrect. Utilise le tiret court "-" et aucun espace.';
     }
   }
   btn.addEventListener('click', tryLogin);
   inp.addEventListener('keydown', e => { if(e.key==='Enter') tryLogin(); });
 
   // ===== Bind texte
-  setText('#companyName', data.company.name);
-  setText('#period', data.company.period);
-  setText('#auditId', data.company.auditId);
-  setText('#auditDate', data.company.date);
-  setText('#kpiCash', eur(data.company.cash));
-  setText('#kpiImpact', `${data.executive.impactScore}/100`);
-  setText('#kpiDD', `${data.executive.drawdownMaxPct.toFixed(1)} %`);
-  setText('#kpiExit', data.executive.exitWindow);
-  setText('#commitHash', data.security.commitHash);
+  setText('#companyName', data.company?.name);
+  setText('#period', data.company?.period);
+  setText('#auditId', data.company?.auditId);
+  setText('#auditDate', data.company?.date);
+  setText('#kpiCash', eur(data.company?.cash));
+  setText('#kpiImpact', `${data.executive?.impactScore}/100`);
+  setText('#kpiDD', `${Number(data.executive?.drawdownMaxPct||0).toFixed(1)} %`);
+  setText('#kpiExit', data.executive?.exitWindow);
+  setText('#commitHash', data.security?.commitHash);
   setText('#reportUrl', data.reportUrl);
-  setText('#year', data.security.year);
+  setText('#year', data.security?.year);
 
-  listTo('#executiveBullets', data.executive.bullets);
-  listTo('#liquidityBullets', data.liquidity.bullets);
-  listTo('#complianceList', data.compliance.items);
-  orderedListTo('#recoList', data.recommendations.steps);
-  listTo('#plan90', data.recommendations.plan90);
+  listTo('#executiveBullets', data.executive?.bullets);
+  listTo('#liquidityBullets', data.liquidity?.bullets);
+  listTo('#complianceList', data.compliance?.items);
+  orderedListTo('#recoList', data.recommendations?.steps);
+  listTo('#plan90', data.recommendations?.plan90);
   listTo('#methodo', data.methodology);
 
   // ===== QR
-  new QRCode(document.getElementById('qrcode'), { text: data.reportUrl, width: 92, height: 92 });
+  if (byId('qrcode')) new QRCode(byId('qrcode'), { text: data.reportUrl, width: 92, height: 92 });
 
   // ===== Charts
   line('#chartOverview', {
-    labels: labelsMonths(data.scenarios.horizonMonths),
+    labels: labelsMonths(data.scenarios?.horizonMonths||24),
     datasets: [
-      ds('Baseline', data.scenarios.baseline),
-      ds('Scénario 1 %', data.scenarios.series[0].monthly),
-      ds('Scénario 3 %', data.scenarios.series[1].monthly),
-      ds('Scénario 5 %', data.scenarios.series[2].monthly)
+      ds('Baseline', data.scenarios?.baseline||[]),
+      ds('Scénario 1 %', data.scenarios?.series?.[0]?.monthly||[]),
+      ds('Scénario 3 %', data.scenarios?.series?.[1]?.monthly||[]),
+      ds('Scénario 5 %', data.scenarios?.series?.[2]?.monthly||[])
     ]
   });
-  buildScenario('S1', data.scenarios.series[0], data.scenarios.baseline, data.company.cash);
-  buildScenario('S3', data.scenarios.series[1], data.scenarios.baseline, data.company.cash);
-  buildScenario('S5', data.scenarios.series[2], data.scenarios.baseline, data.company.cash);
-  bar('#chartLiquidity', data.liquidity.buckets.map(b=>b.label), data.liquidity.buckets.map(b=>b.amount));
+  buildScenario('S1', data.scenarios?.series?.[0], data.scenarios?.baseline, data.company?.cash||0);
+  buildScenario('S3', data.scenarios?.series?.[1], data.scenarios?.baseline, data.company?.cash||0);
+  buildScenario('S5', data.scenarios?.series?.[2], data.scenarios?.baseline, data.company?.cash||0);
+  bar('#chartLiquidity', (data.liquidity?.buckets||[]).map(b=>b.label), (data.liquidity?.buckets||[]).map(b=>b.amount));
 
   function buildScenario(key, serie, baseline, startCash){
-    line('#chart'+key,{labels:labelsMonths(serie.monthly.length),datasets:[ds('Baseline',baseline),ds(`Scénario ${serie.name}`,serie.monthly)]});
-    const t=document.getElementById('table'+key);
+    if(!serie) return;
+    line('#chart'+key,{labels:labelsMonths((serie.monthly||[]).length),datasets:[ds('Baseline',baseline||[]),ds(`Scénario ${serie.name}`,serie.monthly||[])]});
+    const t=byId('table'+key); if(!t) return;
+    const bl = baseline||[];
     t.innerHTML = `
       <thead><tr><th>Mois</th><th>Baseline</th><th>Scénario ${serie.name}</th><th>Écart</th></tr></thead>
       <tbody>${
-        serie.monthly.map((v,i)=>{const b=baseline[i]??baseline[baseline.length-1];const g=v-b;return `<tr><td>M${i+1}</td><td>${eur(b)}</td><td>${eur(v)}</td><td>${g>=0?'+':''}${eur(g)}</td></tr>`}).join('')
+        (serie.monthly||[]).map((v,i)=>{const b=bl[i]??bl[bl.length-1]??0;const g=v-b;return `<tr><td>M${i+1}</td><td>${eur(b)}</td><td>${eur(v)}</td><td>${g>=0?'+':''}${eur(g)}</td></tr>`}).join('')
       }</tbody>
-      <tfoot><tr><th>Total</th><th>${eur(sum(baseline)-startCash)}</th><th>${eur(sum(serie.monthly)-startCash)}</th><th>${eur(sum(serie.monthly)-sum(baseline))}</th></tr></tfoot>`;
+      <tfoot><tr><th>Total</th><th>${eur(sum(bl)-startCash)}</th><th>${eur(sum(serie.monthly||[])-startCash)}</th><th>${eur(sum(serie.monthly||[])-sum(bl))}</th></tr></tfoot>`;
   }
 
   // ===== PDF + Hash
-  document.getElementById('btnDownload').addEventListener('click', ()=>window.print());
-  document.getElementById('btnHash').addEventListener('click', async ()=>{
+  byId('btnDownload')?.addEventListener('click', ()=>window.print());
+  byId('btnHash')?.addEventListener('click', async ()=>{
     const blob = new Blob([document.documentElement.outerHTML], {type:'text/html'});
     const hash = await sha256(blob);
     setText('#pdfHash', hash);
   });
 
   // DEBUG local
-  if (location.hostname.includes('localhost')) console.log('DEBUG accessCode =', data.accessCode);
+  if (location.hostname.includes('localhost')) console.log('DEBUG codes =', codesRaw);
 })();
 </script>
 </body>
