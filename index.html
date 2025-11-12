@@ -50,7 +50,7 @@ th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left}
 .hashbox{background:var(--soft);border:1px solid var(--line);padding:12px;border-radius:12px;word-break:break-all}
 .gate{position:fixed;inset:0;background:#0a0a0af2;display:flex;align-items:center;justify-content:center;z-index:50}
 .gate-box{background:var(--soft);border:1px solid var(--line);padding:24px;border-radius:14px;max-width:360px;width:92%}
-.gate-box input{width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:#0f0f0f;color:var(--text);margin:10px 0}
+.gate-box input{width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:#0f0f0f;color:#fff;margin:10px 0}
 .err{color:#ef4444}
 @media (max-width:980px){.grid-2,.grid-3,.hero-grid,.risk-grid{grid-template-columns:1fr}nav{display:none}}
 @media print{.no-print,.gate{display:none !important}body{print-color-adjust:exact;-webkit-print-color-adjust:exact}.card{page-break-inside:avoid}.hero{padding:20px 0}.table-wrap{overflow:visible}}
@@ -265,28 +265,42 @@ th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left}
   // ===== Data
   const data = JSON.parse(document.getElementById('AUDIT_DATA').textContent);
 
-  // ===== Gate améliorée
+  // ===== Gate améliorée (robuste)
   const gate = $('#gate'), btn = $('#gateBtn'), inp = $('#gateInput'), err = $('#gateErr');
-  const norm = s => (s ?? '').normalize('NFKC').replace(/\s+/g,'').toUpperCase();
+
+  // Normalisation forte: espaces insécables, tirets exotiques, casse
+  const norm = s => (s ?? '')
+    .normalize('NFKC')
+    .replace(/[\u00A0\u2000-\u200B\u202F\u205F\u3000]/g,'') // espaces spéciaux
+    .replace(/[\-‐-‒–—―]/g,'-')                              // tous tirets -> "-"
+    .replace(/\s+/g,'')
+    .toUpperCase();
+
   const target = norm(data.accessCode);
+  const params = new URLSearchParams(location.search);
+  const dbg = params.get('debug') === '1';
+
+  if (dbg) console.log('[NE] accessCode RAW =', data.accessCode, '| TARGET =', target);
 
   // Auto via URL ?code=
-  const urlParams = new URLSearchParams(location.search);
-  const codeFromUrl = urlParams.get('code');
+  const codeFromUrl = params.get('code');
   if (codeFromUrl && norm(codeFromUrl) === target) {
     gate.style.display='none';
     localStorage.setItem('ne_audit_ok','1');
   }
+
   // Auto-unlock si déjà validé
   if(localStorage.getItem('ne_audit_ok')==='1') gate.style.display='none';
 
   function tryLogin(){
-    if(norm(inp.value) === target){
+    const typed = norm(inp.value);
+    if (dbg) console.log('[NE] typed =', typed);
+    if(typed === target){
       gate.style.display='none';
       err.textContent='';
       localStorage.setItem('ne_audit_ok','1');
     } else {
-      err.textContent='Code incorrect. Vérifie la casse et les espaces.';
+      err.textContent='Code incorrect. Vérifie le tiret et les espaces.';
     }
   }
   btn.addEventListener('click', tryLogin);
@@ -307,7 +321,7 @@ th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left}
 
   listTo('#executiveBullets', data.executive.bullets);
   listTo('#liquidityBullets', data.liquidity.bullets);
-  listTo('#complianceList', data.compliance.items, true);
+  listTo('#complianceList', data.compliance.items);
   orderedListTo('#recoList', data.recommendations.steps);
   listTo('#plan90', data.recommendations.plan90);
   listTo('#methodo', data.methodology);
