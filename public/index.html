@@ -1,0 +1,114 @@
+// Génère une URL d'audit à partir d'un formulaire, sans stockage ni mot de passe.
+// Le payload est encodé en base64 dans le hash #payload=...
+exports.handler = async (event) => {
+  if (event.httpMethod !== "POST") {
+    return { statusCode: 405, body: "Method Not Allowed" };
+  }
+
+  // Supporte JSON et form-urlencoded
+  let body = {};
+  try {
+    if (event.headers["content-type"]?.includes("application/json")) {
+      body = JSON.parse(event.body || "{}");
+    } else {
+      const params = new URLSearchParams(event.body || "");
+      params.forEach((v, k) => (body[k] = v));
+    }
+  } catch {
+    return { statusCode: 400, body: "Invalid body" };
+  }
+
+  // Champs minimaux
+  const companyName = (body.companyName || "").trim();
+  const cash = Number(body.cash || 0);
+  const horizon = Number(body.horizonMonths || 24);
+
+  if (!companyName || !Number.isFinite(cash) || cash <= 0) {
+    return { statusCode: 400, body: "companyName et cash requis" };
+  }
+
+  // Fabrique un identifiant lisible
+  const slug = companyName
+    .toLowerCase()
+    .normalize("NFKD").replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+
+  // Assemble le payload attendu par la page audit.html
+  const payload = {
+    reportUrl: `https://audit-numerion.netlify.app/audit/${slug}`,
+    company: {
+      name: companyName,
+      period: body.period || "12–24 mois",
+      auditId: body.auditId || `AUD-${new Date().getFullYear()}-${Math.floor(100+Math.random()*900)}`,
+      date: new Date().toLocaleDateString("fr-FR"),
+      cash: cash
+    },
+    executive: {
+      bullets: [
+        "Allocation progressive 1–5 % sous gouvernance duale.",
+        "Exposition prioritaire BTC/ETH via PSAN régulé.",
+        "Fenêtres de sortie alignées CAPEX.",
+        "Drawdown max simulé capé sur trésorerie totale.",
+        "Gain net vs inflation projeté sur l’horizon.",
+        "Process IFRS documenté et opposable audit."
+      ],
+      impactScore: Number(body.impactScore || 80),
+      drawdownMaxPct: Number(body.drawdownMaxPct || 9.0),
+      exitWindow: body.exitWindow || "T+30 jours en cas de stress"
+    },
+    scenarios: {
+      horizonMonths: horizon,
+      baselineInflationPct: 2.5,
+      riskFreeYieldPct: 3.0,
+      // Baseline: progression linéaire simple pour la démo
+      baseline: Array.from({ length: horizon }, (_, i) => cash + i * Math.round(cash * 0.002)),
+      series: [
+        { name: "1%", allocPct: 1, monthly: Array.from({ length: horizon }, (_, i) => cash + i * Math.round(cash * 0.0025)) },
+        { name: "3%", allocPct: 3, monthly: Array.from({ length: horizon }, (_, i) => cash + i * Math.round(cash * 0.0035)) },
+        { name: "5%", allocPct: 5, monthly: Array.from({ length: horizon }, (_, i) => cash + i * Math.round(cash * 0.0045)) }
+      ]
+    },
+    liquidity: {
+      buckets: [
+        { label: "J+0", amount: Math.round(cash * 0.75) },
+        { label: "J+1 à J+7", amount: Math.round(cash * 0.20) },
+        { label: "J+8 à J+30", amount: Math.round(cash * 0.05) }
+      ],
+      bullets: [
+        "75 % mobilisable J+0.",
+        "Fenêtres T+1/T+7 sur poches d’allocation.",
+        "Seuil d’alerte de liquidité défini."
+      ]
+    },
+    risks: {
+      volatility: "Poche crypto bornée à 1–5 %.",
+      custody: "Conservation via PSAN régulé. Comptes ségrégués.",
+      regulatory: "Conformité MiCA / documentation IFRS.",
+      operational: "Double validation DAF/CEO et procédures écrites."
+    },
+    compliance: { items: ["Mandat et NDA signés","Traçabilité des hypothèses","Procédures de garde PSAN","Notes IFRS","Journal des accès"] },
+    recommendations: {
+      steps: [
+        "Démarrer à 1 % pendant 90 jours avec reporting.",
+        "Étendre à 3 % après comité.",
+        "Aller à 5 % si conditions validées."
+      ],
+      plan90: ["S1–S2: ouverture PSAN","S3: 1 % d’allocation","S4–S8: reporting","S9–S12: comité, montée 3 %"]
+    },
+    methodology: [
+      "Baseline = cash + taux sans risque + inflation.",
+      "Scénarios = baseline + prime crypto lissée + frais.",
+      "Drawdown mesuré sur trésorerie totale."
+    ],
+    security: { commitHash: (process.env.COMMIT_REF || "").slice(0,7), year: new Date().getFullYear() }
+  };
+
+  const base64 = Buffer.from(JSON.stringify(payload)).toString("base64url");
+  const url = `/audit.html#payload=${base64}`;
+
+  return {
+    statusCode: 200,
+    headers: { "Content-Type": "application/json", "Cache-Control": "no-store" },
+    body: JSON.stringify({ url })
+  };
+};
