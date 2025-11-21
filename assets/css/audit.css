@@ -389,6 +389,92 @@ main {
   color: var(--text-muted);
 }
 
+/* Executive snapshot */
+.snapshot-grid {
+  display: grid;
+  grid-template-columns: repeat(4,minmax(0,1fr));
+  gap: 0.75rem;
+}
+
+.snapshot-grid-compact {
+  margin-top: 0.15rem;
+}
+
+.snapshot-kpi {
+  border-radius: var(--radius-soft);
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+  padding: 0.65rem 0.75rem;
+  font-size: 0.8rem;
+  display: grid;
+  gap: 0.18rem;
+}
+
+.snapshot-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  color: var(--text-soft);
+}
+
+.snapshot-value {
+  font-weight: 650;
+  color: #022c22;
+  font-size: 0.94rem;
+}
+
+.snapshot-sub {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.snapshot-riskline {
+  margin-top: 0.8rem;
+  border-radius: var(--radius-soft);
+  border: 1px dashed #d1d5db;
+  background: #f9fafb;
+  padding: 0.6rem 0.7rem;
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.8rem;
+}
+
+.snapshot-risk-label {
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.snapshot-risk-pill {
+  border-radius: var(--radius-pill);
+  padding: 0.15rem 0.6rem;
+  font-size: 0.72rem;
+  background: rgba(234,179,8,0.1);
+  color: #854d0e;
+  border: 1px solid rgba(234,179,8,0.6);
+  white-space: nowrap;
+}
+
+.snapshot-risk-note {
+  color: var(--text-muted);
+  font-size: 0.78rem;
+}
+
+.snapshot-bullets {
+  margin: 0.6rem 0 0;
+  padding-left: 1.1rem;
+  font-size: 0.8rem;
+  display: grid;
+  gap: 0.1rem;
+}
+
+/* Onepager (par défaut masqué, prêt pour usage futur / custom print) */
+.onepager {
+  display: none;
+  margin-bottom: 1rem;
+}
+
 /* Tableau key numbers */
 .key-metrics {
   width: 100%;
@@ -420,6 +506,84 @@ main {
 .metric-strong {
   font-weight: 600;
   color: #065f46;
+}
+
+/* Stress tests */
+.stress-tests {
+  margin-top: 0.9rem;
+  border-radius: var(--radius-soft);
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+  padding: 0.8rem 0.9rem;
+  font-size: 0.82rem;
+}
+
+.stress-title {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--text-soft);
+  margin-bottom: 0.4rem;
+}
+
+.stress-grid {
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: 0.7rem;
+}
+
+.stress-card {
+  border-radius: 0.7rem;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  padding: 0.65rem 0.75rem;
+  display: grid;
+  gap: 0.25rem;
+}
+
+.stress-label {
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.stress-sub {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.stress-impact {
+  font-size: 0.8rem;
+  color: #064e3b;
+}
+
+.stress-note {
+  font-size: 0.76rem;
+  color: var(--text-soft);
+}
+
+/* Benchmark */
+.benchmark-block {
+  margin-top: 1rem;
+  border-radius: var(--radius-soft);
+  border: 1px dashed #d1d5db;
+  padding: 0.75rem 0.85rem;
+  font-size: 0.82rem;
+  background: #f9fafb;
+}
+
+.benchmark-title {
+  font-weight: 600;
+  font-size: 0.84rem;
+  color: var(--text-main);
+  margin-bottom: 0.3rem;
+}
+
+.benchmark-list {
+  margin: 0;
+  padding-left: 1.1rem;
+  font-size: 0.8rem;
+  display: grid;
+  gap: 0.1rem;
 }
 
 /* Bandeau “score de maturité” */
@@ -458,8 +622,74 @@ main {
 
 .maturity-bar-fill {
   height: 100%;
-  width: 60%;
+  width: 0%;
   background: linear-gradient(90deg,#22c55e,#eab308);
+}
+
+/* Readiness */
+.readiness-grid {
+  margin-top: 0.8rem;
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: 0.75rem;
+}
+
+.readiness-card {
+  border-radius: var(--radius-soft);
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+  padding: 0.7rem 0.8rem;
+  font-size: 0.82rem;
+  display: grid;
+  gap: 0.2rem;
+}
+
+.readiness-label {
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  color: var(--text-soft);
+}
+
+.readiness-pill {
+  border-radius: var(--radius-pill);
+  padding: 0.14rem 0.55rem;
+  font-size: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  border: 1px solid transparent;
+}
+
+.readiness-pill::before {
+  content: "";
+  width: 0.34rem;
+  height: 0.34rem;
+  border-radius: 999px;
+  background: currentColor;
+}
+
+.readiness-sub {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.readiness-vert {
+  background: rgba(22,163,74,0.08);
+  border-color: rgba(22,163,74,0.45);
+  color: #166534;
+}
+
+.readiness-orange {
+  background: rgba(234,179,8,0.08);
+  border-color: rgba(234,179,8,0.6);
+  color: #854d0e;
+}
+
+.readiness-rouge {
+  background: rgba(220,38,38,0.08);
+  border-color: rgba(220,38,38,0.7);
+  color: #b91c1c;
 }
 
 /* Matrice des risques */
@@ -565,6 +795,36 @@ main {
   gap: 0.1rem;
 }
 
+/* Check-list comité d’audit */
+.checklist-block {
+  margin-top: 0.85rem;
+  border-radius: var(--radius-soft);
+  border: 1px dashed #d1d5db;
+  background: #f9fafb;
+  padding: 0.75rem 0.85rem;
+  font-size: 0.8rem;
+}
+
+.checklist-title {
+  font-weight: 600;
+  font-size: 0.84rem;
+  margin-bottom: 0.3rem;
+  color: var(--text-main);
+}
+
+.checklist-list {
+  margin: 0;
+  padding-left: 1.1rem;
+  display: grid;
+  gap: 0.1rem;
+}
+
+.check-square {
+  display: inline-block;
+  margin-right: 0.3rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+}
+
 /* Encadré conclusion */
 .conclusion-box {
   border-radius: var(--radius-soft);
@@ -575,6 +835,7 @@ main {
   color: #064e3b;
   display: grid;
   gap: 0.35rem;
+  margin-top: 0.85rem;
 }
 
 .conclusion-title {
@@ -638,6 +899,13 @@ main {
   font-size: 0.76rem;
   color: var(--text-soft);
   line-height: 1.5;
+  margin-bottom: 0.4rem;
+}
+
+.disclaimer-list {
+  margin: 0 0 0.4rem;
+  padding-left: 1.1rem;
+  font-size: 0.76rem;
 }
 
 /* Signature bloc */
@@ -711,9 +979,10 @@ main {
     grid-template-columns: minmax(0,1fr);
   }
   .grid-3,
-  .roadmap-grid {
-    grid-template-columns: minmax(0,1fr);
-  }
+  .roadmap-grid,
+  .snapshot-grid,
+  .readiness-grid,
+  .stress-grid,
   .signature-grid {
     grid-template-columns: minmax(0,1fr);
   }
