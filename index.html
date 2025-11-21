@@ -27,7 +27,7 @@
           <div class="pill-row">
             <div class="pill">
               <span class="pill-dot"></span>
-              Modèle Audit &amp; Simulation IA · Numérion V1.0
+              Modèle Audit &amp; Simulation IA · Numérion V2.0
             </div>
             <div class="pill pill-soft">
               Horizon d’analyse : __HORIZON_ANALYSE__ mois · Allocation cible : __ALLOCATION_CIBLE__ %
@@ -80,7 +80,7 @@
           <span class="dot"></span> Risques &amp; contrôle
         </button>
         <button class="toolbar-link" data-scroll-to="section-gouvernance">
-          <span class="dot"></span> Gouvernance &amp; conformité
+          <span class="dot"></span> Gouvernance &amp; readiness
         </button>
         <button class="toolbar-link" data-scroll-to="section-roadmap">
           <span class="dot"></span> Feuille de route
@@ -95,6 +95,54 @@
       </button>
     </div>
 
+    <!-- ONE-PAGER (préparé pour futur usage) -->
+    <section id="section-onepager" class="onepager card" aria-labelledby="onepager-title">
+      <header class="audit-section-header">
+        <div>
+          <div class="section-kicker">Résumé 1 page</div>
+          <h2 class="section-title" id="onepager-title">Snapshot exécutif — __NOM_ENTREPRISE__</h2>
+        </div>
+      </header>
+      <div class="section-body">
+        <div class="snapshot-grid">
+          <div class="snapshot-kpi">
+            <div class="snapshot-label">Trésorerie disponible</div>
+            <div class="snapshot-value">__TRESORERIE_DISPONIBLE__ €</div>
+            <div class="snapshot-sub">Base de travail déclarée</div>
+          </div>
+          <div class="snapshot-kpi">
+            <div class="snapshot-label">Poche numérique simulée</div>
+            <div class="snapshot-value">__MONTANT_POCHE__ €</div>
+            <div class="snapshot-sub">Soit __ALLOCATION_CIBLE__ % de la trésorerie</div>
+          </div>
+          <div class="snapshot-kpi">
+            <div class="snapshot-label">Horizon &amp; rendement cible</div>
+            <div class="snapshot-value">__HORIZON_ANALYSE__ mois · __RENDEMENT_CIBLE__ % / an</div>
+            <div class="snapshot-sub">Scénario central pédagogique (non garanti)</div>
+          </div>
+          <div class="snapshot-kpi">
+            <div class="snapshot-label">Score de maturité</div>
+            <div class="snapshot-value">__SCORE_MATURITE__/100</div>
+            <div class="snapshot-sub">Profil : __PROFIL_MATURITE__</div>
+          </div>
+        </div>
+
+        <div class="snapshot-riskline">
+          <div class="snapshot-risk-label">Profil global</div>
+          <div class="snapshot-risk-pill">__READINESS_GLOBAL_LABEL__</div>
+          <div class="snapshot-risk-note">
+            Recommandation globale : __RECOMMANDATION_GLOBALE__
+          </div>
+        </div>
+
+        <ul class="snapshot-bullets">
+          <li>Objectif prioritaire : __OBJECTIF_PRIORITAIRE__.</li>
+          <li>Cadre : __REFERENTIEL_COMPTABLE__ · __JURIDICTION__ · MiCA (périmètre informatif).</li>
+          <li>Décision attendue : validation de la poche numérique et de la trajectoire de déploiement.</li>
+        </ul>
+      </div>
+    </section>
+
     <!-- SECTION 1 — SYNTHÈSE EXÉCUTIVE -->
     <section id="section-synthese" class="audit-section card" aria-labelledby="synthese-title">
       <header class="audit-section-header">
@@ -107,8 +155,34 @@
           Lecture pour direction générale &amp; board
         </div>
       </header>
+
+      <!-- Executive snapshot intégré à la synthèse -->
       <div class="section-body">
-        <p>
+
+        <div class="snapshot-grid snapshot-grid-compact">
+          <div class="snapshot-kpi">
+            <div class="snapshot-label">Trésorerie disponible</div>
+            <div class="snapshot-value">__TRESORERIE_DISPONIBLE__ €</div>
+            <div class="snapshot-sub">Base de travail déclarée</div>
+          </div>
+          <div class="snapshot-kpi">
+            <div class="snapshot-label">Poche numérique simulée</div>
+            <div class="snapshot-value">__MONTANT_POCHE__ €</div>
+            <div class="snapshot-sub">Allocation : __ALLOCATION_CIBLE__ %</div>
+          </div>
+          <div class="snapshot-kpi">
+            <div class="snapshot-label">Horizon &amp; rendement cible</div>
+            <div class="snapshot-value">__HORIZON_ANALYSE__ mois · __RENDEMENT_CIBLE__ % / an</div>
+            <div class="snapshot-sub">Scénario central pédagogique</div>
+          </div>
+          <div class="snapshot-kpi">
+            <div class="snapshot-label">Score de maturité</div>
+            <div class="snapshot-value">__SCORE_MATURITE__/100</div>
+            <div class="snapshot-sub">Profil : __PROFIL_MATURITE__</div>
+          </div>
+        </div>
+
+        <p style="margin-top:0.9rem">
           Numérion Éducation™ a analysé la trésorerie de __NOM_ENTREPRISE__, la proposition d’allocation numérique
           et le cadre de gouvernance existant. L’objectif est de <strong>protéger la trésorerie</strong> contre l’érosion monétaire,
           tout en restant aligné avec <strong>MiCA</strong>, votre <strong>référentiel comptable (__REFERENTIEL_COMPTABLE__)</strong>
@@ -129,8 +203,8 @@
             <div class="info-label">Principaux bénéfices attendus (sous X)</div>
             <ul style="margin:0.15rem 0 0;padding-left:1.1rem;display:grid;gap:0.15rem">
               <li>Couverture partielle de l’inflation sur <strong>X %</strong> de la trésorerie disponible.</li>
-              <li>Alignement gouvernance / audit via un <strong>dossier opposable</strong> documenté.</li>
-              <li>Visibilité chiffrée sur un scénario de rendement cible de <strong>X % / an</strong> sur __HORIZON_ANALYSE__ mois.</li>
+              <li>Alignement gouvernance / audit via un <strong>dossier opposable</strong> structuré.</li>
+              <li>Visibilité chiffrée sur un scénario de rendement cible de <strong>__RENDEMENT_CIBLE__ % / an</strong> sur __HORIZON_ANALYSE__ mois.</li>
             </ul>
           </div>
         </div>
@@ -185,6 +259,19 @@
               __CONTEXTE_LIBRE__
             </div>
           </div>
+        </div>
+
+        <!-- Benchmark vs marché -->
+        <div class="benchmark-block">
+          <div class="benchmark-title">Positionnement vs pratiques observées sur le marché</div>
+          <ul class="benchmark-list">
+            <li>Entreprises comparables (__TAILLE_ENTREPRISE__, secteur __SECTEUR__) : allocation typique de <strong>__BENCH_ALLOC_RANGE__</strong> de la trésorerie.</li>
+            <li>Horizon d’analyse généralement constaté : <strong>__BENCH_HORIZON_RANGE__</strong>.</li>
+            <li>Mode de conservation le plus fréquent : <strong>__BENCH_MODE_CONSERVATION__</strong>.</li>
+          </ul>
+          <p class="small muted" style="margin-top:0.3rem">
+            La proposition pour __NOM_ENTREPRISE__ se situe dans une zone jugée <strong>__BENCH_POSITIONING__</strong> par Numérion Éducation™ (sous X).
+          </p>
         </div>
       </div>
     </section>
@@ -256,6 +343,52 @@
             <div class="info-value">__SCENARIO_OFFENSIF_REND__ % / an</div>
             <div class="info-sub">
               Hypothèse : cycle haussier complet, utilisation progressive de produits de rendement (staking, etc.).
+            </div>
+          </div>
+        </div>
+
+        <!-- Stress tests -->
+        <div class="stress-tests">
+          <div class="stress-title">Stress tests &amp; scénarios extrêmes (pédagogiques)</div>
+          <div class="stress-grid">
+            <div class="stress-card">
+              <div class="stress-label">Scénario “choc marché”</div>
+              <div class="stress-sub">
+                BTC -50 % / ETH -60 % sur une période courte (sous X).
+              </div>
+              <div class="stress-impact">
+                Impact max estimé sur la poche :
+                <strong>__STRESS_CHOC_IMPACT_EURO__ €</strong>
+                (soit ~<strong>__STRESS_CHOC_IMPACT_PCT__ %</strong> de la trésorerie totale).
+              </div>
+              <div class="stress-note">
+                Lecture comité d’audit : l’exposition reste bornée par le plafond d’allocation
+                et par l’horizon de __HORIZON_ANALYSE__ mois.
+              </div>
+            </div>
+            <div class="stress-card">
+              <div class="stress-label">Scénario “marché latéral”</div>
+              <div class="stress-sub">
+                Performance globale proche de 0 % sur la poche numérique.
+              </div>
+              <div class="stress-impact">
+                __STRESS_LATERAL_COMMENT__
+              </div>
+              <div class="stress-note">
+                Lecture direction : la priorité devient le coût d’opportunité vs autres placements.
+              </div>
+            </div>
+            <div class="stress-card">
+              <div class="stress-label">Scénario “cycle complet”</div>
+              <div class="stress-sub">
+                Réalisation d’un cycle haussier complet puis consolidation contrôlée.
+              </div>
+              <div class="stress-impact">
+                __STRESS_CYCLE_COMMENT__
+              </div>
+              <div class="stress-note">
+                Lecture board : justifie une vision long terme avec revue annuelle structurée.
+              </div>
             </div>
           </div>
         </div>
@@ -358,12 +491,12 @@
       </div>
     </section>
 
-    <!-- SECTION 5 — GOUVERNANCE, MATURITÉ MICA & ORGANISATION -->
+    <!-- SECTION 5 — GOUVERNANCE, MATURITÉ MICA & READINESS -->
     <section id="section-gouvernance" class="audit-section card" aria-labelledby="gouvernance-title">
       <header class="audit-section-header">
         <div>
           <div class="section-kicker">Section 5</div>
-          <h2 class="section-title" id="gouvernance-title">Gouvernance MiCA, processus internes &amp; niveau de maturité</h2>
+          <h2 class="section-title" id="gouvernance-title">Gouvernance MiCA, readiness opérationnelle &amp; organisation</h2>
         </div>
         <div class="section-tag">
           <span class="dot"></span>
@@ -383,10 +516,41 @@
             <div class="maturity-score">__SCORE_MATURITE__/100</div>
           </div>
           <div class="maturity-bar-wrap" aria-hidden="true">
-            <div class="maturity-bar-fill" style="width: __SCORE_MATURITE__%;"></div>
+            <div class="maturity-bar-fill"></div>
           </div>
           <div class="small" style="text-align:right;max-width:11rem">
             Profil : __PROFIL_MATURITE__
+          </div>
+        </div>
+
+        <!-- Readiness tricolore -->
+        <div class="readiness-grid">
+          <div class="readiness-card">
+            <div class="readiness-label">Gouvernance &amp; procédures</div>
+            <div class="readiness-pill readiness-__READINESS_GOUV_CLASS__">
+              __READINESS_GOUV__
+            </div>
+            <div class="readiness-sub">
+              Politique de trésorerie, pouvoirs, limites &amp; validation en cours / à consolider (sous X).
+            </div>
+          </div>
+          <div class="readiness-card">
+            <div class="readiness-label">Technique &amp; conservation</div>
+            <div class="readiness-pill readiness-__READINESS_TECH_CLASS__">
+              __READINESS_TECH__
+            </div>
+            <div class="readiness-sub">
+              Choix PSAN / custody, dispositifs de sécurité et procédures d’accès (sous X).
+            </div>
+          </div>
+          <div class="readiness-card">
+            <div class="readiness-label">Comptable &amp; audit</div>
+            <div class="readiness-pill readiness-__READINESS_COMPTA_CLASS__">
+              __READINESS_COMPTA__
+            </div>
+            <div class="readiness-sub">
+              Méthode comptable et présentation validées avec l’expert-comptable / CAC (sous X).
+            </div>
           </div>
         </div>
 
@@ -488,7 +652,19 @@
           </article>
         </div>
 
-        <div style="margin-top:0.9rem" class="conclusion-box">
+        <!-- Check-list CAC / comité d’audit -->
+        <div class="checklist-block">
+          <div class="checklist-title">Check-list comité d’audit / commissaire aux comptes</div>
+          <ul class="checklist-list">
+            <li><span class="check-square">□</span> La politique de trésorerie intègre explicitement la poche numérique.</li>
+            <li><span class="check-square">□</span> La méthode comptable retenue a été revue avec l’expert-comptable / CAC.</li>
+            <li><span class="check-square">□</span> Les pouvoirs, seuils et signataires sont formalisés par écrit.</li>
+            <li><span class="check-square">□</span> Le PSAN / opérateur a fait l’objet d’une due diligence documentée.</li>
+            <li><span class="check-square">□</span> La cartographie des risques a été mise à jour pour intégrer cette poche.</li>
+          </ul>
+        </div>
+
+        <div class="conclusion-box">
           <div class="conclusion-title">Conclusion Numérion Éducation™</div>
           <div>
             Pour __NOM_ENTREPRISE__, la mise en place d’une poche numérique de <strong>__ALLOCATION_CIBLE__ %</strong>
@@ -502,6 +678,7 @@
           </ul>
         </div>
 
+        <!-- Signatures -->
         <div class="signature-grid">
           <div class="signature-block">
             <div>
@@ -528,7 +705,7 @@
       <header class="audit-section-header">
         <div>
           <div class="section-kicker">Section 7</div>
-          <h2 class="section-title" id="annexes-title">Annexes, méthodologie &amp; limites de l’audit</h2>
+          <h2 class="section-title" id="annexes-title">Annexes, glossaire &amp; limites de l’audit</h2>
         </div>
         <div class="section-tag">
           <span class="dot"></span>
@@ -581,19 +758,55 @@
 
           <article class="accordion-item">
             <header class="accordion-header">
-              <div class="accordion-header-title">Annexe 3 — Données utilisées &amp; confidentialité</div>
+              <div class="accordion-header-title">Annexe 3 — Données utilisées, origine &amp; confidentialité</div>
               <div class="accordion-icon">▶</div>
             </header>
             <div class="accordion-panel">
               <div class="accordion-panel-inner">
                 <p class="disclaimer">
-                  Les données utilisées pour cet audit proviennent du formulaire transmis par __NOM_ENTREPRISE__
-                  en date du <strong>__DATE_FORMULAIRE__</strong>. Elles sont utilisées exclusivement pour la réalisation
-                  du présent dossier et ne sont pas communiquées à des tiers sans votre accord écrit.
+                  Les données utilisées pour cet audit proviennent principalement :
+                </p>
+                <ul class="disclaimer-list">
+                  <li>Du formulaire Numérion transmis par __NOM_ENTREPRISE__ en date du <strong>__DATE_FORMULAIRE__</strong>.</li>
+                  <li>Des informations complémentaires partagées lors des échanges éventuels (visio / emails).</li>
+                  <li>Des hypothèses de marché internes Numérion (périmètre informatif, non contractuel).</li>
+                </ul>
+                <p class="disclaimer">
+                  Elles sont utilisées exclusivement pour la réalisation du présent dossier et ne sont pas
+                  communiquées à des tiers sans votre accord écrit. La durée maximale de conservation des données
+                  associées au présent audit est de <strong>24 mois</strong>, sauf relation contractuelle prolongée ou
+                  obligation légale contraire.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article class="accordion-item">
+            <header class="accordion-header">
+              <div class="accordion-header-title">Annexe 4 — Glossaire opérationnel</div>
+              <div class="accordion-icon">▶</div>
+            </header>
+            <div class="accordion-panel">
+              <div class="accordion-panel-inner">
+                <p class="disclaimer">
+                  <strong>Poche de trésorerie numérique</strong> : fraction de la trésorerie confiée à des actifs numériques
+                  (BTC, ETH, stablecoins, etc.) dans une logique de diversification et de protection contre l’inflation.
                 </p>
                 <p class="disclaimer">
-                  La durée maximale de conservation des données associées au présent audit est de <strong>24 mois</strong>,
-                  sauf relation contractuelle prolongée ou obligation légale contraire.
+                  <strong>PSAN</strong> : Prestataire de Services sur Actifs Numériques, régulé par l’AMF pour exercer
+                  certaines activités (conservation, achat/vente, etc.).
+                </p>
+                <p class="disclaimer">
+                  <strong>Stablecoin</strong> : actif numérique visant à répliquer la valeur d’une devise (EUR, USD, etc.),
+                  avec un mécanisme de réserve ou d’algorithme (sous X selon les projets).
+                </p>
+                <p class="disclaimer">
+                  <strong>Juste valeur (IFRS)</strong> : valeur de marché d’un actif à la date de clôture, supposant une
+                  transaction normale entre parties informées et consentantes.
+                </p>
+                <p class="disclaimer">
+                  <strong>MiCA</strong> : règlement européen relatif aux marchés de crypto-actifs, définissant un cadre
+                  pour les émetteurs et les prestataires sur actifs numériques (périmètre informatif pour cet audit).
                 </p>
               </div>
             </div>
