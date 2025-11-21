@@ -1,5 +1,5 @@
 // Exemple de données pour un dossier client.
-// Dupliques ce fichier pour chaque entreprise et ajustes les valeurs.
+// Duplique ce fichier pour chaque entreprise et ajuste les valeurs.
 window.AUDIT_DATA = {
   NOM_ENTREPRISE: "Durand Industrie",
   HORIZON_ANALYSE: "24",
@@ -49,5 +49,26 @@ window.AUDIT_DATA = {
   FONCTION_SIGNATAIRE_CLIENT: "Directrice financière (DAF)",
   NOM_CONSULTANT_NUMERION: "Numérion Éducation™ — Équipe Audit",
 
-  DATE_FORMULAIRE: "18/11/2025"
+  DATE_FORMULAIRE: "18/11/2025",
+
+  // Benchmark marché (exemple)
+  BENCH_ALLOC_RANGE: "1–3 %",
+  BENCH_HORIZON_RANGE: "18–36 mois",
+  BENCH_MODE_CONSERVATION: "PSAN régulé + cold wallet partiel",
+  BENCH_POSITIONING: "prudente mais structurée",
+
+  // Stress tests
+  STRESS_CHOC_IMPACT_EURO: "90000",
+  STRESS_CHOC_IMPACT_PCT: "1,8",
+  STRESS_LATERAL_COMMENT: "Impact limité sur le capital, coût principal = opportunité manquée vs autres supports.",
+  STRESS_CYCLE_COMMENT: "Rendement annualisé supérieur au scénario central en cas de réalisation complète du cycle.",
+
+  // Readiness global
+  READINESS_GLOBAL_LABEL: "Profil global : allocation prudente, gouvernance en structuration",
+  READINESS_GOUV: "Orange",
+  READINESS_GOUV_CLASS: "orange",
+  READINESS_TECH: "Orange",
+  READINESS_TECH_CLASS: "orange",
+  READINESS_COMPTA: "Orange",
+  READINESS_COMPTA_CLASS: "orange"
 };
