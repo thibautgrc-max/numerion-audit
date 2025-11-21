@@ -1,508 +1,614 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Audit & Simulation IA — Numérion Éducation™</title>
-<meta name="description" content="Audit de trésorerie numérique conforme MiCA/IFRS. Scénarios 1–3–5 %, liquidité, risques, opposabilité audit, plan 90 jours et recommandations exécutives." />
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%230a0a0a'/%3E%3Cpath d='M18 40 L32 16 L46 40' stroke='%23c9f31d' stroke-width='4' fill='none'/%3E%3C/svg%3E">
-<link rel="preconnect" href="https://cdn.jsdelivr.net">
-<meta property="og:title" content="Audit & Simulation IA — Numérion Éducation™">
-<meta property="og:description" content="Rapport exécutif, scénarios 1–3–5 %, risques, liquidité, conformité MiCA/IFRS.">
-<meta property="og:type" content="website">
-<meta name="theme-color" content="#0a0a0a">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Numérion Éducation™ — Audit de trésorerie numérique (dossier board-ready)</title>
+  <meta name="description" content="Audit de trésorerie numérique, simulation IA et matrice de gouvernance pour directions financières, comités d’audit et comités de direction." />
+  <meta name="theme-color" content="#020617" />
 
-<style>
-:root{
-  --bg:#0a0a0a;--panel:#111;--soft:#171717;--line:#222;
-  --text:#e6e6e6;--muted:#9ca3af;--accent:#c9f31d;
-  --ok:#0ea5e9;--warn:#f59e0b;--good:#10b981;--bad:#ef4444;
-  --radius:14px;--w:1140px
-}
-*{box-sizing:border-box}
-html,body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif}
-.wrap{max-width:var(--w);margin:0 auto;padding:0 20px}
-a{color:var(--text);text-decoration:none}
-.small{font-size:.9rem}.muted{color:var(--muted)}
-.no-print{display:block}
-.site-header{position:sticky;top:0;z-index:20;background:rgba(10,10,10,.9);backdrop-filter:saturate(140%) blur(8px);border-bottom:1px solid var(--line)}
-.site-header .wrap{display:flex;align-items:center;gap:18px;padding:10px 20px}
-.logo{height:28px}
-nav{display:flex;gap:8px;flex:1;flex-wrap:wrap}
-nav a{padding:6px 10px;border-radius:8px}
-nav a:hover{background:var(--soft)}
-.actions{display:flex;gap:10px}
-.btn{background:var(--accent);color:#0a0a0a;border:0;border-radius:10px;padding:10px 14px;font-weight:600;cursor:pointer}
-.btn.secondary{background:#2a2a2a;color:#fff;border:1px solid #3a3a3a}
-.btn.ghost{background:transparent;border:1px solid var(--line);color:var(--text)}
-.btn:active{transform:translateY(1px)}
-.hero{padding:48px 0;border-bottom:1px solid var(--line);background:
-  linear-gradient(180deg,#0a0a0a 0%, #0c0c0c 100%)}
-.hero h1{font-size:2rem;margin:0 0 8px}.subtitle{color:var(--muted)}
-.hero-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:20px}
-.badge,.qr{background:var(--soft);padding:14px;border-radius:var(--radius);border:1px solid var(--line)}
-.badge strong{font-size:1.1rem}
-.card{padding:32px 0;border-bottom:1px solid var(--line);position:relative}
-.card h2{margin:0 0 16px}
-.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:22px}
-.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px}
-.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.bullets{line-height:1.5;margin:0;padding-left:16px}
-.kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:14px}
-.kpi{background:var(--soft);border:1px solid var(--line);padding:12px;border-radius:12px}
-.kpi strong{display:block;font-size:1.2rem;margin-top:4px}
-.table-wrap{margin-top:10px;overflow:auto;border:1px solid var(--line);border-radius:10px}
-table{width:100%;border-collapse:collapse}
-th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
-.scenario h3{margin:0 0 10px}
-.note,.callout{margin-top:12px;padding:12px;border-radius:10px;border:1px solid var(--line);background:var(--soft)}
-.callout.ok{border-left:6px solid var(--ok)}.callout.warn{border-left:6px solid var(--warn)}.callout.good{border-left:6px solid var(--good)}
-.ticks{line-height:1.6;margin:0;padding-left:16px}
-.doc-box{background:var(--soft);border:1px solid var(--line);padding:14px;border-radius:12px}
-.risk-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.risk{background:var(--soft);border:1px solid var(--line);padding:14px;border-radius:12px;min-height:120px}
-.plan90{background:var(--soft);border:1px solid var(--line);padding:14px;border-radius:12px}
-.hashbox{background:var(--soft);border:1px solid var(--line);padding:12px;border-radius:12px;word-break:break-all}
-.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px}
-.toc{position:sticky;top:64px;align-self:start}
-.toc ul{list-style:none;padding:0;margin:0;display:flex;gap:8px;flex-wrap:wrap}
-.toc a{border:1px solid var(--line);padding:6px 10px;border-radius:8px}
-.watermark{position:fixed;inset:0;pointer-events:none;opacity:.035;background:
-  repeating-linear-gradient(45deg,transparent 0 24px,#fff 24px 25px),
-  repeating-linear-gradient(-45deg,transparent 0 24px,#fff 24px 25px)}
-footer{padding:32px 0}
-.footer-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.footer-card{background:var(--soft);border:1px solid var(--line);padding:14px;border-radius:12px}
-
-@media (max-width:980px){
-  .grid-2,.grid-3,.grid-4,.hero-grid{grid-template-columns:1fr}
-  nav{display:none}
-}
-
-@media print{
-  .no-print{display:none !important}
-  body{print-color-adjust:exact;-webkit-print-color-adjust:exact}
-  .card{page-break-inside:avoid}
-  .hero{padding:20px 0}
-  .table-wrap{overflow:visible}
-  @page{size:A4;margin:14mm}
-  body{counter-reset:page}
-  footer::after{content:"Page " counter(page); position:fixed; bottom:8mm; right:14mm; color:#555}
-}
-</style>
-
-<script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
-
-<!-- JSON-LD pour “Report” -->
-<script type="application/ld+json">
-{
-  "@context":"https://schema.org",
-  "@type":"Report",
-  "name":"Audit & Simulation IA — Numérion Éducation",
-  "datePublished":"2025-11-12",
-  "inLanguage":"fr-FR",
-  "about":["Trésorerie d'entreprise","MiCA","IFRS","Crypto-actifs"],
-  "publisher":{"@type":"Organization","name":"Numérion Éducation"},
-  "isAccessibleForFree":false
-}
-</script>
+  <!-- Thème Numérion -->
+  <link rel="stylesheet" href="assets/css/audit.css" />
 </head>
-
 <body>
-<div class="watermark" aria-hidden="true"></div>
+<main>
+  <div class="page-shell">
 
-<header class="site-header no-print" role="banner" aria-label="En-tête">
-  <div class="wrap">
-    <img class="logo" alt="Numérion Éducation" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='28'%3E%3Ctext x='0' y='20' fill='%23c9f31d' font-size='20' font-family='Arial'%3ENumérion%3C/text%3E%3C/svg%3E">
-    <nav aria-label="Navigation principale">
-      <a href="#executive">Synthèse</a><a href="#scenarios">Scénarios</a><a href="#sensitivity">Sensibilités</a><a href="#liquidity">Liquidité</a><a href="#risks">Risques</a><a href="#compliance">Conformité</a><a href="#recommendations">Reco</a><a href="#annexes">Annexes</a>
-    </nav>
-    <div class="actions">
-      <button id="btnDownload" class="btn" aria-label="Imprimer en PDF">Télécharger le PDF</button>
-      <button id="btnHash" class="btn secondary" aria-label="Générer l’empreinte">Générer l’empreinte</button>
-      <button id="btnCSV" class="btn ghost" aria-label="Exporter CSV">Exporter CSV</button>
-    </div>
-  </div>
-</header>
+    <div class="brand-signature">Numérion Éducation™</div>
 
-<section class="hero" role="region" aria-labelledby="title">
-  <div class="wrap">
-    <div class="toc no-print">
-      <ul>
-        <li><a href="#executive">Exécutif</a></li>
-        <li><a href="#scenarios">Scénarios</a></li>
-        <li><a href="#sensitivity">Sensibilités</a></li>
-        <li><a href="#liquidity">Liquidité</a></li>
-        <li><a href="#risks">Risques</a></li>
-        <li><a href="#compliance">Conformité</a></li>
-        <li><a href="#recommendations">Plan</a></li>
-        <li><a href="#annexes">Annexes</a></li>
-      </ul>
-    </div>
-    <h1 id="title">Audit & Simulation IA — <span id="companyName">Entreprise</span></h1>
-    <p class="subtitle">Période auditée : <span id="period">12–24 mois</span> • Numéro d’audit : <span id="auditId">AUD-XXXX</span> • Date : <span id="auditDate">JJ/MM/AAAA</span></p>
-    <div class="hero-grid" role="group" aria-label="Badges">
-      <div class="badge"><div>Conformité</div><strong>MiCA • IFRS</strong></div>
-      <div class="badge"><div>Allocation testée</div><strong>1% • 3% • 5%</strong></div>
-      <div class="badge"><div>Livrable</div><strong>Rapport PDF signé</strong></div>
-      <div class="qr"><div id="qrcode"></div><small>Lien sécurisé du rapport</small></div>
-    </div>
-  </div>
-</section>
-
-<section id="executive" class="card" aria-labelledby="execTitle">
-  <div class="wrap">
-    <h2 id="execTitle">Synthèse exécutive</h2>
-    <div class="grid-2">
-      <div>
-        <ul id="executiveBullets" class="bullets"></ul>
-        <div class="kpis" role="group" aria-label="Principaux indicateurs">
-          <div class="kpi"><span>Trésorerie actuelle</span><strong id="kpiCash">—</strong></div>
-          <div class="kpi"><span>Impact Score Numérion™</span><strong id="kpiImpact">—</strong></div>
-          <div class="kpi"><span>Drawdown max simulé</span><strong id="kpiDD">—</strong></div>
-          <div class="kpi"><span>Fenêtre de sortie</span><strong id="kpiExit">—</strong></div>
+    <!-- HEADER AUDIT -->
+    <header class="audit-header">
+      <div class="audit-header-inner">
+        <div>
+          <h1 class="audit-title">Audit de trésorerie numérique</h1>
+          <p class="audit-subtitle">
+            Dossier “board-ready” pour __NOM_ENTREPRISE__ — synthèse stratégique, simulation de poche numérique et matrice risques &amp; gouvernance.
+          </p>
+          <div class="pill-row">
+            <div class="pill">
+              <span class="pill-dot"></span>
+              Modèle Audit &amp; Simulation IA · Numérion V1.0
+            </div>
+            <div class="pill pill-soft">
+              Horizon d’analyse : __HORIZON_ANALYSE__ mois · Allocation cible : __ALLOCATION_CIBLE__ %
+            </div>
+          </div>
+          <div class="confidential-tag">
+            Confidentiel — Document interne direction &amp; comités
+          </div>
         </div>
-        <div class="callout good" id="roiNote">ROI net vs baseline communiqué en annexe.</div>
-      </div>
-      <div><canvas id="chartOverview" height="200" aria-label="Courbe trésorerie baseline vs scénarios" role="img"></canvas></div>
-    </div>
-  </div>
-</section>
 
-<section id="scenarios" class="card" aria-labelledby="scTitle">
-  <div class="wrap">
-    <h2 id="scTitle">Simulation IA — Scénarios d’allocation</h2>
-    <p class="muted">Comparaison “Trésorerie dormante vs optimisée” sur 12–24 mois. Hypothèses et méthodologie en annexe.</p>
-    <div class="grid-3">
-      <div class="scenario">
-        <h3>Scénario 1%</h3>
-        <canvas id="chartS1" height="160"></canvas>
-        <div class="table-wrap"><table id="tableS1" aria-label="Tableau scénario 1%"></table></div>
-      </div>
-      <div class="scenario">
-        <h3>Scénario 3%</h3>
-        <canvas id="chartS3" height="160"></canvas>
-        <div class="table-wrap"><table id="tableS3" aria-label="Tableau scénario 3%"></table></div>
-      </div>
-      <div class="scenario">
-        <h3>Scénario 5%</h3>
-        <canvas id="chartS5" height="160"></canvas>
-        <div class="table-wrap"><table id="tableS5" aria-label="Tableau scénario 5%"></table></div>
-      </div>
-    </div>
-    <div class="note"><strong>Note :</strong> simulations incluant inflation, taux sans risque, volatilité crypto lissée, frais de garde PSAN.</div>
-  </div>
-</section>
-
-<section id="sensitivity" class="card" aria-labelledby="sensTitle">
-  <div class="wrap">
-    <h2 id="sensTitle">Analyse de sensibilité</h2>
-    <div class="grid-2">
-      <div>
-        <canvas id="chartSensitivity" height="200" aria-label="Barres de sensibilité ROI" role="img"></canvas>
-        <div class="callout ok">Variables testées : Inflation ±1 pt, Taux sans risque ±1 pt, Prime crypto ±20 %.</div>
-      </div>
-      <div class="doc-box">
-        <h4>Hypothèses clés</h4>
-        <ul class="bullets" id="assumptionsList"></ul>
-        <div class="callout warn">Alerte : si la liquidité < seuil, suspension des allocations et revue comité.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="liquidity" class="card" aria-labelledby="liqTitle">
-  <div class="wrap">
-    <h2 id="liqTitle">Analyse de liquidité</h2>
-    <div class="grid-2">
-      <div><canvas id="chartLiquidity" height="180" aria-label="Barres de liquidité par bucket" role="img"></canvas></div>
-      <div>
-        <ul id="liquidityBullets" class="bullets"></ul>
-        <div class="callout ok">Fenêtres de cession prévues. Zéro pénalité de sortie sur la part trésorerie hors PSAN.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="risks" class="card" aria-labelledby="riskTitle">
-  <div class="wrap">
-    <h2 id="riskTitle">Gestion des risques</h2>
-    <div class="risk-grid">
-      <div class="risk"><h4>Volatilité & Drawdown</h4><p id="riskVol">—</p></div>
-      <div class="risk"><h4>Contrepartie & Garde</h4><p id="riskCustody">—</p></div>
-      <div class="risk"><h4>Réglementaire</h4><p id="riskReg">—</p></div>
-      <div class="risk"><h4>Opérationnel</h4><p id="riskOps">—</p></div>
-    </div>
-    <div class="callout warn">Rappel : allocation testée limitée à 1–5 % de la trésorerie. Gouvernance et signatures multiples recommandées.</div>
-  </div>
-</section>
-
-<section id="compliance" class="card" aria-labelledby="compTitle">
-  <div class="wrap">
-    <h2 id="compTitle">Conformité MiCA / IFRS</h2>
-    <div class="grid-2">
-      <div><ul class="ticks" id="complianceList"></ul></div>
-      <div class="doc-box">
-        <h4>Dossier opposable audit</h4>
-        <ul class="bullets">
-          <li>Traçabilité des hypothèses et versions</li>
-          <li>Procédures de garde PSAN</li>
-          <li>Notes comptables IFRS</li>
-          <li>Registre des accès et signatures</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="recommendations" class="card" aria-labelledby="recoTitle">
-  <div class="wrap">
-    <h2 id="recoTitle">Recommandations</h2>
-    <div class="grid-2">
-      <div>
-        <ol id="recoList"></ol>
-        <div class="cta no-print">
-          <a class="btn" href="#contact">Parler au comité</a>
-          <a class="btn secondary" href="#annexes">Voir annexes</a>
+        <div class="doc-meta">
+          <div class="doc-meta-title">Paramètres dossier</div>
+          <div class="doc-meta-row">
+            <div class="doc-meta-label">Entreprise auditée</div>
+            <div class="doc-meta-value">__NOM_ENTREPRISE__</div>
+          </div>
+          <div class="doc-meta-row">
+            <div class="doc-meta-label">Secteur / Taille</div>
+            <div class="doc-meta-value">__SECTEUR__ · __TAILLE_ENTREPRISE__</div>
+          </div>
+          <div class="doc-meta-row">
+            <div class="doc-meta-label">Référentiel comptable</div>
+            <div class="doc-meta-value">__REFERENTIEL_COMPTABLE__</div>
+          </div>
+          <div class="doc-meta-row">
+            <div class="doc-meta-label">Date d’émission</div>
+            <div class="doc-meta-value">__DATE_AUDIT__</div>
+          </div>
+          <div class="doc-meta-row">
+            <div class="doc-meta-label">Référence dossier</div>
+            <div class="doc-meta-value">NE-TRN-__ID_DOSSIER__</div>
+          </div>
         </div>
       </div>
-      <div class="plan90">
-        <h4>Plan 90 jours</h4>
-        <ul id="plan90"></ul>
-      </div>
-    </div>
-  </div>
-</section>
+    </header>
 
-<section id="annexes" class="card" aria-labelledby="annTitle">
-  <div class="wrap">
-    <h2 id="annTitle">Annexes & Opposabilité</h2>
-    <div class="grid-2">
-      <div>
-        <h4>Méthodologie de simulation</h4>
-        <ul class="bullets" id="methodo"></ul>
-        <h4>Disclaimer</h4>
-        <p class="muted small">Ce rapport est fourni à titre professionnel. Les performances passées ne préjugent pas des performances futures. L’entreprise demeure responsable de ses décisions.</p>
-      </div>
-      <div class="hashbox">
-        <h4>Empreinte et version</h4>
-        <p>Empreinte SHA-256 du document : <code id="pdfHash">—</code></p>
-        <p>Commit : <code id="commitHash">—</code></p>
-        <p>Lien audit : <span id="reportUrl">—</span></p>
-        <p>ROI net estimé (S3 vs baseline) : <code id="roiNet">—</code></p>
-      </div>
+    <!-- TOOLBAR -->
+    <div class="toolbar">
+      <nav class="toolbar-nav">
+        <button class="toolbar-link is-active" data-scroll-to="section-synthese">
+          <span class="dot"></span> Synthèse
+        </button>
+        <button class="toolbar-link" data-scroll-to="section-profil">
+          <span class="dot"></span> Profil entreprise
+        </button>
+        <button class="toolbar-link" data-scroll-to="section-simulation">
+          <span class="dot"></span> Simulation &amp; chiffres clés
+        </button>
+        <button class="toolbar-link" data-scroll-to="section-risques">
+          <span class="dot"></span> Risques &amp; contrôle
+        </button>
+        <button class="toolbar-link" data-scroll-to="section-gouvernance">
+          <span class="dot"></span> Gouvernance &amp; conformité
+        </button>
+        <button class="toolbar-link" data-scroll-to="section-roadmap">
+          <span class="dot"></span> Feuille de route
+        </button>
+        <button class="toolbar-link" data-scroll-to="section-annexes">
+          <span class="dot"></span> Annexes
+        </button>
+      </nav>
+      <button class="btn-print" onclick="window.print()">
+        <span>⎙</span>
+        <span>Exporter en PDF / Imprimer</span>
+      </button>
     </div>
-    <div class="muted small">Numérion Éducation™ — Rapport confidentiel. © <span id="year"></span>. Tous droits réservés.</div>
-  </div>
-</section>
 
-<section id="contact" class="card no-print" aria-labelledby="contactTitle">
-  <div class="wrap">
-    <h2 id="contactTitle">Contacter Numérion Éducation</h2>
-    <div class="grid-2">
-      <div class="footer-card">
-        <p>Besoin d’une présentation au comité d’audit ou d’un dossier opposable complet ?</p>
-        <div class="cta">
-          <a class="btn" href="mailto:contact@numerion.education?subject=Audit%20tr%C3%A9sorerie%20%E2%80%94%20Demande%20comit%C3%A9">Envoyer un e-mail</a>
-          <a class="btn secondary" target="_blank" rel="noopener" href="https://cal.com">Réserver un créneau</a>
+    <!-- SECTION 1 — SYNTHÈSE EXÉCUTIVE -->
+    <section id="section-synthese" class="audit-section card" aria-labelledby="synthese-title">
+      <header class="audit-section-header">
+        <div>
+          <div class="section-kicker">Section 1</div>
+          <h2 class="section-title" id="synthese-title">Synthèse exécutive &amp; recommandation globale</h2>
+        </div>
+        <div class="section-tag">
+          <span class="dot"></span>
+          Lecture pour direction générale &amp; board
+        </div>
+      </header>
+      <div class="section-body">
+        <p>
+          Numérion Éducation™ a analysé la trésorerie de __NOM_ENTREPRISE__, la proposition d’allocation numérique
+          et le cadre de gouvernance existant. L’objectif est de <strong>protéger la trésorerie</strong> contre l’érosion monétaire,
+          tout en restant aligné avec <strong>MiCA</strong>, votre <strong>référentiel comptable (__REFERENTIEL_COMPTABLE__)</strong>
+          et les attentes de vos auditeurs.
+        </p>
+
+        <div class="grid-2" style="margin-top:0.8rem;gap:0.9rem">
+          <div class="info-block">
+            <div class="info-label">Recommandation globale Numérion</div>
+            <div class="info-value">
+              __RECOMMANDATION_GLOBALE__
+            </div>
+            <div class="info-sub">
+              __SYNTHese_COURTE__
+            </div>
+          </div>
+          <div class="info-block">
+            <div class="info-label">Principaux bénéfices attendus (sous X)</div>
+            <ul style="margin:0.15rem 0 0;padding-left:1.1rem;display:grid;gap:0.15rem">
+              <li>Couverture partielle de l’inflation sur <strong>X %</strong> de la trésorerie disponible.</li>
+              <li>Alignement gouvernance / audit via un <strong>dossier opposable</strong> documenté.</li>
+              <li>Visibilité chiffrée sur un scénario de rendement cible de <strong>X % / an</strong> sur __HORIZON_ANALYSE__ mois.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div style="margin-top:0.8rem" class="badge">
+          <span class="dot"></span>
+          Note de lecture : cette synthèse peut être présentée en l’état au board et au comité d’audit.
         </div>
       </div>
-      <form class="footer-card" name="contact-audit" method="POST" data-netlify="true">
-        <input type="hidden" name="form-name" value="contact-audit">
-        <label>Nom<br><input name="name" required style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:#0f0f0f;color:var(--text)"></label><br><br>
-        <label>Email pro<br><input name="email" type="email" required style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:#0f0f0f;color:var(--text)"></label><br><br>
-        <label>Message<br><textarea name="message" rows="4" style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:#0f0f0f;color:var(--text)"></textarea></label><br><br>
-        <button class="btn" type="submit">Envoyer</button>
-      </form>
-    </div>
+    </section>
+
+    <!-- SECTION 2 — PROFIL ENTREPRISE & CONTEXTE -->
+    <section id="section-profil" class="audit-section card" aria-labelledby="profil-title">
+      <header class="audit-section-header">
+        <div>
+          <div class="section-kicker">Section 2</div>
+          <h2 class="section-title" id="profil-title">Profil de __NOM_ENTREPRISE__ &amp; contexte de la démarche</h2>
+        </div>
+        <div class="section-tag">
+          <span class="dot"></span>
+          Données structurantes pour l’analyse
+        </div>
+      </header>
+      <div class="section-body">
+        <div class="grid-3">
+          <div class="info-block">
+            <div class="info-label">Secteur &amp; taille</div>
+            <div class="info-value">__SECTEUR__ · __TAILLE_ENTREPRISE__</div>
+            <div class="info-sub">Ex : Industrie · 50–250 salariés</div>
+          </div>
+          <div class="info-block">
+            <div class="info-label">Chiffre d’affaires (fourchette)</div>
+            <div class="info-value">__CA_ANNUEL__</div>
+            <div class="info-sub">Périmètre : __PERIMETRE_AUDIT__</div>
+          </div>
+          <div class="info-block">
+            <div class="info-label">Référentiel &amp; juridiction</div>
+            <div class="info-value">__REFERENTIEL_COMPTABLE__ · __JURIDICTION__</div>
+            <div class="info-sub">Cadre principal pour la présentation aux auditeurs</div>
+          </div>
+        </div>
+
+        <div class="grid-2" style="margin-top:0.9rem">
+          <div class="info-block">
+            <div class="info-label">Objectif prioritaire déclaré</div>
+            <div class="info-value">__OBJECTIF_PRIORITAIRE__</div>
+            <div class="info-sub">Déclaré lors du formulaire d’audit &amp; simulation.</div>
+          </div>
+          <div class="info-block">
+            <div class="info-label">Contexte &amp; déclencheur</div>
+            <div class="info-sub">
+              __CONTEXTE_LIBRE__
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3 — TRÉSORERIE, ALLOCATION & SIMULATION -->
+    <section id="section-simulation" class="audit-section card" aria-labelledby="simulation-title">
+      <header class="audit-section-header">
+        <div>
+          <div class="section-kicker">Section 3</div>
+          <h2 class="section-title" id="simulation-title">Trésorerie disponible, allocation numérique &amp; scénarios chiffrés</h2>
+        </div>
+        <div class="section-tag">
+          <span class="dot"></span>
+          Lecture pour direction financière &amp; contrôle de gestion
+        </div>
+      </header>
+      <div class="section-body">
+        <p>
+          La simulation ci-dessous reprend les ordres de grandeur déclarés par __NOM_ENTREPRISE__ et propose
+          une poche de trésorerie numérique alignée avec l’horizon de __HORIZON_ANALYSE__ mois
+          et un objectif de rendement cible de <strong>__RENDEMENT_CIBLE__ % / an</strong> (sous X).
+        </p>
+
+        <table class="key-metrics" aria-label="Chiffres clés de la trésorerie et de la poche numérique">
+          <tr>
+            <th>Paramètre</th>
+            <th>Valeur déclarée / estimée</th>
+            <th>Commentaire Numérion</th>
+          </tr>
+          <tr>
+            <td>Trésorerie disponible estimée</td>
+            <td class="metric-strong">__TRESORERIE_DISPONIBLE__ €</td>
+            <td>Hors lignes de crédit, sur base fin de mois.</td>
+          </tr>
+          <tr>
+            <td>Allocation numérique envisagée</td>
+            <td class="metric-strong">__ALLOCATION_CIBLE__ %</td>
+            <td>Compatible avec un cadre prudence / diversification sous X.</td>
+          </tr>
+          <tr>
+            <td>Montant de la poche numérique simulée</td>
+            <td class="metric-strong">__MONTANT_POCHE__ €</td>
+            <td>Calculé sur la base des paramètres ci-dessus.</td>
+          </tr>
+          <tr>
+            <td>Horizon financier</td>
+            <td>__HORIZON_ANALYSE__ mois</td>
+            <td>Horizon cohérent avec une logique de thèse long terme (non spéculative).</td>
+          </tr>
+        </table>
+
+        <div class="grid-3" style="margin-top:0.9rem">
+          <div class="info-block">
+            <div class="info-label">Scénario prudent (sous X)</div>
+            <div class="info-value">__SCENARIO_PRUDENT_REND__ % / an</div>
+            <div class="info-sub">
+              Hypothèse : exposition majoritaire BTC/ETH, volatilité élevée mais risque contrôlé via horizon long terme.
+            </div>
+          </div>
+          <div class="info-block">
+            <div class="info-label">Scénario central</div>
+            <div class="info-value">__SCENARIO_CENTRAL_REND__ % / an</div>
+            <div class="info-sub">
+              Hypothèse : réalisation partielle de la thèse de marché, réallocation si dérive trop forte du risque.
+            </div>
+          </div>
+          <div class="info-block">
+            <div class="info-label">Scénario offensif</div>
+            <div class="info-value">__SCENARIO_OFFENSIF_REND__ % / an</div>
+            <div class="info-sub">
+              Hypothèse : cycle haussier complet, utilisation progressive de produits de rendement (staking, etc.).
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:0.8rem" class="badge">
+          <span class="dot"></span>
+          Ces scénarios sont fournis à titre pédagogique (périmètre informatif). La décision d’allocation reste à la main de votre direction.
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4 — MATRICE DES RISQUES & CONTRÔLES CLÉS -->
+    <section id="section-risques" class="audit-section card" aria-labelledby="risques-title">
+      <header class="audit-section-header">
+        <div>
+          <div class="section-kicker">Section 4</div>
+          <h2 class="section-title" id="risques-title">Matrice des risques &amp; dispositifs de contrôle recommandés</h2>
+        </div>
+        <div class="section-tag">
+          <span class="dot"></span>
+          Support pour comité d’audit &amp; CAC
+        </div>
+      </header>
+      <div class="section-body">
+        <p>
+          La matrice ci-dessous positionne les principaux risques liés à une poche de trésorerie numérique
+          au regard du profil de __NOM_ENTREPRISE__. Les commentaires “sous X” sont à adapter avec vos équipes
+          et vos auditeurs pour intégrer ce dossier dans votre cartographie des risques.
+        </p>
+
+        <table class="risk-matrix">
+          <tr>
+            <th>Risque</th>
+            <th>Probabilité</th>
+            <th>Impact</th>
+            <th>Contrôles &amp; atténuations proposées</th>
+          </tr>
+          <tr>
+            <td>
+              <div class="risk-name">Volatilité marché crypto</div>
+              <div class="risk-tag medium">
+                <span class="dot"></span> Niveau : Moyen
+              </div>
+            </td>
+            <td>__PROBA_VOLATILITE__ (sous X)</td>
+            <td>__IMPACT_VOLATILITE__ (sous X)</td>
+            <td>
+              Allocation limitée à __ALLOCATION_CIBLE__ %, horizon de __HORIZON_ANALYSE__ mois, rééquilibrage périodique.
+              Documentation claire de la thèse d’investissement dans la politique de trésorerie.
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="risk-name">Risque de conservation / opérateur PSAN</div>
+              <div class="risk-tag medium">
+                <span class="dot"></span> Niveau : Moyen
+              </div>
+            </td>
+            <td>__PROBA_CUSTODY__</td>
+            <td>__IMPACT_CUSTODY__</td>
+            <td>
+              Sélection d’un PSAN régulé AMF, procédure KYC/KYT renforcée, mise en place de droits d’accès ségrégués,
+              documentation de la due diligence opérateur (fichier opposable audit).
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="risk-name">Risque comptable / IFRS</div>
+              <div class="risk-tag medium">
+                <span class="dot"></span> Niveau : Moyen
+              </div>
+            </td>
+            <td>__PROBA_COMPTABLE__</td>
+            <td>__IMPACT_COMPTABLE__</td>
+            <td>
+              Validation de la méthode de comptabilisation avec l’expert-comptable / CAC, documentation des flux,
+              suivi des justes valeurs, note dédiée dans l’annexe aux comptes consolidés (le cas échéant).
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="risk-name">Risque cyber / accès non autorisé</div>
+              <div class="risk-tag high">
+                <span class="dot"></span> Niveau : Élevé
+              </div>
+            </td>
+            <td>__PROBA_CYBER__</td>
+            <td>__IMPACT_CYBER__</td>
+            <td>
+              Procédure interne forte : multi-signatures, segmentation des droits, procédures de validation à plusieurs signataires,
+              documentation des clés et des sauvegardes, tests réguliers de revue.
+            </td>
+          </tr>
+        </table>
+
+        <p class="small muted" style="margin-top:0.6rem">
+          Cette matrice est un socle : elle peut être directement intégrée à votre cartographie des risques,
+          complétée avec des niveaux chiffrés (X / 5 ou X / 10) et validée en comité des risques / comité d’audit.
+        </p>
+      </div>
+    </section>
+
+    <!-- SECTION 5 — GOUVERNANCE, MATURITÉ MICA & ORGANISATION -->
+    <section id="section-gouvernance" class="audit-section card" aria-labelledby="gouvernance-title">
+      <header class="audit-section-header">
+        <div>
+          <div class="section-kicker">Section 5</div>
+          <h2 class="section-title" id="gouvernance-title">Gouvernance MiCA, processus internes &amp; niveau de maturité</h2>
+        </div>
+        <div class="section-tag">
+          <span class="dot"></span>
+          Dossier opposable audit
+        </div>
+      </header>
+      <div class="section-body">
+        <p>
+          Numérion Éducation™ positionne __NOM_ENTREPRISE__ sur une échelle de <strong>0 à 100</strong>
+          en matière de <strong>maturité trésorerie numérique / MiCA</strong>, sur la base de vos réponses
+          au formulaire et de notre grille interne.
+        </p>
+
+        <div class="maturity-strip">
+          <div>
+            <div class="maturity-label">Score de maturité MiCA &amp; gouvernance</div>
+            <div class="maturity-score">__SCORE_MATURITE__/100</div>
+          </div>
+          <div class="maturity-bar-wrap" aria-hidden="true">
+            <div class="maturity-bar-fill" style="width: __SCORE_MATURITE__%;"></div>
+          </div>
+          <div class="small" style="text-align:right;max-width:11rem">
+            Profil : __PROFIL_MATURITE__
+          </div>
+        </div>
+
+        <div class="grid-3" style="margin-top:0.9rem">
+          <div class="info-block">
+            <div class="info-label">Mode de conservation envisagé</div>
+            <div class="info-value">__MODE_CONSERVATION__</div>
+            <div class="info-sub">
+              Ex : PSAN agréé AMF + cold wallet interne pour une partie des avoirs.
+            </div>
+          </div>
+          <div class="info-block">
+            <div class="info-label">Niveau de conformité MiCA déclaré</div>
+            <div class="info-value">__NIVEAU_MICA__</div>
+            <div class="info-sub">
+              Structuration : __COMMENTAIRE_MICA__ (sous X).
+            </div>
+          </div>
+          <div class="info-block">
+            <div class="info-label">Nombre de signataires &amp; portée décisionnelle</div>
+            <div class="info-value">__NOMBRE_SIGNATAIRES__ · __PORTEE_DECISION__</div>
+            <div class="info-sub">
+              Important pour la définition des seuils, pouvoirs et contrôles internes.
+            </div>
+          </div>
+        </div>
+
+        <p class="small muted" style="margin-top:0.7rem">
+          Les éléments ci-dessus ont vocation à être documentés dans vos <strong>politiques de trésorerie</strong>,
+          <strong>politiques d’investissement / risque</strong> et procédures internes, afin de rendre la démarche
+          pleinement lisible pour vos auditeurs et votre board.
+        </p>
+      </div>
+    </section>
+
+    <!-- SECTION 6 — FEUILLE DE ROUTE OPÉRATIONNELLE -->
+    <section id="section-roadmap" class="audit-section card" aria-labelledby="roadmap-title">
+      <header class="audit-section-header">
+        <div>
+          <div class="section-kicker">Section 6</div>
+          <h2 class="section-title" id="roadmap-title">Feuille de route opérationnelle proposée</h2>
+        </div>
+        <div class="section-tag">
+          <span class="dot"></span>
+          Plan d’action en 3 phases
+        </div>
+      </header>
+      <div class="section-body">
+        <p>
+          La feuille de route ci-dessous propose un <strong>déploiement en trois phases</strong> pour
+          structurer, décider puis exécuter la poche de trésorerie numérique de __NOM_ENTREPRISE__
+          dans un cadre sécurisé et opposable audit.
+        </p>
+
+        <div class="roadmap-grid" style="margin-top:0.8rem">
+          <article class="roadmap-step">
+            <div class="roadmap-step-header">
+              <div>
+                <div class="roadmap-step-index">Phase 1</div>
+                <div class="roadmap-step-title">Cadrage &amp; validation interne</div>
+              </div>
+              <div class="roadmap-chip">Horizon : X semaines</div>
+            </div>
+            <ul class="roadmap-list">
+              <li>Présentation de la présente note au board / comité d’audit.</li>
+              <li>Validation des plages d’allocation (<strong>__ALLOCATION_CIBLE__ %</strong> max) et de l’horizon.</li>
+              <li>Précision du périmètre comptable et validation avec l’expert-comptable / CAC.</li>
+            </ul>
+          </article>
+
+          <article class="roadmap-step">
+            <div class="roadmap-step-header">
+              <div>
+                <div class="roadmap-step-index">Phase 2</div>
+                <div class="roadmap-step-title">Gouvernance &amp; procédures</div>
+              </div>
+              <div class="roadmap-chip">Horizon : X semaines</div>
+            </div>
+            <ul class="roadmap-list">
+              <li>Formalisation / mise à jour de la politique de trésorerie et de la politique d’investissement.</li>
+              <li>Définition des signataires, pouvoirs, limitations et procédures de validation.</li>
+              <li>Choix du PSAN / opérateur et rédaction de la note de due diligence.</li>
+            </ul>
+          </article>
+
+          <article class="roadmap-step">
+            <div class="roadmap-step-header">
+              <div>
+                <div class="roadmap-step-index">Phase 3</div>
+                <div class="roadmap-step-title">Mise en œuvre &amp; revue périodique</div>
+              </div>
+              <div class="roadmap-chip">Horizon : X mois</div>
+            </div>
+            <ul class="roadmap-list">
+              <li>Mise en place progressive de la poche numérique (X paliers).</li>
+              <li>Suivi trimestriel : performance, risques, conformité MiCA, retours du CAC.</li>
+              <li>Actualisation annuelle de la thèse, du périmètre et des contrôles.</li>
+            </ul>
+          </article>
+        </div>
+
+        <div style="margin-top:0.9rem" class="conclusion-box">
+          <div class="conclusion-title">Conclusion Numérion Éducation™</div>
+          <div>
+            Pour __NOM_ENTREPRISE__, la mise en place d’une poche numérique de <strong>__ALLOCATION_CIBLE__ %</strong>
+            de la trésorerie disponible, sur un horizon de <strong>__HORIZON_ANALYSE__ mois</strong>, apparaît
+            <strong>__AVIS_GLOBAL__</strong> (sous X), sous réserve :
+          </div>
+          <ul style="margin:0.35rem 0 0.1rem;padding-left:1.1rem">
+            <li>De la validation de la politique de trésorerie et de la politique d’investissement par le board.</li>
+            <li>De la formalisation des procédures internes et des contrôles associés.</li>
+            <li>De la validation de la méthode comptable et de présentation avec vos auditeurs.</li>
+          </ul>
+        </div>
+
+        <div class="signature-grid">
+          <div class="signature-block">
+            <div>
+              <div class="signature-label">Pour __NOM_ENTREPRISE__</div>
+              <div class="signature-name">__NOM_SIGNATAIRE_CLIENT__</div>
+              <div class="small muted">Fonction : __FONCTION_SIGNATAIRE_CLIENT__</div>
+            </div>
+            <div class="small muted">Signature &amp; validation interne :</div>
+          </div>
+          <div class="signature-block">
+            <div>
+              <div class="signature-label">Pour Numérion Éducation™</div>
+              <div class="signature-name">__NOM_CONSULTANT_NUMERION__</div>
+              <div class="small muted">Cabinet d’intelligence financière — trésorerie numérique.</div>
+            </div>
+            <div class="small muted">Signature &amp; validation de l’audit :</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 7 — ANNEXES & DISPOSITIONS LÉGALES -->
+    <section id="section-annexes" class="audit-section card" aria-labelledby="annexes-title">
+      <header class="audit-section-header">
+        <div>
+          <div class="section-kicker">Section 7</div>
+          <h2 class="section-title" id="annexes-title">Annexes, méthodologie &amp; limites de l’audit</h2>
+        </div>
+        <div class="section-tag">
+          <span class="dot"></span>
+          À disposition des auditeurs &amp; du comité d’audit
+        </div>
+      </header>
+      <div class="section-body">
+        <div class="accordion" data-accordion>
+          <article class="accordion-item">
+            <header class="accordion-header">
+              <div class="accordion-header-title">Annexe 1 — Méthodologie de simulation &amp; hypothèses retenues</div>
+              <div class="accordion-icon">▶</div>
+            </header>
+            <div class="accordion-panel">
+              <div class="accordion-panel-inner">
+                <p class="disclaimer">
+                  Les scénarios de rendement (__SCENARIO_PRUDENT_REND__ %, __SCENARIO_CENTRAL_REND__ %, __SCENARIO_OFFENSIF_REND__ %)
+                  sont basés sur des hypothèses de marché “sous X” qui doivent être revues régulièrement. Ils ne constituent pas
+                  une garantie de performance et n’ont pas vocation à être interprétés comme une prévision ferme.
+                </p>
+                <p class="disclaimer">
+                  La poche simulée de <strong>__MONTANT_POCHE__ €</strong> découle directement de l’allocation __ALLOCATION_CIBLE__ % sur une trésorerie
+                  déclarée de <strong>__TRESORERIE_DISPONIBLE__ €</strong>. Toute modification de ces paramètres implique une
+                  mise à jour du présent audit.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article class="accordion-item">
+            <header class="accordion-header">
+              <div class="accordion-header-title">Annexe 2 — Rôle de Numérion Éducation™</div>
+              <div class="accordion-icon">▶</div>
+            </header>
+            <div class="accordion-panel">
+              <div class="accordion-panel-inner">
+                <p class="disclaimer">
+                  Numérion Éducation™ agit en qualité de <strong>cabinet d’intelligence financière</strong>. Nous ne détenons
+                  aucun fonds pour le compte de __NOM_ENTREPRISE__, ne transmettons aucun ordre de marché et
+                  n’exerçons aucune activité relevant d’un prestataire de services d’investissement.
+                </p>
+                <p class="disclaimer">
+                  Le présent audit a vocation à <strong>éclairer la décision</strong> de votre direction, de votre board
+                  et de vos conseils habituels (expert-comptable, CAC, conseil juridique). La décision finale d’allocation
+                  reste de la seule responsabilité de vos organes de direction.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article class="accordion-item">
+            <header class="accordion-header">
+              <div class="accordion-header-title">Annexe 3 — Données utilisées &amp; confidentialité</div>
+              <div class="accordion-icon">▶</div>
+            </header>
+            <div class="accordion-panel">
+              <div class="accordion-panel-inner">
+                <p class="disclaimer">
+                  Les données utilisées pour cet audit proviennent du formulaire transmis par __NOM_ENTREPRISE__
+                  en date du <strong>__DATE_FORMULAIRE__</strong>. Elles sont utilisées exclusivement pour la réalisation
+                  du présent dossier et ne sont pas communiquées à des tiers sans votre accord écrit.
+                </p>
+                <p class="disclaimer">
+                  La durée maximale de conservation des données associées au présent audit est de <strong>24 mois</strong>,
+                  sauf relation contractuelle prolongée ou obligation légale contraire.
+                </p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
   </div>
-</section>
+</main>
 
-<footer class="no-print">
-  <div class="wrap">
-    <div class="small muted">Préparé par Numérion Éducation™ — MiCA • IFRS • PSAN. Rapport confidentiel.</div>
-  </div>
-</footer>
+<!-- 1) Données d’audit (exemple / client) -->
+<script src="assets/js/audit-data-example.js"></script>
 
-<!-- ======= DATA JSON inline ======= -->
-<script id="AUDIT_DATA" type="application/json">
-{
-  "reportUrl": "https://audit.client.numerion.education/ACME",
-  "company": { "name": "ACME Industries", "period": "Jan 2025 – Déc 2026", "auditId": "AUD-2025-001", "date": "12/11/2025", "cash": 1250000 },
-  "executive": {
-    "bullets": [
-      "Allocation progressive 1–5 % sous gouvernance duale.",
-      "Exposition prioritaire BTC/ETH via PSAN régulé.",
-      "Fenêtres de sortie trimestrielles alignées besoins CAPEX.",
-      "Drawdown max simulé ≤ 8,7 % sur trésorerie totale.",
-      "Gain net inflation sur 24 mois : +2,3 à +6,8 pts.",
-      "Process IFRS documenté et opposable audit."
-    ],
-    "impactScore": 82, "drawdownMaxPct": 8.7, "exitWindow": "T+30 jours en cas de stress"
-  },
-  "scenarios": {
-    "horizonMonths": 24, "baselineInflationPct": 2.5, "riskFreeYieldPct": 3.0,
-    "series": [
-      {"name":"1%","allocPct":1,"monthly":[1250000,1253200,1256400,1259100,1262400,1265600,1267800,1270200,1272400,1275600,1278300,1281500,1283600,1286500,1289300,1292400,1295600,1298400,1301500,1304300,1307200,1310200,1313100,1316000]},
-      {"name":"3%","allocPct":3,"monthly":[1250000,1254800,1259800,1265200,1270400,1276000,1281400,1287200,1292600,1298600,1304200,1310400,1316200,1322600,1328600,1335200,1341400,1348200,1354600,1361600,1368200,1375400,1382200,1389600]},
-      {"name":"5%","allocPct":5,"monthly":[1250000,1256500,1263600,1270600,1278200,1285600,1293600,1301400,1309800,1318000,1326800,1335400,1344600,1353600,1363200,1372600,1382600,1392400,1402800,1413000,1423800,1434400,1445600,1456600]}
-    ],
-    "baseline":[1250000,1252600,1255200,1257400,1260000,1262600,1265200,1267400,1270000,1272600,1275200,1277400,1280000,1282600,1285200,1287400,1290000,1292600,1295200,1297400,1300000,1302600,1305200,1307400]
-  },
-  "liquidity": {
-    "buckets":[{"label":"J+0","amount":950000},{"label":"J+1 à J+7","amount":250000},{"label":"J+8 à J+30","amount":50000}],
-    "bullets":["95 % mobilisable J+0 via comptes courants.","PSAN avec fenêtres T+1 pour l’allocation crypto.","Seuil d’alerte de liquidité à 200 k€."]
-  },
-  "risks": {
-    "volatility":"Poche crypto bornée à 1–5 % pour caper la variance. Backtest 24 mois incluant stress 2024.",
-    "custody":"Conservation via PSAN régulé. Comptes ségrégués. Multi-signature et registre d’accès.",
-    "regulatory":"Conformité MiCA et documentation IFRS pour la comptabilisation des actifs numériques.",
-    "operational":"Double validation DAF/CEO. Procédures écrites. RACI et plan de continuité."
-  },
-  "compliance": { "items": ["Mandat et NDA signés","Traçabilité des hypothèses","Procédures de garde PSAN","Notes IFRS à jour","Journal des accès"] },
-  "recommendations": {
-    "steps":["Démarrer à 1 % pendant 90 jours avec reporting mensuel.","Étendre à 3 % après revue de comité et résultats.","Limiter 5 % si conditions de marché validées."],
-    "plan90":["S1–S2 : ouverture PSAN + registre gouvernance","S3 : première allocation 1 %","S4–S8 : reporting, revue risques, fenêtres de sortie","S9–S12 : comité, montée à 3 % conditionnelle"]
-  },
-  "methodology":["Baseline = cash + taux sans risque + inflation.","Scénarios = baseline + prime crypto lissée + frais PSAN.","Drawdown mesuré sur trésorerie totale.","Ajustements prudents sur volatilité et corrélation."],
-  "assumptions":["Inflation 2,5 %","Taux sans risque 3 %","Prime crypto lissée 6–12 % annualisée","Frais PSAN 0,8–1,2 %","Volatilité annualisée capée sur poche 1–5 %"],
-  "security":{"commitHash":"abcdef1","year":2025}
-}
-</script>
-
-<script>
-(function(){
-  // ===== Helpers
-  const $ = s => document.querySelector(s);
-  const id = s => document.getElementById(s);
-  const setText = (sel,v)=>{ const el=$(sel); if(el) el.textContent=v; };
-  const listTo = (sel,items=[])=>{ const el=$(sel); if(!el) return; el.innerHTML=''; items.forEach(t=>{const li=document.createElement('li'); li.textContent=t; el.appendChild(li);});};
-  const orderedListTo=(sel,items=[])=>{ const el=$(sel); if(!el) return; el.innerHTML=''; items.forEach(t=>{const li=document.createElement('li'); li.textContent=t; el.appendChild(li);});};
-  const eur = v => Number(v||0).toLocaleString('fr-FR',{style:'currency',currency:'EUR'});
-  const labelsMonths = n => Array.from({length:n},(_,i)=>`M${i+1}`);
-  const ds = (label,data)=>({label,data:(data||[]),tension:.25,pointRadius:0});
-  const line = (sel,cfg)=>{ const el=$(sel); if(!el) return;
-    new Chart(el,{type:'line',data:{labels:cfg.labels,datasets:cfg.datasets},
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#e6e6e6'}}},
-      scales:{x:{ticks:{color:'#9ca3af'},grid:{color:'#222'}},y:{ticks:{color:'#9ca3af'},grid:{color:'#222'}}}}); };
-  const bar = (sel,labels,dataArr,horizontal=false)=>{ const el=$(sel); if(!el) return;
-    new Chart(el,{type:'bar',data:{labels,datasets:[{label:'Montants',data:dataArr}]},
-      options:{indexAxis: horizontal?'y':'x',responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#e6e6e6'}}},
-      scales:{x:{ticks:{color:'#9ca3af'},grid:{color:'#222'}},y:{ticks:{color:'#9ca3af'},grid:{color:'#222'}}}}); };
-
-  // ===== Data
-  let data={}; try{ data=JSON.parse(id('AUDIT_DATA').textContent); }catch(e){ alert('Config JSON invalide.'); return; }
-
-  // ===== Bind header
-  setText('#companyName', data.company?.name);
-  setText('#period', data.company?.period);
-  setText('#auditId', data.company?.auditId);
-  setText('#auditDate', data.company?.date);
-  setText('#kpiCash', eur(data.company?.cash));
-  setText('#kpiImpact', `${data.executive?.impactScore||0}/100`);
-  setText('#kpiDD', `${Number(data.executive?.drawdownMaxPct||0).toFixed(1)} %`);
-  setText('#kpiExit', data.executive?.exitWindow);
-  setText('#commitHash', data.security?.commitHash);
-  setText('#reportUrl', data.reportUrl);
-  setText('#year', data.security?.year);
-
-  listTo('#executiveBullets', data.executive?.bullets);
-  listTo('#liquidityBullets', data.liquidity?.bullets);
-  listTo('#complianceList', data.compliance?.items);
-  orderedListTo('#recoList', data.recommendations?.steps);
-  listTo('#plan90', data.recommendations?.plan90);
-  listTo('#methodo', data.methodology);
-  listTo('#assumptionsList', data.assumptions);
-
-  // ===== QR
-  try { new QRCode(id('qrcode'), { text: data.reportUrl, width: 92, height: 92 }); } catch(e){}
-
-  // ===== Overview chart
-  const scen = data.scenarios||{};
-  line('#chartOverview',{labels:labelsMonths(scen.horizonMonths||24),datasets:[
-    ds('Baseline', scen.baseline),
-    ds('Scénario 1 %', scen.series?.[0]?.monthly),
-    ds('Scénario 3 %', scen.series?.[1]?.monthly),
-    ds('Scénario 5 %', scen.series?.[2]?.monthly),
-  ]});
-
-  // ===== Scenario tables
-  function buildScenario(key, serie, baseline, startCash){
-    if(!serie) return;
-    line('#chart'+key,{labels:labelsMonths((serie.monthly||[]).length),datasets:[ds('Baseline',baseline||[]),ds(`Scénario ${serie.name}`,serie.monthly||[])]});
-    const t=id('table'+key); if(!t) return;
-    const bl = baseline||[];
-    const sum=a=>(a||[]).reduce((x,y)=>x+y,0);
-    t.innerHTML = `
-      <thead><tr><th>Mois</th><th>Baseline</th><th>Scénario ${serie.name}</th><th>Écart</th></tr></thead>
-      <tbody>${
-        (serie.monthly||[]).map((v,i)=>{const b=bl[i]??bl[bl.length-1]??0;const g=v-b;return `<tr><td>M${i+1}</td><td>${eur(b)}</td><td>${eur(v)}</td><td>${g>=0?'+':''}${eur(g)}</td></tr>`}).join('')
-      }</tbody>
-      <tfoot><tr><th>Total</th><th>${eur(sum(bl)-(startCash||0))}</th><th>${eur(sum(serie.monthly||[])-(startCash||0))}</th><th>${eur(sum(serie.monthly||[])-sum(bl))}</th></tr></tfoot>`;
-  }
-  buildScenario('S1', scen.series?.[0], scen.baseline, data.company?.cash||0);
-  buildScenario('S3', scen.series?.[1], scen.baseline, data.company?.cash||0);
-  buildScenario('S5', scen.series?.[2], scen.baseline, data.company?.cash||0);
-
-  // ===== Sensitivity (barres horizontales en € d’écart vs baseline M24)
-  (function buildSensitivity(){
-    const bl = scen.baseline||[];
-    const lastBl = bl[bl.length-1]||0;
-    // simplifié: +/- variations appliquées sur la dernière valeur du scénario 3 %
-    const s3 = scen.series?.[1]?.monthly||[];
-    const lastS3 = s3[s3.length-1]||0;
-
-    const variables = [
-      { name:"Inflation −1 pt", factor: +0.005 },
-      { name:"Inflation +1 pt", factor: -0.005 },
-      { name:"Taux sans risque −1 pt", factor: -0.005 },
-      { name:"Taux sans risque +1 pt", factor: +0.005 },
-      { name:"Prime crypto −20 %", factor: -0.20 },
-      { name:"Prime crypto +20 %", factor: +0.20 }
-    ];
-    const labels = variables.map(v=>v.name);
-    const values = variables.map(v => Math.round((lastS3 - lastBl)*(1+v.factor)));
-    bar('#chartSensitivity', labels, values, true);
-
-    // ROI net estimé affiché en annexe
-    const roi = lastS3 - lastBl;
-    setText('#roiNet', (roi>=0?'+':'') + eur(roi));
-  })();
-
-  // ===== Liquidity
-  const lb=(data.liquidity?.buckets||[]);
-  bar('#chartLiquidity', lb.map(b=>b.label), lb.map(b=>b.amount));
-
-  // ===== Export CSV (tables S1/S3/S5 concat)
-  function toCSV(){
-    const hdr = ['Scenario','Mois','Baseline','Scenario','Ecart'];
-    const rows = [];
-    [['S1',scen.series?.[0]],['S3',scen.series?.[1]],['S5',scen.series?.[2]]].forEach(([key,serie])=>{
-      if(!serie) return;
-      const bl = scen.baseline||[];
-      (serie.monthly||[]).forEach((v,i)=>{
-        const b = bl[i]??bl[bl.length-1]??0;
-        rows.push([serie.name,`M${i+1}`,b,v,v-b]);
-      });
-    });
-    const csv = [hdr.join(','), ...rows.map(r=>r.join(','))].join('\n');
-    const blob = new Blob([csv],{type:'text/csv;charset=utf-8;'});
-    const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
-    a.download = 'audit-scenarios.csv'; document.body.appendChild(a); a.click(); a.remove();
-  }
-  id('btnCSV')?.addEventListener('click', toCSV);
-
-  // ===== PDF + Hash
-  id('btnDownload')?.addEventListener('click', ()=>window.print());
-  id('btnHash')?.addEventListener('click', async ()=>{
-    const blob = new Blob([document.documentElement.outerHTML], {type:'text/html'});
-    const hash = await crypto.subtle.digest('SHA-256', await blob.arrayBuffer());
-    const hex = [...new Uint8Array(hash)].map(b=>b.toString(16).padStart(2,'0')).join('');
-    setText('#pdfHash', hex);
-  });
-
-})();
-</script>
+<!-- 2) Moteur d’injection & interactions -->
+<script src="assets/js/audit-engine.js"></script>
 </body>
 </html>
