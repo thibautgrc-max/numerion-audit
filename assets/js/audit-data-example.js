@@ -1,102 +1,89 @@
-// assets/js/audit-data-gth.js
-// Données d’audit générées à partir du formulaire Numérion pour l’entreprise “gth”.
-
+// Exemple de données injectées pour un dossier client
 window.AUDIT_DATA = {
-  // Identité & paramètres de base
-  NOM_ENTREPRISE: "gth",
-  HORIZON_ANALYSE: "12",                       // Horizon financier : 12 mois
-  ALLOCATION_CIBLE: "3",                       // 3 % (poche stratégique)
-  REFERENTIEL_COMPTABLE: "IFRS",
+  NOM_ENTREPRISE: "Numérion Education",
+  HORIZON_ANALYSE: 12,
+  ALLOCATION_CIBLE: 3,
   SECTEUR: "Technologie",
   TAILLE_ENTREPRISE: "< 50 salariés",
+  REFERENTIEL_COMPTABLE: "IFRS",
+  DATE_AUDIT: "25 novembre 2025",
+  ID_DOSSIER: "2025-NE-001",
+
+  // Trésorerie & poche
+  TRESORERIE_DISPONIBLE: 5000000,     // brut, formaté en € par le moteur
+  MONTANT_POCHE: 150000,              // 3% de 5M
+  RENDEMENT_CIBLE: 10,                // % / an cible central
+  SCORE_MATURITE: 60,
+  PROFIL_MATURITE: "Maturité intermédiaire structurable",
+
+  READINESS_GLOBAL_LABEL: "Structurable à court terme",
+  RECOMMANDATION_GLOBALE: "Validation d’une poche numérique prudente à 3 % de la trésorerie, avec montée en puissance progressive sous contrôle du board.",
+  SYNTHESE_COURTE: "Le profil de trésorerie, la gouvernance et le référentiel IFRS permettent d’envisager une poche numérique limitée mais significative, sous réserve de formaliser les procédures et la documentation audit.",
+
+  OBJECTIF_PRIORITAIRE: "Réduire l’érosion de trésorerie (inflation)",
+  JURIDICTION: "France (zone euro)",
   CA_ANNUEL: "< 5 M€",
   PERIMETRE_AUDIT: "Entité seule",
-  JURIDICTION: "France (zone euro)",
-  DATE_AUDIT: "25/11/2025",                    // Date d’émission du rapport
-  ID_DOSSIER: "2025-NE-001",                   // ID libre, tu peux l’ajuster
+  CONTEXTE_LIBRE: "Inflation sur le cash, volonté de diversifier une petite poche de trésorerie vers le numérique avec un cadre de gouvernance solide.",
 
-  // Objectifs et contexte
-  OBJECTIF_PRIORITAIRE: "Réduire l’érosion de trésorerie (inflation)",
-  CONTEXTE_LIBRE:
-    "Phase d’exploration de la trésorerie numérique pour limiter l’érosion inflationniste, avec des ressources internes limitées (manque de temps / ressources internes).",
+  // Benchmark
+  BENCH_ALLOC_RANGE: "1 % – 5 %",
+  BENCH_HORIZON_RANGE: "24–36 mois",
+  BENCH_MODE_CONSERVATION: "PSAN régulé AMF avec comptes ségrégués",
+  BENCH_POSITIONING: "prudente mais alignée avec les bonnes pratiques",
+  BENCH_ALLOC_MIN: 1,
+  BENCH_ALLOC_MAX: 5,
 
-  // Trésorerie & allocation (on prend la borne basse de la tranche > 5 M€ pour la simulation)
-  // Trésorerie disponible déclarée : > 5 M€  → base de travail : 5 000 000 €
-  TRESORERIE_DISPONIBLE: "5000000",
-  // Allocation 3 % → 150 000 €
-  MONTANT_POCHE: "150000",
+  // Scénarios rendements (pédagogiques)
+  SCENARIO_PRUDENT_REND: 4,
+  SCENARIO_CENTRAL_REND: 8,
+  SCENARIO_OFFENSIF_REND: 15,
 
-  // Cible de rendement (fourchette déclarée 10–15 % → scénario central à 12 %)
-  RENDEMENT_CIBLE: "12",
+  // Stress tests
+  STRESS_CHOC_IMPACT_EURO: 45000,
+  STRESS_CHOC_IMPACT_PCT: 0.9, // % de la trésorerie totale
+  STRESS_LATERAL_COMMENT: "Poche numérique sans contribution significative au résultat, mais jouant un rôle de diversification.",
+  STRESS_CYCLE_COMMENT: "Poche numérique pouvant générer un surplus de rendement significatif sur le cycle, à encadrer par une politique claire de prise de profits.",
 
-  // Scénarios pédagogiques (tu peux les ajuster si besoin)
-  SCENARIO_PRUDENT_REND: "5",   // % / an
-  SCENARIO_CENTRAL_REND: "12",  // % / an
-  SCENARIO_OFFENSIF_REND: "18", // % / an
-
-  // Risques (valeurs descriptives, à adapter si tu veux les chiffrer finement)
-  PROBA_VOLATILITE: "Moyenne",
-  IMPACT_VOLATILITE: "Important",
-  PROBA_CUSTODY: "Faible",
-  IMPACT_CUSTODY: "Important",
+  // Risques
+  PROBA_VOLATILITE: "Élevée (actifs très volatils)",
+  IMPACT_VOLATILITE: "Modéré à significatif selon l’allocation max retenue",
+  PROBA_CUSTODY: "Faible à moyenne (PSAN régulé)",
+  IMPACT_CUSTODY: "Significatif (risque opérationnel / contrepartie)",
   PROBA_COMPTABLE: "Moyenne",
-  IMPACT_COMPTABLE: "Moyen",
+  IMPACT_COMPTABLE: "Modéré, dépendant du traitement IFRS retenu",
   PROBA_CYBER: "Moyenne",
-  IMPACT_CYBER: "Élevé",
+  IMPACT_CYBER: "Élevé (perte potentielle irréversible des actifs)",
 
-  // Maturité & gouvernance
-  SCORE_MATURITE: "60", // Score maturité transmis par le wizard
-  PROFIL_MATURITE: "Organisation en phase d’exploration structurée, avec premiers éléments de gouvernance en place.",
+  // Readiness (classes: vert / orange / rouge)
+  READINESS_GOUV_CLASS: "orange",
+  READINESS_GOUV: "Gouvernance partiellement formalisée",
+  READINESS_TECH_CLASS: "orange",
+  READINESS_TECH: "Infrastructure technique en cours de définition",
+  READINESS_COMPTA_CLASS: "orange",
+  READINESS_COMPTA: "Traitement comptable à valider précisément avec le CAC",
 
-  MODE_CONSERVATION: "PSAN agréé AMF",        // Mode de conservation
-  NIVEAU_MICA: "Partielle",                   // Conformité MiCA : Partielle
-  COMMENTAIRE_MICA:
-    "Premiers éléments de conformité présents (politique d’investissement déjà validée), politique de trésorerie à formaliser.",
+  MODE_CONSERVATION: "PSAN agréé AMF",
+  NIVEAU_MICA: "Partielle",
+  COMMENTAIRE_MICA: "Certaines briques de gouvernance sont en place, mais la documentation MiCA reste à consolider.",
+
   NOMBRE_SIGNATAIRES: "1 (décisionnaire unique)",
   PORTEE_DECISION: "Exploration / cadrage",
 
-  // Recommandation globale
-  RECOMMANDATION_GLOBALE:
-    "Mettre en place une poche numérique prudente de 3 % sur 12 mois, avec montée en puissance progressive et revue régulière.",
-  SYNTHese_COURTE:
-    "Démarrer par une exposition BTC / ETH + stablecoins, en plusieurs paliers, avec suivi trimestriel et formalisation progressive des procédures internes.",
-  AVIS_GLOBAL:
-    "cohérente avec une phase d’exploration structurée pour une petite entreprise technologique.",
+  AVIS_GLOBAL: "favorable dans un cadre prudent",
 
-  // Signataires
-  NOM_SIGNATAIRE_CLIENT: "gth",
+  // IFRS
+  IFRS_TREATMENT_LABEL: "Crypto-actifs classés comme immobilisations incorporelles (IAS 38)",
+  IFRS_TREATMENT_COMMENT: "En l’absence de cadre pleinement stabilisé, les crypto-actifs sont généralement comptabilisés en immobilisations incorporelles, avec tests de dépréciation.",
+  IFRS_IMPACT_LABEL: "Impact principalement sur le bilan (juste valeur / dépréciations)",
+  IFRS_IMPACT_COMMENT: "Les variations de juste valeur peuvent se traduire par des dépréciations ; la communication en annexe est clé pour les auditeurs.",
+  IFRS_DISCLOSURE_LABEL: "Note dédiée en annexe et suivi de la juste valeur",
+  IFRS_DISCLOSURE_COMMENT: "Suivi des quantités, des prix de référence, des justes valeurs et des méthodes retenues, en cohérence avec l’information destinée au marché.",
+
+  // Signatures
+  NOM_SIGNATAIRE_CLIENT: "T. Garcia",
   FONCTION_SIGNATAIRE_CLIENT: "Direction générale (DG / CEO)",
-  NOM_CONSULTANT_NUMERION: "Numérion Éducation™ — Équipe Audit",
+  NOM_CONSULTANT_NUMERION: "Consultant Numérion Éducation™",
 
-  // Formulaire & trace
-  DATE_FORMULAIRE: "25/11/2025",
-  SOURCE: "Site Numérion Éducation",
-  WIZARD_VERSION: "V4.1 board-ready",
-
-  // Benchmark marché (adapté à petite structure tech)
-  BENCH_ALLOC_RANGE: "1–3 %",
-  BENCH_HORIZON_RANGE: "12–24 mois",
-  BENCH_MODE_CONSERVATION: "PSAN régulé + éventuellement cold wallet pour une partie des avoirs",
-  BENCH_POSITIONING:
-    "alignée avec les pratiques prudentes observées pour des petites structures technologiques en phase d’exploration.",
-
-  // Stress tests — on part de la poche 150 000 €
-  // Choc -60 % sur la poche ≈ 90 000 € de drawdown
-  STRESS_CHOC_IMPACT_EURO: "90000",
-  // 90 000 / 5 000 000 ≈ 1,8 %
-  STRESS_CHOC_IMPACT_PCT: "1,8",
-  STRESS_LATERAL_COMMENT:
-    "En cas de marché latéral, l’impact principal est un coût d’opportunité par rapport à d’autres supports, sans dégradation significative du capital global.",
-  STRESS_CYCLE_COMMENT:
-    "En cas de cycle haussier complet, la poche numérique peut délivrer un rendement annualisé supérieur au scénario central, sous réserve de prises de profits structurées.",
-
-  // Readiness global & tricolore
-  READINESS_GLOBAL_LABEL:
-    "Profil global : phase d’exploration structurée, gouvernance à formaliser et sécuriser.",
-  READINESS_GOUV: "Orange",
-  READINESS_GOUV_CLASS: "orange",
-  READINESS_TECH: "Orange",
-  READINESS_TECH_CLASS: "orange",
-  READINESS_COMPTA: "Orange",
-  READINESS_COMPTA_CLASS: "orange"
+  DATE_FORMULAIRE: "25 novembre 2025"
 };
