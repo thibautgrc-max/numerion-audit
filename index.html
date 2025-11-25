@@ -6,17 +6,11 @@
   <title>Numérion Éducation™ — Audit de trésorerie numérique (dossier board-ready)</title>
   <meta name="description" content="Audit de trésorerie numérique, simulation IA et matrice de gouvernance pour directions financières, comités d’audit et comités de direction." />
   <meta name="theme-color" content="#020617" />
-  <link rel="stylesheet" href="assets/css/audit-premium.css" />
+
+  <!-- Thème Numérion (même nom de fichier que ton repo) -->
+  <link rel="stylesheet" href="assets/css/audit.css" />
 </head>
 <body>
-
-<!-- Loader IA -->
-<div id="auditLoader">
-  <div class="loader-ring"></div>
-  <div class="loader-text-main">Préparation de l’audit Numérion…</div>
-  <div class="loader-text-sub">Analyse IA des paramètres déclarés &amp; génération du dossier board-ready.</div>
-</div>
-
 <main>
   <div class="page-shell">
 
@@ -33,7 +27,7 @@
           <div class="pill-row">
             <div class="pill">
               <span class="pill-dot"></span>
-              Modèle Audit &amp; Simulation IA · Numérion V3.0
+              Modèle Audit &amp; Simulation IA · Numérion V2.0
             </div>
             <div class="pill pill-soft">
               Horizon d’analyse : __HORIZON_ANALYSE__ mois · Allocation cible : __ALLOCATION_CIBLE__ %
@@ -77,19 +71,16 @@
           <span class="dot"></span> Synthèse
         </button>
         <button class="toolbar-link" data-scroll-to="section-profil">
-          <span class="dot"></span> Profil &amp; contexte
+          <span class="dot"></span> Profil entreprise
         </button>
         <button class="toolbar-link" data-scroll-to="section-simulation">
-          <span class="dot"></span> Simulation &amp; scénarios
+          <span class="dot"></span> Simulation &amp; chiffres clés
         </button>
         <button class="toolbar-link" data-scroll-to="section-risques">
-          <span class="dot"></span> Risques
-        </button>
-        <button class="toolbar-link" data-scroll-to="section-ifrs">
-          <span class="dot"></span> IFRS &amp; comptable
+          <span class="dot"></span> Risques &amp; contrôle
         </button>
         <button class="toolbar-link" data-scroll-to="section-gouvernance">
-          <span class="dot"></span> Gouvernance
+          <span class="dot"></span> Gouvernance &amp; readiness
         </button>
         <button class="toolbar-link" data-scroll-to="section-roadmap">
           <span class="dot"></span> Feuille de route
@@ -103,6 +94,54 @@
         <span>Exporter en PDF / Imprimer</span>
       </button>
     </div>
+
+    <!-- ONE-PAGER (optionnel / masqué) -->
+    <section id="section-onepager" class="onepager card" aria-labelledby="onepager-title">
+      <header class="audit-section-header">
+        <div>
+          <div class="section-kicker">Résumé 1 page</div>
+          <h2 class="section-title" id="onepager-title">Snapshot exécutif — __NOM_ENTREPRISE__</h2>
+        </div>
+      </header>
+      <div class="section-body">
+        <div class="snapshot-grid">
+          <div class="snapshot-kpi">
+            <div class="snapshot-label">Trésorerie disponible</div>
+            <div class="snapshot-value">__TRESORERIE_DISPONIBLE__ €</div>
+            <div class="snapshot-sub">Base de travail déclarée</div>
+          </div>
+          <div class="snapshot-kpi">
+            <div class="snapshot-label">Poche numérique simulée</div>
+            <div class="snapshot-value">__MONTANT_POCHE__ €</div>
+            <div class="snapshot-sub">Soit __ALLOCATION_CIBLE__ % de la trésorerie</div>
+          </div>
+          <div class="snapshot-kpi">
+            <div class="snapshot-label">Horizon &amp; rendement cible</div>
+            <div class="snapshot-value">__HORIZON_ANALYSE__ mois · __RENDEMENT_CIBLE__ % / an</div>
+            <div class="snapshot-sub">Scénario central pédagogique (non garanti)</div>
+          </div>
+          <div class="snapshot-kpi">
+            <div class="snapshot-label">Score de maturité</div>
+            <div class="snapshot-value">__SCORE_MATURITE__/100</div>
+            <div class="snapshot-sub">Profil : __PROFIL_MATURITE__</div>
+          </div>
+        </div>
+
+        <div class="snapshot-riskline">
+          <div class="snapshot-risk-label">Profil global</div>
+          <div class="snapshot-risk-pill">__READINESS_GLOBAL_LABEL__</div>
+          <div class="snapshot-risk-note">
+            Recommandation globale : __RECOMMANDATION_GLOBALE__
+          </div>
+        </div>
+
+        <ul class="snapshot-bullets">
+          <li>Objectif prioritaire : __OBJECTIF_PRIORITAIRE__.</li>
+          <li>Cadre : __REFERENTIEL_COMPTABLE__ · __JURIDICTION__ · MiCA (périmètre informatif).</li>
+          <li>Décision attendue : validation de la poche numérique et de la trajectoire de déploiement.</li>
+        </ul>
+      </div>
+    </section>
 
     <!-- SECTION 1 — SYNTHÈSE EXÉCUTIVE -->
     <section id="section-synthese" class="audit-section card" aria-labelledby="synthese-title">
@@ -156,7 +195,7 @@
               __RECOMMANDATION_GLOBALE__
             </div>
             <div class="info-sub">
-              __SYNTHESE_COURTE__
+              __SYNTHese_COURTE__
             </div>
           </div>
           <div class="info-block">
@@ -173,8 +212,6 @@
           <span class="dot"></span>
           Note de lecture : cette synthèse peut être présentée en l’état au board et au comité d’audit.
         </div>
-
-        <div class="page-footer">Document Numérion Éducation™ — Page 1 / 7 (indicatif)</div>
       </div>
     </section>
 
@@ -195,7 +232,7 @@
           <div class="info-block">
             <div class="info-label">Secteur &amp; taille</div>
             <div class="info-value">__SECTEUR__ · __TAILLE_ENTREPRISE__</div>
-            <div class="info-sub">Ex : Technologie · &lt; 50 salariés</div>
+            <div class="info-sub">Ex : Industrie · 50–250 salariés</div>
           </div>
           <div class="info-block">
             <div class="info-label">Chiffre d’affaires (fourchette)</div>
@@ -223,7 +260,6 @@
           </div>
         </div>
 
-        <!-- Benchmark vs marché -->
         <div class="benchmark-block">
           <div class="benchmark-title">Positionnement vs pratiques observées sur le marché</div>
           <ul class="benchmark-list">
@@ -231,19 +267,10 @@
             <li>Horizon d’analyse généralement constaté : <strong>__BENCH_HORIZON_RANGE__</strong>.</li>
             <li>Mode de conservation le plus fréquent : <strong>__BENCH_MODE_CONSERVATION__</strong>.</li>
           </ul>
-          <div class="benchmark-bar-wrap">
-            <div class="benchmark-bar-label">Positionnement de __NOM_ENTREPRISE__ (allocation numérique)</div>
-            <div class="benchmark-bar" data-bench-bar>
-              <div class="benchmark-range"></div>
-              <div class="benchmark-client" data-bench-client></div>
-            </div>
-          </div>
           <p class="small muted" style="margin-top:0.3rem">
             La proposition pour __NOM_ENTREPRISE__ se situe dans une zone jugée <strong>__BENCH_POSITIONING__</strong> par Numérion Éducation™ (sous X).
           </p>
         </div>
-
-        <div class="page-footer">Document Numérion Éducation™ — Page 2 / 7 (indicatif)</div>
       </div>
     </section>
 
@@ -252,7 +279,7 @@
       <header class="audit-section-header">
         <div>
           <div class="section-kicker">Section 3</div>
-          <h2 class="section-title" id="simulation-title">Trésorerie disponible, allocation numérique &amp; scénarios</h2>
+          <h2 class="section-title" id="simulation-title">Trésorerie disponible, allocation numérique &amp; scénarios chiffrés</h2>
         </div>
         <div class="section-tag">
           <span class="dot"></span>
@@ -294,33 +321,29 @@
           </tr>
         </table>
 
-        <!-- Scenario chart -->
-        <div class="scenario-chart">
-          <div class="stress-title">Rendements cibles par scénario (périmètre pédagogique)</div>
-          <div class="scenario-row prudent">
-            <div class="scenario-label">Scénario prudent</div>
-            <div class="scenario-bar-track">
-              <div class="scenario-bar-fill" data-scenario="PRUDENT"></div>
+        <div class="grid-3" style="margin-top:0.9rem">
+          <div class="info-block">
+            <div class="info-label">Scénario prudent (sous X)</div>
+            <div class="info-value">__SCENARIO_PRUDENT_REND__ % / an</div>
+            <div class="info-sub">
+              Hypothèse : exposition majoritaire BTC/ETH, volatilité élevée mais risque contrôlé via horizon long terme.
             </div>
-            <div class="scenario-value">__SCENARIO_PRUDENT_REND__ % / an</div>
           </div>
-          <div class="scenario-row">
-            <div class="scenario-label">Scénario central</div>
-            <div class="scenario-bar-track">
-              <div class="scenario-bar-fill" data-scenario="CENTRAL"></div>
+          <div class="info-block">
+            <div class="info-label">Scénario central</div>
+            <div class="info-value">__SCENARIO_CENTRAL_REND__ % / an</div>
+            <div class="info-sub">
+              Hypothèse : réalisation partielle de la thèse de marché, réallocation si dérive trop forte du risque.
             </div>
-            <div class="scenario-value">__SCENARIO_CENTRAL_REND__ % / an</div>
           </div>
-          <div class="scenario-row offensif">
-            <div class="scenario-label">Scénario offensif</div>
-            <div class="scenario-bar-track">
-              <div class="scenario-bar-fill" data-scenario="OFFENSIF"></div>
-            </div>
-            <div class="scenario-value">__SCENARIO_OFFENSIF_REND__ % / an</div>
+          <div class="info-block">
+            <div class="info-label">Scénario offensif</div>
+            <div class="info-value">__SCENARIO_OFFENSIF_REND__ % / an</div>
+            <div class="info-sub">
+              Hypothèse : cycle haussier complet, utilisation progressive de produits de rendement (staking, etc.).</div>
           </div>
         </div>
 
-        <!-- Stress tests -->
         <div class="stress-tests">
           <div class="stress-title">Stress tests &amp; scénarios extrêmes (pédagogiques)</div>
           <div class="stress-grid">
@@ -370,12 +393,10 @@
           <span class="dot"></span>
           Ces scénarios sont fournis à titre pédagogique (périmètre informatif). La décision d’allocation reste à la main de votre direction.
         </div>
-
-        <div class="page-footer">Document Numérion Éducation™ — Page 3 / 7 (indicatif)</div>
       </div>
     </section>
 
-    <!-- SECTION 4 — MATRICE DES RISQUES -->
+    <!-- SECTION 4 — MATRICE DES RISQUES & CONTRÔLES CLÉS -->
     <section id="section-risques" class="audit-section card" aria-labelledby="risques-title">
       <header class="audit-section-header">
         <div>
@@ -408,8 +429,8 @@
                 <span class="dot"></span> Niveau : Moyen
               </div>
             </td>
-            <td>__PROBA_VOLATILITE__</td>
-            <td>__IMPACT_VOLATILITE__</td>
+            <td>__PROBA_VOLATILITE__ (sous X)</td>
+            <td>__IMPACT_VOLATILITE__ (sous X)</td>
             <td>
               Allocation limitée à __ALLOCATION_CIBLE__ %, horizon de __HORIZON_ANALYSE__ mois, rééquilibrage périodique.
               Documentation claire de la thèse d’investissement dans la politique de trésorerie.
@@ -463,67 +484,14 @@
           Cette matrice est un socle : elle peut être directement intégrée à votre cartographie des risques,
           complétée avec des niveaux chiffrés (X / 5 ou X / 10) et validée en comité des risques / comité d’audit.
         </p>
-
-        <div class="page-footer">Document Numérion Éducation™ — Page 4 / 7 (indicatif)</div>
       </div>
     </section>
 
-    <!-- SECTION 5 — ANALYSE IFRS & COMPTABLE -->
-    <section id="section-ifrs" class="audit-section card" aria-labelledby="ifrs-title">
-      <header class="audit-section-header">
-        <div>
-          <div class="section-kicker">Section 5</div>
-          <h2 class="section-title" id="ifrs-title">Analyse IFRS, traitement comptable &amp; communication financière</h2>
-        </div>
-        <div class="section-tag">
-          <span class="dot"></span>
-          Support pour direction financière &amp; CAC
-        </div>
-      </header>
-      <div class="section-body">
-        <p>
-          Cette section résume les principaux enjeux comptables liés à la poche de trésorerie numérique,
-          en cohérence avec votre référentiel <strong>__REFERENTIEL_COMPTABLE__</strong> (périmètre informatif).
-        </p>
-
-        <div class="ifrs-grid">
-          <div class="ifrs-card">
-            <div class="ifrs-label">Nature comptable des actifs</div>
-            <div class="ifrs-value">__IFRS_TREATMENT_LABEL__</div>
-            <div class="ifrs-note">
-              __IFRS_TREATMENT_COMMENT__
-            </div>
-          </div>
-          <div class="ifrs-card">
-            <div class="ifrs-label">Impact sur bilan &amp; résultat</div>
-            <div class="ifrs-value">__IFRS_IMPACT_LABEL__</div>
-            <div class="ifrs-note">
-              __IFRS_IMPACT_COMMENT__
-            </div>
-          </div>
-          <div class="ifrs-card">
-            <div class="ifrs-label">Communication en annexe &amp; reporting</div>
-            <div class="ifrs-value">__IFRS_DISCLOSURE_LABEL__</div>
-            <div class="ifrs-note">
-              __IFRS_DISCLOSURE_COMMENT__
-            </div>
-          </div>
-        </div>
-
-        <p class="small muted" style="margin-top:0.75rem">
-          Ces éléments doivent être revus et validés avec votre expert-comptable et votre commissaire aux comptes,
-          afin d’être intégrés dans vos états financiers (bilan, compte de résultat, annexes).
-        </p>
-
-        <div class="page-footer">Document Numérion Éducation™ — Page 5 / 7 (indicatif)</div>
-      </div>
-    </section>
-
-    <!-- SECTION 6 — GOUVERNANCE, MATURITÉ & READINESS -->
+    <!-- SECTION 5 — GOUVERNANCE, MATURITÉ MICA & READINESS -->
     <section id="section-gouvernance" class="audit-section card" aria-labelledby="gouvernance-title">
       <header class="audit-section-header">
         <div>
-          <div class="section-kicker">Section 6</div>
+          <div class="section-kicker">Section 5</div>
           <h2 class="section-title" id="gouvernance-title">Gouvernance MiCA, readiness opérationnelle &amp; organisation</h2>
         </div>
         <div class="section-tag">
@@ -551,7 +519,6 @@
           </div>
         </div>
 
-        <!-- Readiness -->
         <div class="readiness-grid">
           <div class="readiness-card">
             <div class="readiness-label">Gouvernance &amp; procédures</div>
@@ -611,16 +578,14 @@
           <strong>politiques d’investissement / risque</strong> et procédures internes, afin de rendre la démarche
           pleinement lisible pour vos auditeurs et votre board.
         </p>
-
-        <div class="page-footer">Document Numérion Éducation™ — Page 6 / 7 (indicatif)</div>
       </div>
     </section>
 
-    <!-- SECTION 7 — FEUILLE DE ROUTE & ANNEXES -->
+    <!-- SECTION 6 — FEUILLE DE ROUTE OPÉRATIONNELLE -->
     <section id="section-roadmap" class="audit-section card" aria-labelledby="roadmap-title">
       <header class="audit-section-header">
         <div>
-          <div class="section-kicker">Section 7</div>
+          <div class="section-kicker">Section 6</div>
           <h2 class="section-title" id="roadmap-title">Feuille de route opérationnelle proposée</h2>
         </div>
         <div class="section-tag">
@@ -682,7 +647,6 @@
           </article>
         </div>
 
-        <!-- Check-list CAC / comité d’audit -->
         <div class="checklist-block">
           <div class="checklist-title">Check-list comité d’audit / commissaire aux comptes</div>
           <ul class="checklist-list">
@@ -708,7 +672,6 @@
           </ul>
         </div>
 
-        <!-- Signatures -->
         <div class="signature-grid">
           <div class="signature-block">
             <div>
@@ -727,16 +690,14 @@
             <div class="small muted">Signature &amp; validation de l’audit :</div>
           </div>
         </div>
-
-        <div class="page-footer">Document Numérion Éducation™ — Page 7 / 7 (indicatif)</div>
       </div>
     </section>
 
-    <!-- SECTION 8 — ANNEXES -->
+    <!-- SECTION 7 — ANNEXES & DISPOSITIONS LÉGALES -->
     <section id="section-annexes" class="audit-section card" aria-labelledby="annexes-title">
       <header class="audit-section-header">
         <div>
-          <div class="section-kicker">Section 8</div>
+          <div class="section-kicker">Section 7</div>
           <h2 class="section-title" id="annexes-title">Annexes, glossaire &amp; limites de l’audit</h2>
         </div>
         <div class="section-tag">
@@ -844,15 +805,16 @@
             </div>
           </article>
         </div>
-
-        <div class="page-footer">Document Numérion Éducation™ — Annexes</div>
       </div>
     </section>
 
   </div>
 </main>
 
+<!-- Données d’audit (exemple / client) -->
 <script src="assets/js/audit-data-example.js"></script>
-<script src="assets/js/audit-premium-engine.js"></script>
+
+<!-- Moteur d’injection & interactions -->
+<script src="assets/js/audit-engine.js"></script>
 </body>
 </html>
