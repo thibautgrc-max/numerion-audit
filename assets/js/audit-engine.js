@@ -1,162 +1,150 @@
-// assets/js/audit-data-example.js
-window.AUDIT_DATA = {
-  // Identité dossier / entreprise
-  NOM_ENTREPRISE: "gth",
-  NOM_GROUPE: "Numérion Éducation",
-  DATE_AUDIT: "25/11/2025",
-  DATE_FORMULAIRE: "25/11/2025",
-  ID_DOSSIER: "2025-NE-001",
+// assets/js/audit-engine.js
+(function () {
+  "use strict";
 
-  // Rôle / contact
-  ROLE_CONTACT: "Direction générale (DG / CEO)",
-  NOM_SIGNATAIRE_CLIENT: "gth",
-  FONCTION_SIGNATAIRE_CLIENT: "Direction générale",
-  NOM_CONSULTANT_NUMERION: "Équipe Numérion Éducation™",
+  const data = window.AUDIT_DATA || null;
 
-  // Profil entreprise
-  SECTEUR: "Technologie",
-  TAILLE_ENTREPRISE: "< 50 salariés",
-  CA_ANNUEL: "< 5 M€",
-  PERIMETRE_AUDIT: "Entité seule",
-  JURIDICTION: "France (zone euro)",
-  FORME_JURIDIQUE: "SAS",
-  APPARTENANCE_GROUPE: "Indépendant",
-  SOURCE: "Site Numérion Éducation",
+  function injectPlaceholders() {
+    if (!data) {
+      console.warn("[Numérion] AUDIT_DATA non défini – aucun placeholder injecté.");
+      return;
+    }
 
-  // Trésorerie & allocation (gth)
-  TRESORERIE_DISPONIBLE: 5500000,            // > 5 M€ -> approx 5,5 M€
-  ALLOCATION_CIBLE: 3,                      // 3 %
-  HORIZON_ANALYSE: 12,                      // 12 mois
-  RENDEMENT_CIBLE: 12,                      // cible centrale 10–15% -> 12% pédagogique
-  UNIVERS_ACTIFS: "BTC / ETH, Stablecoins (EUR / USD)",
-  USAGE_PRINCIPAL: "Diversification de trésorerie",
-  TOLERANCE_VOLATILITE: "Modérée (rendement / risque équilibré)",
+    // On parcourt tous les nœuds texte (éléments sans enfants)
+    const nodes = document.querySelectorAll("body *");
+    nodes.forEach((el) => {
+      if (el.children.length === 0 && el.innerHTML && el.innerHTML.includes("__")) {
+        el.innerHTML = el.innerHTML.replace(/__([A-Z0-9_]+)__/g, (match, key) => {
+          if (Object.prototype.hasOwnProperty.call(data, key)) {
+            return data[key];
+          }
+          // Si aucune donnée pour ce placeholder, on le remplace par vide
+          return "";
+        });
+      }
+    });
+  }
 
-  // Poche numérique simulée
-  MONTANT_POCHE: 165000,                    // 3% de 5 500 000 €
+  function syncMaturityBar() {
+    if (!data) return;
+    const score = Number(data.SCORE_MATURITE || 0);
+    const bar = document.querySelector(".maturity-bar-fill");
+    if (bar && !isNaN(score)) {
+      const safe = Math.max(0, Math.min(100, score));
+      bar.style.width = safe + "%";
+    }
+  }
 
-  // Objectifs & contexte
-  OBJECTIF_PRIORITAIRE: "Réduire l’érosion de trésorerie (inflation)",
-  URGENCE: "Étude / cadrage interne",
-  PORTEE_DECISION: "Exploration / cadrage",
-  FREQUENCE_COMITE: "Au fil de l’eau",
-  POLITIQUE_TRESORERIE: "Aucune",
-  POLITIQUE_INVEST: "Oui (politique d’investissement / risque existante)",
-  CONTRAINTES_INTERNES: "Manque de temps / ressources internes",
-  COMMENTAIRES_LIBRES: "yesssouii",
-  CONTEXTE_LIBRE:
-    "Première réflexion structurée sur une poche de trésorerie numérique, " +
-    "avec volonté de protéger le cash contre l’inflation sans complexifier le quotidien des équipes.",
+  function initToolbar() {
+    const links = document.querySelectorAll(".toolbar-link[data-scroll-to]");
+    if (!links.length) return;
 
-  // Gouvernance / MiCA
-  MODE_CONSERVATION: "PSAN agréé AMF",
-  NIVEAU_MICA: "Conformité partielle",
-  COMMENTAIRE_MICA:
-    "Certaines briques de gouvernance existent déjà, mais les procédures écrites et la cartographie des risques " +
-    "doivent être complétées pour être pleinement alignées avec MiCA.",
-  COMMISSAIRE_AUX_COMPTES: "Oui",
-  NOMBRE_SIGNATAIRES: "1 (décisionnaire unique)",
-  PORTEE_DECISION_GOUV: "Décisionnaire unique, validation en board recommandée",
+    const sections = {};
+    links.forEach((link) => {
+      const id = link.getAttribute("data-scroll-to");
+      const section = document.getElementById(id);
+      if (section) sections[id] = section;
 
-  REFERENTIEL_COMPTABLE: "IFRS",
-  VISIO_RESTITUTION: "Oui, visio 45 min",
-  PLAGE_HORAIRE_PREF: "À préciser (créneaux de bureau privilégiés)",
+      link.addEventListener("click", () => {
+        const target = sections[id];
+        if (!target) return;
+        const rect = target.getBoundingClientRect();
+        const offset = window.pageYOffset + rect.top - 72;
+        window.scrollTo({ top: offset, behavior: "smooth" });
 
-  // Maturité & readiness
-  SCORE_MATURITE: 60,
-  PROFIL_MATURITE: "Organisation en structuration",
-  READINESS_GOUV: "En cours de structuration",
-  READINESS_GOUV_CLASS: "orange",
-  READINESS_TECH: "Solide avec PSAN régulé",
-  READINESS_TECH_CLASS: "vert",
-  READINESS_COMPTA: "À cadrer avec l’expert-comptable / CAC",
-  READINESS_COMPTA_CLASS: "orange",
+        links.forEach((l) => l.classList.remove("is-active"));
+        link.classList.add("is-active");
+      });
+    });
 
-  READINESS_GLOBAL_LABEL: "Poche numérique à déployer de façon progressive",
-  RECOMMANDATION_GLOBALE:
-    "Valider une poche numérique limitée à 3 % de la trésorerie puis la déployer en plusieurs paliers " +
-    "avec reporting trimestriel aux instances de gouvernance.",
-  SYNTHESE_COURTE:
-    "Avec une trésorerie supérieure à 5 M€ et un objectif de protection contre l’inflation, " +
-    "une poche numérique de 3 % apparaît cohérente, sous réserve de formaliser les procédures internes " +
-    "et d’embarquer vos auditeurs.",
-  AVIS_GLOBAL: "cohérente avec un profil prudence / diversification",
+    // Mise à jour de l’état actif au scroll
+    window.addEventListener("scroll", () => {
+      const scrollPos = window.scrollY || window.pageYOffset;
+      let currentId = null;
 
-  // Benchmarks
-  BENCH_ALLOC_RANGE: "2–5 %",
-  BENCH_HORIZON_RANGE: "12–36 mois",
-  BENCH_MODE_CONSERVATION: "PSAN régulé + ségrégation des accès",
-  BENCH_POSITIONING: "alignée avec les pratiques prudentes observées",
+      Object.entries(sections).forEach(([id, section]) => {
+        const top = section.offsetTop - 120;
+        if (scrollPos >= top) currentId = id;
+      });
 
-  // Scénarios de rendement (pédagogiques)
-  SCENARIO_PRUDENT_REND: 4,
-  SCENARIO_CENTRAL_REND: 10,
-  SCENARIO_OFFENSIF_REND: 18,
+      if (currentId) {
+        links.forEach((l) => {
+          l.classList.toggle(
+            "is-active",
+            l.getAttribute("data-scroll-to") === currentId
+          );
+        });
+      }
+    });
+  }
 
-  SCENARIO_PRUDENT_VALUE: 171600,   // 165 000 * 1.04
-  SCENARIO_CENTRAL_VALUE: 181500,   // 165 000 * 1.10
-  SCENARIO_OFFENSIF_VALUE: 194700,  // 165 000 * 1.18
+  function initAccordions() {
+    const accordions = document.querySelectorAll("[data-accordion]");
+    accordions.forEach((acc) => {
+      const items = acc.querySelectorAll(".accordion-item");
+      items.forEach((item) => {
+        const header = item.querySelector(".accordion-header");
+        const panel = item.querySelector(".accordion-panel");
+        if (!header || !panel) return;
 
-  SCENARIO_PRUDENT_COMMENT:
-    "Exposition majoritaire BTC/ETH, focus capital préservé, montées progressives et revues régulières.",
-  SCENARIO_CENTRAL_COMMENT:
-    "Réalisation partielle de la thèse de marché, avec rééquilibrages périodiques et revue annuelle cadrée.",
-  SCENARIO_OFFENSIF_COMMENT:
-    "Cycle haussier complet, utilisation progressive de produits de rendement (staking, etc.) " +
-    "avec règles de prise de profits documentées.",
+        // Fermeture initiale
+        panel.style.maxHeight = "0px";
 
-  // Stress tests
-  STRESS_CHOC_IMPACT_EURO: 90750,
-  STRESS_CHOC_IMPACT_PCT: 1.65,
-  STRESS_LATERAL_COMMENT:
-    "Dans un marché globalement neutre, la poche numérique joue surtout un rôle de veille stratégique " +
-    "et de diversification, avec un coût d’opportunité limité au regard du montant engagé.",
-  STRESS_CYCLE_COMMENT:
-    "Dans un cycle haussier complet puis consolidé, la poche peut contribuer de façon significative " +
-    "à la performance globale de trésorerie, sous réserve d’une revue régulière du risque.",
+        header.addEventListener("click", () => {
+          const isOpen = header.classList.contains("is-open");
 
-  // Matrice des risques – textes
-  PROBA_VOLATILITE: "Élevée (classe d’actifs intrinsèquement volatile)",
-  IMPACT_VOLATILITE:
-    "Important pour la poche numérique, mais borné par le plafond d’allocation de 3 %. ",
-  PROBA_CUSTODY: "Modérée (PSAN régulé AMF)",
-  IMPACT_CUSTODY:
-    "Potentiellement élevé en cas de défaillance, d’où l’importance de la due diligence opérateur.",
-  PROBA_COMPTABLE: "Modérée",
-  IMPACT_COMPTABLE:
-    "Moyen à élevé si le traitement IFRS n’est pas cadré en amont avec l’expert-comptable et le CAC.",
-  PROBA_CYBER: "Non négligeable (risque structurel sur les actifs numériques)",
-  IMPACT_CYBER:
-    "Important sur la poche numérique, avec un impact limité au montant engagé si les dispositifs " +
-    "de sécurité sont robustes.",
+          // Fermer tous les autres
+          items.forEach((it) => {
+            const h = it.querySelector(".accordion-header");
+            const p = it.querySelector(".accordion-panel");
+            if (!h || !p) return;
+            h.classList.remove("is-open");
+            p.style.maxHeight = "0px";
+          });
 
-  // Indicateurs de succès & points ouverts
-  INDICATEURS_SUCCES:
-    "Respect durable du plafond d’allocation validé par le board ; " +
-    "absence d’incident de sécurité significatif ; feedback CAC cohérent avec la thèse initiale.",
-  POINTS_OUVERTS:
-    "Paramétrage définitif des seuils de réduction automatique et de prise de profits ; " +
-    "choix final du PSAN / opérateur et périmètre exact des services utilisés ; " +
-    "intégration du reporting dans les instances existantes (board, comité d’audit, etc.).",
+          // Ouvrir celui cliqué si besoin
+          if (!isOpen) {
+            header.classList.add("is-open");
+            panel.style.maxHeight = panel.scrollHeight + "px";
+          }
+        });
+      });
+    });
+  }
 
-  // Reporting trimestriel standard (exemple neutre)
-  REPORT_T1_VALEUR: 165000,
-  REPORT_T2_VALEUR: "—",
-  REPORT_T3_VALEUR: "—",
-  REPORT_T4_VALEUR: "—",
+  function initBackToTop() {
+    const btn = document.getElementById("back-to-top");
+    if (!btn) return;
 
-  REPORT_T1_REND: "À compléter",
-  REPORT_T2_REND: "—",
-  REPORT_T3_REND: "—",
-  REPORT_T4_REND: "—",
+    const toggle = () => {
+      const scrollPos = window.scrollY || window.pageYOffset;
+      if (scrollPos > 220) {
+        btn.classList.add("is-visible");
+      } else {
+        btn.classList.remove("is-visible");
+      }
+    };
 
-  REPORT_T1_LIMITES: "Allocation conforme (≤ 3 %)",
-  REPORT_T2_LIMITES: "—",
-  REPORT_T3_LIMITES: "—",
-  REPORT_T4_LIMITES: "—",
+    window.addEventListener("scroll", toggle);
+    toggle(); // état initial
 
-  REPORT_T1_INCIDENTS: "Aucun incident déclaré",
-  REPORT_T2_INCIDENTS: "—",
-  REPORT_T3_INCIDENTS: "—",
-  REPORT_T4_INCIDENTS: "—"
-};
+    btn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+
+  function init() {
+    injectPlaceholders();
+    syncMaturityBar();
+    initToolbar();
+    initAccordions();
+    initBackToTop();
+    console.info("[Numérion] Audit dynamique initialisé.");
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+})();
