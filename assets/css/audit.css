@@ -20,7 +20,6 @@
   --error: #dc2626;
 }
 
-/* RESET / BASE */
 *, *::before, *::after { box-sizing: border-box; }
 
 html, body {
@@ -40,7 +39,9 @@ body {
   padding: 1.5rem 1rem 2.5rem;
 }
 
-main { width: 100%; }
+main {
+  width: 100%;
+}
 
 .page-shell {
   width: 100%;
@@ -49,44 +50,7 @@ main { width: 100%; }
   color: var(--text-main);
 }
 
-/* LOADER AUDIT */
-#auditLoader {
-  position: fixed;
-  inset: 0;
-  background: radial-gradient(circle at top, rgba(15,23,42,0.96) 0, #020617 60%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-  flex-direction: column;
-  gap: 0.9rem;
-  color: #e5e7eb;
-}
-
-.loader-ring {
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  border: 3px solid rgba(148,163,184,0.35);
-  border-top-color: #22c55e;
-  animation: spin 0.9s linear infinite;
-}
-
-.loader-text-main {
-  font-size: 0.9rem;
-  font-weight: 550;
-}
-
-.loader-text-sub {
-  font-size: 0.78rem;
-  color: #9ca3af;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-/* SIGNATURE / HEADER */
+/* Signature / bandeau top */
 .brand-signature {
   text-align: center;
   margin-bottom: 0.4rem;
@@ -220,7 +184,7 @@ main { width: 100%; }
   color: #f97373;
 }
 
-/* TOOLBAR */
+/* Nav secondaire / CTA impression */
 .toolbar {
   display: flex;
   align-items: center;
@@ -296,7 +260,7 @@ main { width: 100%; }
   box-shadow: 0 10px 24px rgba(16,185,129,0.45);
 }
 
-/* CARDS / SECTIONS */
+/* Cards génériques */
 .card {
   border-radius: var(--radius-card);
   border: 1px solid var(--border-soft);
@@ -307,7 +271,9 @@ main { width: 100%; }
   margin-inline: auto;
 }
 
-.audit-section { margin-bottom: 1rem; }
+.audit-section {
+  margin-bottom: 1rem;
+}
 
 .audit-section-header {
   display: flex;
@@ -376,11 +342,13 @@ main { width: 100%; }
   background: var(--primary);
 }
 
-.small { font-size: 0.82rem; }
 .muted { color: var(--text-muted); }
+.small { font-size: 0.82rem; }
 
-/* GRIDS */
-.grid { display: grid; }
+/* Grilles / tableaux */
+.grid {
+  display: grid;
+}
 
 .grid-2 {
   display: grid;
@@ -394,7 +362,6 @@ main { width: 100%; }
   gap: 0.75rem;
 }
 
-/* INFO BLOCKS */
 .info-block {
   border-radius: var(--radius-soft);
   border: 1px solid #e5e7eb;
@@ -422,14 +389,16 @@ main { width: 100%; }
   color: var(--text-muted);
 }
 
-/* SNAPSHOT EXECUTIF */
+/* Executive snapshot */
 .snapshot-grid {
   display: grid;
   grid-template-columns: repeat(4,minmax(0,1fr));
   gap: 0.75rem;
 }
 
-.snapshot-grid-compact { margin-top: 0.15rem; }
+.snapshot-grid-compact {
+  margin-top: 0.15rem;
+}
 
 .snapshot-kpi {
   border-radius: var(--radius-soft);
@@ -500,7 +469,13 @@ main { width: 100%; }
   gap: 0.1rem;
 }
 
-/* TABLEAU CHIFFRES CLÉS */
+/* Onepager (par défaut masqué, prêt pour usage futur / custom print) */
+.onepager {
+  display: none;
+  margin-bottom: 1rem;
+}
+
+/* Tableau key numbers */
 .key-metrics {
   width: 100%;
   border-collapse: collapse;
@@ -533,70 +508,7 @@ main { width: 100%; }
   color: #065f46;
 }
 
-/* DELTAS / KPI EVOLUTION */
-.kpi-delta {
-  font-size: 0.76rem;
-  color: #16a34a;
-}
-
-.kpi-delta.negative {
-  color: #b91c1c;
-}
-
-/* SCENARIO CHART (barres horizontales) */
-.scenario-chart {
-  margin-top: 1rem;
-  border-radius: var(--radius-soft);
-  border: 1px solid #e5e7eb;
-  background: #f9fafb;
-  padding: 0.75rem 0.9rem;
-  font-size: 0.8rem;
-}
-
-.scenario-row {
-  display: grid;
-  grid-template-columns: 0.9fr 2.1fr 0.8fr;
-  gap: 0.6rem;
-  align-items: center;
-  margin-bottom: 0.45rem;
-}
-
-.scenario-label {
-  font-weight: 600;
-  color: var(--text-main);
-}
-
-.scenario-bar-track {
-  width: 100%;
-  height: 7px;
-  border-radius: 999px;
-  background: #e5e7eb;
-  overflow: hidden;
-}
-
-.scenario-bar-fill {
-  height: 100%;
-  width: 0%;
-  border-radius: 999px;
-  background: linear-gradient(90deg,#22c55e,#16a34a);
-  transition: width 0.5s ease-out;
-}
-
-.scenario-row.offensif .scenario-bar-fill {
-  background: linear-gradient(90deg,#f97316,#ea580c);
-}
-
-.scenario-row.prudent .scenario-bar-fill {
-  background: linear-gradient(90deg,#38bdf8,#0ea5e9);
-}
-
-.scenario-value {
-  font-weight: 550;
-  color: #064e3b;
-  text-align: right;
-}
-
-/* STRESS TESTS */
+/* Stress tests */
 .stress-tests {
   margin-top: 0.9rem;
   border-radius: var(--radius-soft);
@@ -649,7 +561,7 @@ main { width: 100%; }
   color: var(--text-soft);
 }
 
-/* BENCHMARK */
+/* Benchmark */
 .benchmark-block {
   margin-top: 1rem;
   border-radius: var(--radius-soft);
@@ -674,41 +586,7 @@ main { width: 100%; }
   gap: 0.1rem;
 }
 
-.benchmark-bar-wrap {
-  margin-top: 0.55rem;
-}
-
-.benchmark-bar-label {
-  font-size: 0.76rem;
-  color: var(--text-muted);
-  margin-bottom: 0.2rem;
-}
-
-.benchmark-bar {
-  position: relative;
-  width: 100%;
-  height: 8px;
-  border-radius: 999px;
-  background: #e5e7eb;
-  overflow: hidden;
-}
-
-.benchmark-range {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg,rgba(52,211,153,0.25),rgba(45,212,191,0.35));
-}
-
-.benchmark-client {
-  position: absolute;
-  top: -2px;
-  width: 2px;
-  height: 12px;
-  border-radius: 999px;
-  background: #111827;
-}
-
-/* MATURITÉ / READINESS */
+/* Bandeau “score de maturité” */
 .maturity-strip {
   border-radius: 0.7rem;
   padding: 0.55rem 0.75rem;
@@ -748,6 +626,7 @@ main { width: 100%; }
   background: linear-gradient(90deg,#22c55e,#eab308);
 }
 
+/* Readiness */
 .readiness-grid {
   margin-top: 0.8rem;
   display: grid;
@@ -813,7 +692,7 @@ main { width: 100%; }
   color: #b91c1c;
 }
 
-/* MATRICE RISQUES */
+/* Matrice des risques */
 .risk-matrix {
   width: 100%;
   border-collapse: collapse;
@@ -864,42 +743,7 @@ main { width: 100%; }
 .risk-tag.medium span.dot { background: #f59e0b; }
 .risk-tag.high span.dot { background: #dc2626; }
 
-/* ANALYSE IFRS */
-.ifrs-grid {
-  margin-top: 0.7rem;
-  display: grid;
-  grid-template-columns: repeat(3,minmax(0,1fr));
-  gap: 0.75rem;
-}
-
-.ifrs-card {
-  border-radius: var(--radius-soft);
-  border: 1px solid #e5e7eb;
-  background: #f9fafb;
-  padding: 0.7rem 0.8rem;
-  font-size: 0.82rem;
-  display: grid;
-  gap: 0.2rem;
-}
-
-.ifrs-label {
-  font-size: 0.76rem;
-  text-transform: uppercase;
-  letter-spacing: 0.13em;
-  color: var(--text-soft);
-}
-
-.ifrs-value {
-  font-weight: 600;
-  color: var(--text-main);
-}
-
-.ifrs-note {
-  font-size: 0.78rem;
-  color: var(--text-muted);
-}
-
-/* ROADMAP */
+/* Roadmap */
 .roadmap-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0,1fr));
@@ -951,7 +795,7 @@ main { width: 100%; }
   gap: 0.1rem;
 }
 
-/* CHECKLIST */
+/* Check-list comité d’audit */
 .checklist-block {
   margin-top: 0.85rem;
   border-radius: var(--radius-soft);
@@ -978,9 +822,10 @@ main { width: 100%; }
 .check-square {
   display: inline-block;
   margin-right: 0.3rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
 }
 
-/* CONCLUSION */
+/* Encadré conclusion */
 .conclusion-box {
   border-radius: var(--radius-soft);
   border: 1px solid rgba(22,163,74,0.4);
@@ -1000,7 +845,7 @@ main { width: 100%; }
   text-transform: uppercase;
 }
 
-/* ACCORDION / ANNEXES */
+/* Annexes / accordéon simple */
 .accordion {
   border-radius: var(--radius-soft);
   border: 1px solid #e5e7eb;
@@ -1063,7 +908,7 @@ main { width: 100%; }
   font-size: 0.76rem;
 }
 
-/* SIGNATURE */
+/* Signature bloc */
 .signature-grid {
   display: grid;
   grid-template-columns: repeat(2,minmax(0,1fr));
@@ -1095,15 +940,7 @@ main { width: 100%; }
   color: var(--text-main);
 }
 
-/* FOOTER / PAGE COUNTER (visuel) */
-.page-footer {
-  margin-top: 0.75rem;
-  font-size: 0.74rem;
-  color: #9ca3af;
-  text-align: right;
-}
-
-/* RESPONSIVE */
+/* Responsive */
 @media (max-width: 880px) {
   .audit-header-inner {
     grid-template-columns: minmax(0,1fr);
@@ -1146,20 +983,16 @@ main { width: 100%; }
   .snapshot-grid,
   .readiness-grid,
   .stress-grid,
-  .ifrs-grid,
   .signature-grid {
     grid-template-columns: minmax(0,1fr);
   }
 }
 
-/* PRINT */
+/* Print */
 @media print {
   body {
     background: #ffffff !important;
     padding: 0;
-  }
-  #auditLoader {
-    display: none !important;
   }
   .audit-header {
     box-shadow: none;
