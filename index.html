@@ -7,7 +7,7 @@
   <meta name="description" content="Audit de trésorerie numérique, simulation IA et matrice de gouvernance pour directions financières, comités d’audit et comités de direction." />
   <meta name="theme-color" content="#020617" />
 
-  <!-- Thème Numérion (même nom de fichier que ton repo) -->
+  <!-- Thème Numérion -->
   <link rel="stylesheet" href="assets/css/audit.css" />
 </head>
 <body>
@@ -95,7 +95,7 @@
       </button>
     </div>
 
-    <!-- ONE-PAGER (optionnel / masqué) -->
+    <!-- ONE-PAGER (optionnel) -->
     <section id="section-onepager" class="onepager card" aria-labelledby="onepager-title">
       <header class="audit-section-header">
         <div>
@@ -195,7 +195,7 @@
               __RECOMMANDATION_GLOBALE__
             </div>
             <div class="info-sub">
-              __SYNTHese_COURTE__
+              __SYNTHESE_COURTE__
             </div>
           </div>
           <div class="info-block">
@@ -232,7 +232,7 @@
           <div class="info-block">
             <div class="info-label">Secteur &amp; taille</div>
             <div class="info-value">__SECTEUR__ · __TAILLE_ENTREPRISE__</div>
-            <div class="info-sub">Ex : Industrie · 50–250 salariés</div>
+            <div class="info-sub">Exemple : Technologie · &lt; 50 salariés</div>
           </div>
           <div class="info-block">
             <div class="info-label">Chiffre d’affaires (fourchette)</div>
@@ -260,6 +260,7 @@
           </div>
         </div>
 
+        <!-- Benchmark vs marché -->
         <div class="benchmark-block">
           <div class="benchmark-title">Positionnement vs pratiques observées sur le marché</div>
           <ul class="benchmark-list">
@@ -307,7 +308,7 @@
           <tr>
             <td>Allocation numérique envisagée</td>
             <td class="metric-strong">__ALLOCATION_CIBLE__ %</td>
-            <td>Compatible avec un cadre prudence / diversification sous X.</td>
+            <td>Compatible avec une approche prudente et diversifiée, sous X.</td>
           </tr>
           <tr>
             <td>Montant de la poche numérique simulée</td>
@@ -317,7 +318,7 @@
           <tr>
             <td>Horizon financier</td>
             <td>__HORIZON_ANALYSE__ mois</td>
-            <td>Horizon cohérent avec une logique de thèse long terme (non spéculative).</td>
+            <td>Horizon cohérent avec une thèse long terme (non spéculative).</td>
           </tr>
         </table>
 
@@ -326,7 +327,7 @@
             <div class="info-label">Scénario prudent (sous X)</div>
             <div class="info-value">__SCENARIO_PRUDENT_REND__ % / an</div>
             <div class="info-sub">
-              Hypothèse : exposition majoritaire BTC/ETH, volatilité élevée mais risque contrôlé via horizon long terme.
+              Hypothèse : exposition majoritaire BTC/ETH, volatilité élevée mais bornée par l’allocation maximale.
             </div>
           </div>
           <div class="info-block">
@@ -340,10 +341,12 @@
             <div class="info-label">Scénario offensif</div>
             <div class="info-value">__SCENARIO_OFFENSIF_REND__ % / an</div>
             <div class="info-sub">
-              Hypothèse : cycle haussier complet, utilisation progressive de produits de rendement (staking, etc.).</div>
+              Hypothèse : cycle haussier complet, utilisation progressive de produits de rendement (staking, etc.).
+            </div>
           </div>
         </div>
 
+        <!-- Stress tests -->
         <div class="stress-tests">
           <div class="stress-title">Stress tests &amp; scénarios extrêmes (pédagogiques)</div>
           <div class="stress-grid">
@@ -389,9 +392,61 @@
           </div>
         </div>
 
+        <!-- Tableau de sensibilité taux / inflation -->
+        <div style="margin-top:1rem">
+          <div class="section-kicker">Analyse de sensibilité</div>
+          <p class="small muted" style="margin-top:0.2rem;margin-bottom:0.4rem">
+            Lecture pour comité d’audit : impact de variations de taux, d’inflation et de liquidité sur la poche numérique (ordres de grandeur pédagogiques).
+          </p>
+
+          <table class="sensitivity-table" aria-label="Sensibilité aux taux, à l’inflation et à la trésorerie">
+            <tr>
+              <th>Paramètre</th>
+              <th>Hypothèse de variation</th>
+              <th>Impact estimé sur la poche</th>
+              <th>Commentaire Numérion</th>
+            </tr>
+            <tr>
+              <td>
+                <div class="sensitivity-label">Hausse des taux sans risque</div>
+              </td>
+              <td>+100 points de base (sous X)</td>
+              <td class="metric-strong">__SENSI_TAUX_IMPACT__ € / an (ordre de grandeur)</td>
+              <td>
+                __SENSI_TAUX_COMMENT__
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="sensitivity-label">Inflation supérieure au scénario central</div>
+              </td>
+              <td>+X pts d’inflation / an vs hypothèse centrale</td>
+              <td class="metric-strong">__SENSI_INFLATION_IMPACT__ € / an (ordre de grandeur)</td>
+              <td>
+                __SENSI_INFLATION_COMMENT__
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="sensitivity-label">Resserrement de liquidité interne</div>
+              </td>
+              <td>Baisse de __SENSI_TRESO_BAISSE__ % de la trésorerie disponible</td>
+              <td class="metric-strong">Réduction de la poche possible : __SENSI_TRESO_IMPACT__ €</td>
+              <td>
+                __SENSI_TRESO_COMMENT__
+              </td>
+            </tr>
+          </table>
+
+          <p class="sensitivity-note">
+            Ces chiffres sont des <strong>ordres de grandeur pédagogiques</strong> pour positionner la poche numérique dans
+            la stratégie globale de trésorerie (cash, dettes, covenants, investissements).
+          </p>
+        </div>
+
         <div style="margin-top:0.8rem" class="badge">
           <span class="dot"></span>
-          Ces scénarios sont fournis à titre pédagogique (périmètre informatif). La décision d’allocation reste à la main de votre direction.
+          Ces scénarios et sensibilités sont fournis à titre informatif. La décision d’allocation reste à la main de votre direction.
         </div>
       </div>
     </section>
@@ -481,7 +536,7 @@
         </table>
 
         <p class="small muted" style="margin-top:0.6rem">
-          Cette matrice est un socle : elle peut être directement intégrée à votre cartographie des risques,
+          Cette matrice est un socle : elle peut être intégrée directement à votre cartographie des risques,
           complétée avec des niveaux chiffrés (X / 5 ou X / 10) et validée en comité des risques / comité d’audit.
         </p>
       </div>
@@ -519,6 +574,7 @@
           </div>
         </div>
 
+        <!-- Readiness tricolore -->
         <div class="readiness-grid">
           <div class="readiness-card">
             <div class="readiness-label">Gouvernance &amp; procédures</div>
@@ -554,7 +610,7 @@
             <div class="info-label">Mode de conservation envisagé</div>
             <div class="info-value">__MODE_CONSERVATION__</div>
             <div class="info-sub">
-              Ex : PSAN agréé AMF + cold wallet interne pour une partie des avoirs.
+              Exemple : PSAN agréé AMF + cold wallet interne pour une partie des avoirs.
             </div>
           </div>
           <div class="info-block">
@@ -578,6 +634,63 @@
           <strong>politiques d’investissement / risque</strong> et procédures internes, afin de rendre la démarche
           pleinement lisible pour vos auditeurs et votre board.
         </p>
+
+        <!-- Tableau de gouvernance décisionnelle -->
+        <div style="margin-top:1rem">
+          <div class="section-kicker">Trajectoire de gouvernance</div>
+          <h3 class="section-title" style="font-size:0.95rem;margin-top:0.25rem">
+            Tableau de pilotage des décisions clés
+          </h3>
+          <p class="small muted" style="margin-top:0.2rem;margin-bottom:0.4rem">
+            Support pour consigner les décisions, validations et revues liées à la poche de trésorerie numérique.
+          </p>
+
+          <table class="governance-table" aria-label="Pilotage de gouvernance">
+            <tr>
+              <th>Instance</th>
+              <th>Décision / validation attendue</th>
+              <th>Périodicité</th>
+              <th>État / commentaire</th>
+            </tr>
+            <tr>
+              <td>
+                <div class="governance-label">Board / conseil d’administration</div>
+              </td>
+              <td>Validation du principe de poche numérique, des plafonds d’allocation et de l’horizon.</td>
+              <td>__GOUV_BOARD_FREQ__</td>
+              <td>__GOUV_BOARD_COMMENT__</td>
+            </tr>
+            <tr>
+              <td>
+                <div class="governance-label">Comité d’audit / comité des risques</div>
+              </td>
+              <td>Intégration dans la cartographie des risques, validation des contrôles et du reporting.</td>
+              <td>__GOUV_AUDIT_FREQ__</td>
+              <td>__GOUV_AUDIT_COMMENT__</td>
+            </tr>
+            <tr>
+              <td>
+                <div class="governance-label">Direction financière / trésorerie</div>
+              </td>
+              <td>Exécution opérationnelle, suivi de la poche, reporting chiffré.</td>
+              <td>__GOUV_DF_FREQ__</td>
+              <td>__GOUV_DF_COMMENT__</td>
+            </tr>
+            <tr>
+              <td>
+                <div class="governance-label">CAC / expert-comptable</div>
+              </td>
+              <td>Validation du traitement comptable, disclosures &amp; annexe aux comptes.</td>
+              <td>__GOUV_CAC_FREQ__</td>
+              <td>__GOUV_CAC_COMMENT__</td>
+            </tr>
+          </table>
+
+          <p class="governance-note">
+            Ce tableau peut être complété et signé lors de chaque étape clé, afin de constituer un <strong>journal de gouvernance</strong>
+            opposable en cas de revue par les auditeurs ou les régulateurs.
+          </p>
+        </div>
       </div>
     </section>
 
@@ -647,6 +760,7 @@
           </article>
         </div>
 
+        <!-- Check-list CAC / comité d’audit -->
         <div class="checklist-block">
           <div class="checklist-title">Check-list comité d’audit / commissaire aux comptes</div>
           <ul class="checklist-list">
@@ -672,6 +786,7 @@
           </ul>
         </div>
 
+        <!-- Signatures -->
         <div class="signature-grid">
           <div class="signature-block">
             <div>
@@ -804,6 +919,32 @@
               </div>
             </div>
           </article>
+
+          <article class="accordion-item">
+            <header class="accordion-header">
+              <div class="accordion-header-title">Annexe 5 — Traçabilité &amp; journal d’audit</div>
+              <div class="accordion-icon">▶</div>
+            </header>
+            <div class="accordion-panel">
+              <div class="accordion-panel-inner">
+                <p class="disclaimer">
+                  Cette annexe a vocation à consigner, sur une période de <strong>__JOURNAL_PERIODE__</strong>,
+                  les principaux jalons de la démarche : décisions de gouvernance, revues, mises à jour de
+                  la politique de trésorerie et échanges avec les auditeurs.
+                </p>
+                <ul class="disclaimer-list">
+                  <li>Décisions board / comité d’audit : __JOURNAL_DECISIONS_BOARD__.</li>
+                  <li>Principales mises à jour de la poche (montants, allocations, horizon) : __JOURNAL_MAJ_POCHE__.</li>
+                  <li>Échanges structurants avec CAC / expert-comptable : __JOURNAL_ECHANGES_CAC__.</li>
+                  <li>Événements de marché significatifs documentés : __JOURNAL_EVENTS_MARCHE__.</li>
+                </ul>
+                <p class="disclaimer">
+                  Ce journal peut être tenu sous forme de <strong>fiche complémentaire</strong>, signée par les parties
+                  prenantes, et archivée avec le présent audit pour renforcer la traçabilité des décisions.
+                </p>
+              </div>
+            </div>
+          </article>
         </div>
       </div>
     </section>
@@ -816,5 +957,12 @@
 
 <!-- Moteur d’injection & interactions -->
 <script src="assets/js/audit-engine.js"></script>
+
+<!-- Bouton haut de page -->
+<button id="back-to-top" type="button">
+  <span class="icon">↑</span>
+  <span>Haut de page</span>
+</button>
+
 </body>
 </html>
