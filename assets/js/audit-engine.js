@@ -13,6 +13,7 @@
     Object.entries(data).forEach(([key, value]) => {
       let v = String(value);
 
+      // Formatage automatique pour certains champs
       if (key === "TRESORERIE_DISPONIBLE" || key === "MONTANT_POCHE") {
         v = formatEuro(value);
       }
@@ -90,6 +91,7 @@
         header.addEventListener('click', function(){
           const isOpen = header.classList.contains('is-open');
 
+          // Ferme tous les items de ce bloc
           items.forEach(it => {
             const h = it.querySelector('.accordion-header');
             const p = it.querySelector('.accordion-panel');
@@ -98,6 +100,7 @@
             p.style.maxHeight = null;
           });
 
+          // Ouvre l’item courant si nécessaire
           if (!isOpen) {
             header.classList.add('is-open');
             panel.style.maxHeight = panel.scrollHeight + 'px';
@@ -121,11 +124,35 @@
     }
   }
 
+  // Bouton "Haut de page"
+  function initBackToTop() {
+    const btn = document.getElementById('back-to-top');
+    if (!btn) return;
+
+    const toggleVisibility = () => {
+      const scrollPos = window.scrollY || window.pageYOffset;
+      if (scrollPos > 220) {
+        btn.classList.add('is-visible');
+      } else {
+        btn.classList.remove('is-visible');
+      }
+    };
+
+    window.addEventListener('scroll', toggleVisibility);
+    toggleVisibility();
+
+    btn.addEventListener('click', function(){
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  // Init globale
   function init() {
     injectPlaceholders();
     initToolbar();
     initAccordions();
     syncMaturityBar();
+    initBackToTop();
 
     console.info("[Numérion] Audit dynamique initialisé.");
   }
