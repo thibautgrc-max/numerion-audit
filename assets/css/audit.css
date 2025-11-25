@@ -1,3 +1,5 @@
+/* assets/css/audit.css */
+
 :root {
   --bg-body: radial-gradient(circle at top, #0f172a 0, #020617 46%, #020617 100%);
   --bg-page: #020617;
@@ -60,6 +62,7 @@ main {
   color: #9ca3af;
 }
 
+/* Header audit */
 .audit-header {
   border-radius: var(--radius-card);
   border: 1px solid rgba(148,163,184,0.22);
@@ -258,6 +261,39 @@ main {
 .btn-print:active {
   transform: translateY(0);
   box-shadow: 0 10px 24px rgba(16,185,129,0.45);
+}
+
+/* Bouton “haut de page” */
+.back-to-top {
+  position: fixed;
+  right: 1.4rem;
+  bottom: 1.4rem;
+  border-radius: var(--radius-pill);
+  padding: 0.4rem 0.8rem;
+  font-size: 0.78rem;
+  border: 1px solid rgba(148,163,184,0.35);
+  background: rgba(15,23,42,0.95);
+  color: #e5e7eb;
+  box-shadow: 0 16px 40px rgba(15,23,42,0.55);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  z-index: 20;
+}
+
+.back-to-top span.icon {
+  font-size: 0.85rem;
+}
+
+.back-to-top.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
 }
 
 /* Cards génériques */
@@ -469,7 +505,7 @@ main {
   gap: 0.1rem;
 }
 
-/* Onepager (par défaut masqué, prêt pour usage futur / custom print) */
+/* Onepager (par défaut masqué) */
 .onepager {
   display: none;
   margin-bottom: 1rem;
@@ -1005,6 +1041,9 @@ main {
     display: none !important;
   }
   .btn-print {
+    display: none !important;
+  }
+  .back-to-top {
     display: none !important;
   }
   .page-shell {
