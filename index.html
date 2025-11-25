@@ -25,7 +25,7 @@
           <div class="pill-row">
             <div class="pill">
               <span class="pill-dot"></span>
-              Modèle Audit &amp; Simulation IA · Numérion V2.1
+              Modèle Audit &amp; Simulation IA · Numérion V4.1 board-ready
             </div>
             <div class="pill pill-soft">
               Horizon d’analyse : __HORIZON_ANALYSE__ mois · Allocation cible : __ALLOCATION_CIBLE__ %
@@ -70,6 +70,7 @@
         <button class="toolbar-link" data-scroll-to="section-risques"><span class="dot"></span> Risques &amp; contrôle</button>
         <button class="toolbar-link" data-scroll-to="section-gouvernance"><span class="dot"></span> Gouvernance &amp; readiness</button>
         <button class="toolbar-link" data-scroll-to="section-roadmap"><span class="dot"></span> Feuille de route</button>
+        <button class="toolbar-link" data-scroll-to="section-analyse-strategique"><span class="dot"></span> Analyse stratégique</button>
         <button class="toolbar-link" data-scroll-to="section-annexes"><span class="dot"></span> Annexes</button>
       </nav>
       <button class="btn-print" onclick="window.print()">
@@ -93,7 +94,7 @@
           <div class="snapshot-kpi">
             <div class="snapshot-label">Trésorerie disponible</div>
             <div class="snapshot-value">__TRESORERIE_DISPONIBLE__ €</div>
-            <div class="snapshot-sub">Base de travail estimée</div>
+            <div class="snapshot-sub">Base de travail estimée (&gt; 5 M€ déclarés)</div>
           </div>
           <div class="snapshot-kpi">
             <div class="snapshot-label">Poche numérique simulée</div>
@@ -103,7 +104,7 @@
           <div class="snapshot-kpi">
             <div class="snapshot-label">Horizon &amp; rendement cible</div>
             <div class="snapshot-value">__HORIZON_ANALYSE__ mois · __RENDEMENT_CIBLE__ % / an</div>
-            <div class="snapshot-sub">Scénario central pédagogique</div>
+            <div class="snapshot-sub">Cible déclarée : 10–15 % / an</div>
           </div>
           <div class="snapshot-kpi">
             <div class="snapshot-label">Score de maturité</div>
@@ -225,7 +226,7 @@
           <tr>
             <td>Trésorerie disponible estimée</td>
             <td class="metric-strong">__TRESORERIE_DISPONIBLE__ €</td>
-            <td>Hors lignes de crédit, sur base fin de mois.</td>
+            <td>Base de travail sur une trésorerie &gt; 5 M€ (ordre de grandeur gth).</td>
           </tr>
           <tr>
             <td>Allocation numérique envisagée</td>
@@ -495,7 +496,7 @@
           <h2 class="section-title" id="roadmap-title">Feuille de route opérationnelle proposée</h2>
         </div>
         <div class="section-tag">
-          <span class="dot"></span> Plan d’action en 3 phases
+          <span class="dot"></span> Plan d’action en 3 phases</span>
         </div>
       </header>
       <div class="section-body">
@@ -649,6 +650,61 @@
             </div>
             <div class="small muted">Signature &amp; validation de l’audit :</div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6B : ANALYSE STRATÉGIQUE NUMÉRION -->
+    <section id="section-analyse-strategique" class="audit-section card" aria-labelledby="analyse-title">
+      <header class="audit-section-header">
+        <div>
+          <div class="section-kicker">Section 6 bis</div>
+          <h2 class="section-title" id="analyse-title">Analyse stratégique finale Numérion™</h2>
+        </div>
+        <div class="section-tag">
+          <span class="dot"></span> Évaluation globale IA · Vision Board
+        </div>
+      </header>
+      <div class="section-body">
+        <p>
+          Cette section fournit une <strong>lecture consolidée des données financières, de gouvernance et de maturité</strong> 
+          issues du dossier __NOM_ENTREPRISE__, traduite en indicateurs stratégiques pondérés par le moteur Numérion IA.
+        </p>
+
+        <div class="strategy-grid">
+          <div class="strategy-card">
+            <div class="strategy-label">Cohérence allocation / trésorerie</div>
+            <div class="strategy-score" id="score-allocation"></div>
+            <div class="strategy-sub">Poids <strong>__ALLOCATION_CIBLE__ %</strong> sur <strong>__TRESORERIE_DISPONIBLE__ €</strong></div>
+          </div>
+          <div class="strategy-card">
+            <div class="strategy-label">Maturité MiCA &amp; gouvernance</div>
+            <div class="strategy-score" id="score-gouvernance"></div>
+            <div class="strategy-sub">Basée sur le score global <strong>__SCORE_MATURITE__/100</strong></div>
+          </div>
+          <div class="strategy-card">
+            <div class="strategy-label">Rendement / Risque estimé</div>
+            <div class="strategy-score" id="score-rendement"></div>
+            <div class="strategy-sub">Objectif <strong>__RENDEMENT_CIBLE__ %</strong> · tolérance : <strong>__TOLERANCE_VOLATILITE__</strong></div>
+          </div>
+          <div class="strategy-card">
+            <div class="strategy-label">Conformité &amp; auditabilité IFRS</div>
+            <div class="strategy-score" id="score-conformite"></div>
+            <div class="strategy-sub">Référentiel : <strong>__REFERENTIEL_COMPTABLE__</strong></div>
+          </div>
+        </div>
+
+        <div class="global-insight">
+          <div class="insight-label">Indice global d’alignement stratégique</div>
+          <div class="insight-bar">
+            <div class="insight-bar-fill" id="score-global"></div>
+          </div>
+          <div class="insight-comment" id="comment-global"></div>
+        </div>
+
+        <div class="badge" style="margin-top:0.8rem">
+          <span class="dot"></span>
+          Interprétation IA Numérion : estimation pondérée selon profil entreprise, gouvernance, tolérance risque et horizon financier.
         </div>
       </div>
     </section>
