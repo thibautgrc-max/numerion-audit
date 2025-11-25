@@ -1,7 +1,9 @@
+// assets/js/audit-engine.js
+
 (function(){
   const data = window.AUDIT_DATA || null;
 
-  // Remplacement de tous les __PLACEHOLDERS__
+  // Remplacement des __PLACEHOLDERS__
   function injectPlaceholders() {
     if (!data) {
       console.warn("[Numérion] AUDIT_DATA non défini. Aucun placeholder remplacé.");
@@ -13,7 +15,6 @@
     Object.entries(data).forEach(([key, value]) => {
       let v = String(value);
 
-      // Formatage automatique pour certains champs
       if (key === "TRESORERIE_DISPONIBLE" || key === "MONTANT_POCHE") {
         v = formatEuro(value);
       }
@@ -91,7 +92,6 @@
         header.addEventListener('click', function(){
           const isOpen = header.classList.contains('is-open');
 
-          // Ferme tous les items de ce bloc
           items.forEach(it => {
             const h = it.querySelector('.accordion-header');
             const p = it.querySelector('.accordion-panel');
@@ -100,7 +100,6 @@
             p.style.maxHeight = null;
           });
 
-          // Ouvre l’item courant si nécessaire
           if (!isOpen) {
             header.classList.add('is-open');
             panel.style.maxHeight = panel.scrollHeight + 'px';
@@ -124,12 +123,31 @@
     }
   }
 
-  // Init globale
+  // Bouton “haut de page”
+  function initBackToTop() {
+    const btn = document.querySelector('.back-to-top');
+    if (!btn) return;
+
+    btn.addEventListener('click', function(){
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    window.addEventListener('scroll', function(){
+      const y = window.scrollY || window.pageYOffset;
+      if (y > 320) {
+        btn.classList.add('is-visible');
+      } else {
+        btn.classList.remove('is-visible');
+      }
+    });
+  }
+
   function init() {
     injectPlaceholders();
     initToolbar();
     initAccordions();
     syncMaturityBar();
+    initBackToTop();
 
     console.info("[Numérion] Audit dynamique initialisé.");
   }
