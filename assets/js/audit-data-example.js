@@ -1,185 +1,193 @@
+// assets/js/audit-data-example.js
+// ============================================================================
+// Données d'exemple pour l'audit Numérion Éducation™
+// ============================================================================
+
 window.AUDIT_DATA = {
-  /* ─────────────────────────
-   *  IDENTITÉ & CONTEXTE
-   * ───────────────────────── */
+  /* ─────────────────────────────────────────────
+   *  IDENTITÉ / PARAMÈTRES GÉNÉRAUX
+   * ──────────────────────────────────────────── */
+
   NOM_ENTREPRISE: "gth",
   NOM_GROUPE: "Numérion Education",
   SECTEUR: "Technologie",
-  SEGMENT: "Technologie — < 50 salariés",
   TAILLE_ENTREPRISE: "< 50 salariés",
+  CA_ANNUEL: "< 5 M€",
   FORME_JURIDIQUE: "SAS",
+  PERIMETRE_AUDIT: "Entité seule",
   APPARTENANCE_GROUPE: "Indépendant",
 
-  PAYS: "France (zone euro)",
-  JURIDICTION: "France (zone euro)",
   REFERENTIEL_COMPTABLE: "IFRS",
+  JURIDICTION: "France (zone euro)",
+  COMMISSAIRE_AUX_COMPTES: "Oui",
+  FREQUENCE_REVUE_COMITE: "Au fil de l’eau",
 
   ROLE_CONTACT: "Direction générale (DG / CEO)",
-  TELEPHONE_CONTACT: "+33647705367",
+  NOM_CONTACT: "gth",
   EMAIL_CONTACT: "gth@gmail.com",
+  TELEPHONE_CONTACT: "+33 6 47 70 53 67",
 
+  DATE_FORMULAIRE: "25 novembre 2025",
+  DATE_AUDIT: "25 novembre 2025",
+  ID_DOSSIER: "2025-001",
   SOURCE: "Site Numérion Éducation",
-  DATE_FORMULAIRE: "25/11/2025",
-  DATE_AUDIT: "25/11/2025",
-  ID_DOSSIER: "2025-11-25-001",
+  WIZARD_VERSION: "V4.1 board-ready",
 
-  /* Commentaire libre du formulaire */
-  CONTEXTE_LIBRE: "Commentaire formulaire : “yesssouii” (commentaire libre, à enrichir lors de la visio).",
-
-  /* ─────────────────────────
+  /* ─────────────────────────────────────────────
    *  TRÉSORERIE & ALLOCATION
-   * ───────────────────────── */
-  // Trésorerie disponible déclarée : > 5 M€ → on prend un ordre de grandeur prudent pour la simulation
-  TRESORERIE_DISPONIBLE: 5500000, // sera formaté en 5 500 000 €
+   * ──────────────────────────────────────────── */
 
-  // Allocation envisagée : 3 % (poche stratégique)
-  ALLOCATION_ENVISAGEE_LABEL: "3 % (poche stratégique)",
-  ALLOCATION_CIBLE: 3, // le HTML ajoute lui-même " %"
+  // Trésorerie déclarée : "> 5 M€" → on prend 5 000 000 € comme base pédagogique
+  TRESORERIE_DISPONIBLE: 5000000,        // sera formaté en "5 000 000"
+  ALLOCATION_CIBLE: 3,                   // 3 %
+  HORIZON_ANALYSE: 12,                   // 12 mois
+  RENDEMENT_CIBLE: 12,                   // 12 % / an (dans la fourchette 10–15 %)
 
-  // Montant de la poche simulée : 3 % de 5,5 M€
-  MONTANT_POCHE: 165000, // sera formaté en 165 000 €
+  // Poche numérique (3 % de 5 000 000 € ≈ 150 000 €)
+  MONTANT_POCHE: 150000,
 
-  // Horizon financier : 12 mois
-  HORIZON_ANALYSE: 12,
-
-  // Rendement cible annuel : 10–15 % → on prend 12 % comme cible pédagogique
-  RENDEMENT_CIBLE: 12,
-
-  /* Chiffre d’affaires & périmètre */
-  CA_ANNUEL: "< 5 M€",
-  PERIMETRE_AUDIT: "Entité seule",
-
-  /* Objectif & usage */
   OBJECTIF_PRIORITAIRE: "Réduire l’érosion de trésorerie (inflation)",
   USAGE_PRINCIPAL: "Diversification de trésorerie",
+  TOLERANCE_VOLATILITE:
+    "Modérée (rendement / risque équilibré)",
+  UNIVERS_ACTIFS:
+    "BTC / ETH, Stablecoins (EUR / USD)",
+  EXPOSITION_ACTUELLE:
+    "Non renseignée via le formulaire",
   URGENCE: "Étude / cadrage interne",
 
-  /* Comités & fréquence */
-  FREQUENCE_REVUE_COMITE: "Au fil de l’eau",
-  JOUR_PREFERENCIEL: "Non renseigné (revue au fil de l’eau)",
-  PLAGE_HORAIRE_PREFEREE: "Plage horaire préférée non précisée",
+  /* Benchmarks marché (texte pédagogique) */
+  BENCH_ALLOC_RANGE: "1 à 5 % de la trésorerie",
+  BENCH_HORIZON_RANGE: "24–36 mois",
+  BENCH_MODE_CONSERVATION: "PSAN régulé + solutions de conservation renforcées",
+  BENCH_POSITIONING: "dans une zone prudente mais cohérente avec le marché",
 
-  /* Univers d’actifs & exposition actuelle */
-  EXPOSITION_ACTUELLE: "Non renseignée (exposition numérique actuelle très limitée ou nulle).",
-  UNIVERS_ACTIFS: "BTC / ETH, Stablecoins (EUR / USD)",
+  /* ─────────────────────────────────────────────
+   *  GOUVERNANCE, MICA & MATURITÉ
+   * ──────────────────────────────────────────── */
+
   MODE_CONSERVATION: "PSAN agréé AMF",
-
-  /* Politiques internes */
-  POLITIQUE_TRESORERIE: "Aucune politique de trésorerie formalisée à ce stade.",
-  POLITIQUE_INVESTISSEMENT_RISQUE: "Oui, existence d’une politique d’investissement / risque.",
-  CONTRAINTES_INTERNES: "Manque de temps / ressources internes.",
-  COMMISSAIRE_AUX_COMPTES: "Oui",
-  NIVEAU_CONFORT_AUDITEURS: "Présence d’un commissaire aux comptes (CAC) — à embarquer dès la phase de cadrage.",
-
-  /* MiCA & conformité */
   NIVEAU_MICA: "Partielle",
-  COMMENTAIRE_MICA: "Conformité MiCA partielle déclarée. Cadrage à renforcer avec l’expert-comptable, le CAC et les conseils habituels.",
+  COMMENTAIRE_MICA:
+    "Les premiers travaux de cadrage sont engagés ; la formalisation de la politique et des procédures reste à approfondir.",
 
-  /* Décision & gouvernance */
   NOMBRE_SIGNATAIRES: "1 (décisionnaire unique)",
   PORTEE_DECISION: "Exploration / cadrage",
-  TOLERANCE_VOLATILITE: "Modérée (rendement / risque équilibré)",
+  POLITIQUE_TRESORERIE: "Aucune",
+  POLITIQUE_INVESTISSEMENT_RISQUE: "Oui",
+  CONTRAINTES_INTERNES:
+    "Manque de temps / ressources internes",
 
-  /* ─────────────────────────
-   *  MATURITÉ & READINESS
-   * ───────────────────────── */
   SCORE_MATURITE: 60,
-  PROFIL_MATURITE: "Intermédiaire — bases présentes, structuration à renforcer.",
+  PROFIL_MATURITE: "Maturité intermédiaire — bases en place, structuration à renforcer",
 
-  READINESS_GOUV_CLASS: "orange",
-  READINESS_GOUV: "En structuration — politiques à formaliser, pouvoirs & seuils à cadrer.",
+  // Label global de readiness (utilisé dans le snapshot)
+  READINESS_GLOBAL_LABEL: "Prêt sous conditions (cadrage & gouvernance à consolider)",
 
-  READINESS_TECH_CLASS: "vert",
-  READINESS_TECH: "Correcte — mode de conservation via PSAN agréé AMF, sécurisation cyber à détailler.",
+  // Répartition par pilier (gouvernance / technique / comptable)
+  READINESS_GOUV: "À structurer",
+  READINESS_GOUV_CLASS: "orange",  // → .readiness-orange
+  READINESS_TECH: "En cours de définition",
+  READINESS_TECH_CLASS: "orange",
+  READINESS_COMPTA: "Socle en place avec le CAC",
+  READINESS_COMPTA_CLASS: "vert",
 
-  READINESS_COMPTA_CLASS: "orange",
-  READINESS_COMPTA: "À consolider — IFRS, traitement comptable et échange structuré avec le CAC à organiser.",
+  /* ─────────────────────────────────────────────
+   *  SYNTHÈSE & RECOMMANDATION GLOBALE
+   * ──────────────────────────────────────────── */
 
-  READINESS_GLOBAL_LABEL: "Profil équilibré mais à structurer (score 60/100).",
-
-  /* ─────────────────────────
-   *  SYNTHÈSE & RECO GLOBAL
-   * ───────────────────────── */
   RECOMMANDATION_GLOBALE:
-    "Mettre en place progressivement une poche stratégique de 3 % de la trésorerie (>5 M€) " +
-    "via un PSAN agréé AMF, en formalisant les politiques de trésorerie, d’investissement et la gouvernance associée.",
+    "Avancer vers une poche numérique pilote de 3 % sous réserve de cadrage et de formalisation de la gouvernance.",
 
+  // Attention : le placeholder HTML est __SYNTHese_COURTE__ (respecter la casse)
   SYNTHese_COURTE:
-    "Profil de maturité intermédiaire (60/100), tolérance à la volatilité modérée, " +
-    "objectif clair de réduction de l’érosion monétaire. Recommandation : démarrer par une poche test de 3 % " +
-    "avec un cadre gouvernance / comptable robuste pour rassurer CAC et comité d’audit.",
+    "Compte tenu du profil « Technologie < 50 salariés », d’une trésorerie significative et d’un objectif clair de protection contre l’inflation, la mise en place progressive d’une poche numérique reste pertinente, à condition de documenter les règles de décision, les contrôles et le dialogue avec le commissaire aux comptes.",
 
   AVIS_GLOBAL:
-    "Compatible avec une approche prudente de diversification de trésorerie, sous réserve de formaliser les politiques " +
-    "et de valider le traitement comptable avec les auditeurs.",
+    "raisonnable dans le cadre d’une expérimentation encadrée et documentée",
 
-  /* ─────────────────────────
-   *  BENCHMARK MARCHÉ
-   * ───────────────────────── */
-  BENCH_ALLOC_RANGE: "2–5 % de la trésorerie pour une poche numérique prudente.",
-  BENCH_HORIZON_RANGE: "12–36 mois pour une logique non spéculative.",
-  BENCH_MODE_CONSERVATION: "PSAN régulé AMF, avec éventuellement une garde complémentaire en cold wallet.",
-  BENCH_POSITIONING: "Plutôt prudent, cohérent avec les pratiques observées pour des PME technologiques de taille comparable.",
+  CONTEXTE_LIBRE:
+    "yesssouii (formulaire) — traduit la volonté d’explorer de nouveaux leviers de rendement et de protection contre l’inflation, tout en gardant un cadre professionnel autour de la trésorerie.",
 
-  /* ─────────────────────────
-   *  SCÉNARIOS DE RENDEMENT
-   *  (calculés sur une poche de 165 000 €)
-   * ───────────────────────── */
-  // Taux annuels pédagogiques
-  SCENARIO_PRUDENT_REND: 4,   // % / an
-  SCENARIO_CENTRAL_REND: 10,  // % / an
-  SCENARIO_OFFENSIF_REND: 18, // % / an
+  /* ─────────────────────────────────────────────
+   *  SCÉNARIOS DE RENDEMENT (PÉDAGOGIQUES)
+   * ──────────────────────────────────────────── */
 
-  // Valeurs d’illustration sur 12 mois
-  SCENARIO_PRUDENT_VALEUR: 171600,  // 165 000 € × 1,04
-  SCENARIO_CENTRAL_VALEUR: 181500,  // 165 000 € × 1,10
-  SCENARIO_OFFENSIF_VALEUR: 194700, // 165 000 € × 1,18
+  SCENARIO_PRUDENT_REND: 4,   // 4 % / an
+  SCENARIO_CENTRAL_REND: 8,   // 8 % / an
+  SCENARIO_OFFENSIF_REND: 18, // 18 % / an
 
-  /* ─────────────────────────
-   *  STRESS TESTS
-   * ───────────────────────── */
-  // Choc marché : BTC -50 %, ETH -60 % → impact ~ -55 % sur la poche
-  STRESS_CHOC_IMPACT_EURO: 90750,   // ~ 55 % de 165 000 €
-  STRESS_CHOC_IMPACT_PCT: 1.65,     // ~ 1,65 % de la trésorerie totale (> 5,5 M€)
+  STRESS_CHOC_IMPACT_EURO: 75000, // choc -50/-60 % sur la poche (exemple)
+  STRESS_CHOC_IMPACT_PCT: 1.5,    // ~1,5 % de la trésorerie totale
 
   STRESS_LATERAL_COMMENT:
-    "En cas de marché latéral (performance proche de 0 %), la poche numérique joue surtout un rôle de diversification, " +
-    "avec un coût d’opportunité limité au regard du montant engagé (3 % de la trésorerie).",
+    "Dans un scénario de marché latéral, la performance financière de la poche serait proche de 0 ; l’enjeu principal devient le coût d’opportunité par rapport à d’autres supports de trésorerie et la charge de suivi interne.",
 
   STRESS_CYCLE_COMMENT:
-    "Dans un cycle complet haussier puis une consolidation maîtrisée, la poche peut contribuer de façon significative " +
-    "à la performance globale de trésorerie, sous réserve de prises de profits progressives et de revues annuelles structurées.",
+    "En cas de cycle haussier complet suivi d’une normalisation, la poche pourrait générer un surplus de performance significatif, à condition de respecter les limites d’allocation et un calendrier de prises de profits validé par le board.",
 
-  /* ─────────────────────────
-   *  MATRICE DES RISQUES
-   * ───────────────────────── */
-  PROBA_VOLATILITE: "Élevée (classe d’actifs intrinsèquement volatile).",
-  IMPACT_VOLATILITE: "Important sur la poche, mais borné par le plafond d’allocation de 3 %.",
+  /* ─────────────────────────────────────────────
+   *  MATRICE DES RISQUES (NIVEAUX QUALITATIFS)
+   * ──────────────────────────────────────────── */
 
-  PROBA_CUSTODY: "Modérée (PSAN régulé AMF).",
-  IMPACT_CUSTODY: "Potentiellement élevé en cas de défaillance, d’où l’importance de la due diligence opérateur.",
+  PROBA_VOLATILITE: "Élevée (structurelle au marché crypto)",
+  IMPACT_VOLATILITE: "Modéré à significatif sur la poche (borné par 3 %)",
 
-  PROBA_COMPTABLE: "Modérée.",
+  PROBA_CUSTODY: "Faible à modérée (PSAN régulé, mais risques opérationnels)",
+  IMPACT_CUSTODY: "Potentiellement élevé en cas de défaut de l’opérateur",
+
+  PROBA_COMPTABLE: "Modérée",
   IMPACT_COMPTABLE:
-    "Moyen à élevé si le traitement IFRS n’est pas cadré en amont avec l’expert-comptable et le CAC.",
+    "Principalement sur la présentation des comptes et la lisibilité pour les auditeurs",
 
-  PROBA_CYBER: "Non négligeable (risque structurel sur les actifs numériques).",
+  PROBA_CYBER: "Modérée à élevée",
   IMPACT_CYBER:
-    "Important sur la poche numérique, mais limité au montant engagé ; doit être adressé par des dispositifs de sécurité forts.",
+    "Élevé si les accès ne sont pas correctement segmentés et sécurisés",
 
-  /* ─────────────────────────
-   *  REPORTING & SUIVI (optionnel)
-   * ───────────────────────── */
-  REPORT_T1_VALEUR: 165000,
-  REPORT_T1_COMMENTAIRE:
-    "T0 / T1 : mise en place de la poche numérique test (3 % de la trésorerie) auprès d’un PSAN agréé AMF.",
-  REPORT_T2_VALEUR: 0, // à renseigner lors des premiers mois de suivi
-  REPORT_T2_COMMENTAIRE:
-    "T2 : à compléter après 6–12 mois de vie de la poche (performance, incidents, retour CAC).",
+  /* ─────────────────────────────────────────────
+   *  REPORTING TRIMESTRIEL (T1 → T4)
+   * ──────────────────────────────────────────── */
 
-  /* ─────────────────────────
-   *  DIVERS / MÉTADONNÉES
-   * ───────────────────────── */
-  WIZARD_VERSION: "V4.1 board-ready",
-  URGENCE_LIBELLE: "Étude / cadrage interne (pas de décision immédiate imposée)."
+  // Valeur de la poche numérique (€)
+  REPORT_T1_VALEUR: "150 000",
+  REPORT_T2_VALEUR: "153 500",
+  REPORT_T3_VALEUR: "157 000",
+  REPORT_T4_VALEUR: "163 000",
+
+  // Rendement cumulé (%) vs objectif
+  REPORT_T1_REND: "2,0 %",
+  REPORT_T2_REND: "4,2 %",
+  REPORT_T3_REND: "6,5 %",
+  REPORT_T4_REND: "9,0 %",
+
+  // Respect des limites d’allocation
+  REPORT_T1_LIMITES: "OK (≤ 3 %)",
+  REPORT_T2_LIMITES: "OK (≤ 3 %)",
+  REPORT_T3_LIMITES: "OK (≤ 3 %)",
+  REPORT_T4_LIMITES: "OK (≤ 3 %)",
+
+  // Incidents / anomalies recensées
+  REPORT_T1_INCIDENTS: "Aucun incident signalé",
+  REPORT_T2_INCIDENTS: "Aucun incident signalé",
+  REPORT_T3_INCIDENTS: "Aucun incident signalé",
+  REPORT_T4_INCIDENTS: "Aucun incident signalé",
+
+  /* ─────────────────────────────────────────────
+   *  SIGNATURES & INTERLOCUTEURS
+   * ──────────────────────────────────────────── */
+
+  NOM_SIGNATAIRE_CLIENT: "gth",
+  FONCTION_SIGNATAIRE_CLIENT: "Direction générale",
+  NOM_CONSULTANT_NUMERION: "Consultant Numérion Éducation™",
+
+  /* ─────────────────────────────────────────────
+   *  LABELS / TEXTES COMPLÉMENTAIRES
+   * ──────────────────────────────────────────── */
+
+  POINTS_OUVERTS_TRANCHER:
+    "Paramétrage des seuils de réduction automatique de la poche (prise de profits / réduction de l’exposition) et validation finale du périmètre de services PSAN.",
+  KPI_RESPECT_PLAFOND:
+    "Respect durable du plafond d’allocation de 3 % validé par le board.",
+  KPI_SECURITE:
+    "Aucun incident de sécurité ou d’accès non autorisé sur la période de suivi."
 };
