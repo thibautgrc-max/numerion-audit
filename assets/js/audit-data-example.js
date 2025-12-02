@@ -163,5 +163,41 @@ window.AUDIT_DATA = {
   REPORT_T1_INCIDENTS: "Aucun incident déclaré",
   REPORT_T2_INCIDENTS: "—",
   REPORT_T3_INCIDENTS: "—",
-  REPORT_T4_INCIDENTS: "—"
+  REPORT_T4_INCIDENTS: "—",
+
+  // ===== Repères historiques (ordre de grandeur pédagogique) =====
+  HISTO_BASE_CAPITAL: "1 000 000",
+  HISTO_PERIODE: "10 ans",
+
+  // Bitcoin : ordre de grandeur sur ~10 ans, très forte volatilité
+  HISTO_BTC_ANNUAL: "30–40",
+  HISTO_BTC_VALUE: "≈ 13 000 000",
+  HISTO_BTC_COMMENT:
+    "Sur la dernière décennie, Bitcoin a connu des phases de hausse spectaculaires et des corrections violentes. " +
+    "Pour un investisseur très précoce et discipliné, l’ordre de grandeur historique se compte en multiples de x10 à x20 " +
+    "sur 10 ans, au prix d’une volatilité extrême et d’un risque de drawdown très élevé.",
+
+  // Actions mondiales (MSCI World) : ordre de grandeur long terme 6–9 % / an
+  HISTO_MSCI_ANNUAL: "7–8",
+  HISTO_MSCI_VALUE: "≈ 2 000 000",
+  HISTO_MSCI_COMMENT:
+    "Un portefeuille actions mondiales type MSCI World délivre historiquement une performance de l’ordre de 6–9 %/an " +
+    "sur longue période. 1 000 000 € investis pendant 10 ans se seraient situés autour de 1,8 à 2,1 M€ " +
+    "selon le point d’entrée et les frais.",
+
+  // Tesla : cas extrême d’action de croissance
+  HISTO_TSLA_ANNUAL: "30–40",
+  HISTO_TSLA_VALUE: "≈ 10 000 000",
+  HISTO_TSLA_COMMENT:
+    "Tesla illustre un cas extrême d’action de croissance : sur la décennie passée, la performance cumulée a été " +
+    "très largement supérieure à celle du marché, mais avec des drawdowns importants et une dépendance forte " +
+    "à une seule histoire d’entreprise.",
+
+  // Cash / inflation zone euro
+  HISTO_INFLATION_ANNUAL: "2–3",
+  HISTO_INFLATION_VALUE: "≈ 800 000",
+  HISTO_INFLATION_COMMENT:
+    "En conservant 1 000 000 € en cash non rémunéré sur 10 ans, le montant nominal reste identique, " +
+    "mais le pouvoir d’achat réel est rogné par l’inflation. Sur une inflation moyenne de 2–3 %/an, " +
+    "le pouvoir d’achat résiduel se situe autour de 75–85 % du montant d’origine."
 };
