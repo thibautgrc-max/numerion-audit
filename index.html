@@ -316,6 +316,77 @@
           </div>
         </div>
 
+        <!-- Repères historiques -->
+        <h3 style="margin-top:1.2rem;font-size:0.9rem;font-weight:650;">
+          Repères historiques (ordre de grandeur)
+        </h3>
+        <p class="small muted" style="margin-bottom:0.4rem;">
+          Illustration pédagogique&nbsp;: que serait devenu un capital de <strong>__HISTO_BASE_CAPITAL__ €</strong>
+          sur <strong>__HISTO_PERIODE__</strong> dans différents univers d’actifs, comparé à du cash non investi.
+        </p>
+
+        <div class="history-block">
+          <div class="history-grid">
+            <!-- Carte BTC -->
+            <article class="history-card">
+              <div class="history-label">Bitcoin (BTC)</div>
+              <div class="history-metric">≈ __HISTO_BTC_ANNUAL__ % / an</div>
+              <div class="history-value">Capital simulé&nbsp;: __HISTO_BTC_VALUE__ €</div>
+              <p class="history-sub">
+                __HISTO_BTC_COMMENT__
+              </p>
+              <div class="history-tag history-tag-volatile">
+                <span class="dot"></span> Volatilité extrême · actif purement numérique
+              </div>
+            </article>
+
+            <!-- Carte actions mondiales -->
+            <article class="history-card">
+              <div class="history-label">Actions mondiales (MSCI World)</div>
+              <div class="history-metric">≈ __HISTO_MSCI_ANNUAL__ % / an</div>
+              <div class="history-value">Capital simulé&nbsp;: __HISTO_MSCI_VALUE__ €</div>
+              <p class="history-sub">
+                __HISTO_MSCI_COMMENT__
+              </p>
+              <div class="history-tag history-tag-equity">
+                <span class="dot"></span> Portefeuille diversifié grandes capitalisations
+              </div>
+            </article>
+
+            <!-- Carte Tesla -->
+            <article class="history-card">
+              <div class="history-label">Tesla (exemple d’action de croissance)</div>
+              <div class="history-metric">≈ __HISTO_TSLA_ANNUAL__ % / an</div>
+              <div class="history-value">Capital simulé&nbsp;: __HISTO_TSLA_VALUE__ €</div>
+              <p class="history-sub">
+                __HISTO_TSLA_COMMENT__
+              </p>
+              <div class="history-tag history-tag-growth">
+                <span class="dot"></span> Cas extrême de croissance · risque idiosyncratique élevé
+              </div>
+            </article>
+
+            <!-- Carte cash / inflation -->
+            <article class="history-card">
+              <div class="history-label">Cash en euro (compte courant)</div>
+              <div class="history-metric">≈ __HISTO_INFLATION_ANNUAL__ % d’inflation / an</div>
+              <div class="history-value">Pouvoir d’achat résiduel&nbsp;: __HISTO_INFLATION_VALUE__ €</div>
+              <p class="history-sub">
+                __HISTO_INFLATION_COMMENT__
+              </p>
+              <div class="history-tag history-tag-cash">
+                <span class="dot"></span> Sécurité nominale · érosion silencieuse du pouvoir d’achat
+              </div>
+            </article>
+          </div>
+
+          <p class="history-footnote small muted">
+            Les performances passées ne préjugent pas des performances futures. Ces ordres de grandeur sont basés sur
+            des données publiques agrégées, arrondies pour simplification pédagogique. Ils servent à positionner
+            la poche numérique proposée pour __NOM_ENTREPRISE__ par rapport à des trajectoires historiques connues.
+          </p>
+        </div>
+
         <div class="badge" style="margin-top:0.8rem">
           <span class="dot"></span>
           Ces scénarios sont fournis à titre pédagogique (périmètre informatif). La décision d’allocation reste à la main de votre direction.
@@ -815,6 +886,32 @@
                 <p class="disclaimer">
                   <strong>MiCA</strong> : règlement européen relatif aux marchés de crypto-actifs, définissant un cadre
                   pour les émetteurs et les prestataires sur actifs numériques.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Annexe 5 repères historiques -->
+          <article class="accordion-item">
+            <header class="accordion-header">
+              <div class="accordion-header-title">Annexe 5 — Repères historiques &amp; limites d’interprétation</div>
+              <div class="accordion-icon">▶</div>
+            </header>
+            <div class="accordion-panel">
+              <div class="accordion-panel-inner">
+                <p class="disclaimer">
+                  Les repères historiques présentés (Bitcoin, actions mondiales, Tesla, cash / inflation) sont
+                  construits à partir de données publiques agrégées et arrondies, dans un but purement pédagogique.
+                </p>
+                <p class="disclaimer">
+                  Ils ne constituent ni une recommandation d’investissement, ni une prévision, ni une garantie de
+                  performance. Les trajectoires réelles observées dépendent fortement des dates d’investissement
+                  et de désinvestissement, des frais, de la fiscalité et des décisions de gestion.
+                </p>
+                <p class="disclaimer">
+                  L’objectif est de donner au board, à la direction financière et au comité d’audit un ordre de
+                  grandeur visuel des conséquences potentielles, à long terme, d’une thèse d’allocation ou de la
+                  conservation d’un excédent significatif en cash non rémunéré.
                 </p>
               </div>
             </div>
