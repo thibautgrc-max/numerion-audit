@@ -38,24 +38,33 @@
 
   /* ------------------- ACCORDÉONS ------------------- */
   function initAccordion() {
-    document.querySelectorAll("[data-accordion] .accordion-header").forEach((h) => {
-      h.addEventListener("click", () => {
-        const p = h.nextElementSibling;
-        h.classList.toggle("is-open");
-        if (p) p.style.maxHeight = h.classList.contains("is-open")
-          ? p.scrollHeight + "px"
-          : "0";
+    document
+      .querySelectorAll("[data-accordion] .accordion-header")
+      .forEach((h) => {
+        h.addEventListener("click", () => {
+          const p = h.nextElementSibling;
+          h.classList.toggle("is-open");
+          if (p)
+            p.style.maxHeight = h.classList.contains("is-open")
+              ? p.scrollHeight + "px"
+              : "0";
+        });
       });
-    });
   }
 
   /* ------------------- BOUTON HAUT DE PAGE ------------------- */
   function initBackToTop() {
     const btn = document.getElementById("back-to-top");
     if (!btn) return;
+
     window.addEventListener("scroll", () => {
-      btn.style.display = window.scrollY > 250 ? "flex" : "none";
+      if (window.scrollY > 250) {
+        btn.classList.add("is-visible");
+      } else {
+        btn.classList.remove("is-visible");
+      }
     });
+
     btn.addEventListener("click", () =>
       window.scrollTo({ top: 0, behavior: "smooth" })
     );
@@ -82,9 +91,9 @@
     // Score global pondéré
     const global = Math.round(
       scoreAllocation * 0.25 +
-      scoreGouv * 0.35 +
-      scoreRend * 0.25 +
-      scoreConf * 0.15
+        scoreGouv * 0.35 +
+        scoreRend * 0.25 +
+        scoreConf * 0.15
     );
 
     const setScore = (id, value) => {
@@ -126,7 +135,7 @@
       scoreGouv,
       scoreRend,
       scoreConf,
-      global
+      global,
     });
   }
 
@@ -138,7 +147,9 @@
     initAccordion();
     initBackToTop();
     initStrategicAnalysis();
-    console.info("✅ Audit Numérion gth injecté avec hyperpuissance stratégique.");
+    console.info(
+      "✅ Audit Numérion injecté avec hyperpuissance stratégique (board-ready)."
+    );
   }
 
   if (document.readyState === "loading") {
