@@ -316,77 +316,6 @@
           </div>
         </div>
 
-        <!-- Repères historiques -->
-        <h3 style="margin-top:1.2rem;font-size:0.9rem;font-weight:650;">
-          Repères historiques (ordre de grandeur)
-        </h3>
-        <p class="small muted" style="margin-bottom:0.4rem;">
-          Illustration pédagogique&nbsp;: que serait devenu un capital de <strong>__HISTO_BASE_CAPITAL__ €</strong>
-          sur <strong>__HISTO_PERIODE__</strong> dans différents univers d’actifs, comparé à du cash non investi.
-        </p>
-
-        <div class="history-block">
-          <div class="history-grid">
-            <!-- Carte BTC -->
-            <article class="history-card">
-              <div class="history-label">Bitcoin (BTC)</div>
-              <div class="history-metric">≈ __HISTO_BTC_ANNUAL__ % / an</div>
-              <div class="history-value">Capital simulé&nbsp;: __HISTO_BTC_VALUE__ €</div>
-              <p class="history-sub">
-                __HISTO_BTC_COMMENT__
-              </p>
-              <div class="history-tag history-tag-volatile">
-                <span class="dot"></span> Volatilité extrême · actif purement numérique
-              </div>
-            </article>
-
-            <!-- Carte actions mondiales -->
-            <article class="history-card">
-              <div class="history-label">Actions mondiales (MSCI World)</div>
-              <div class="history-metric">≈ __HISTO_MSCI_ANNUAL__ % / an</div>
-              <div class="history-value">Capital simulé&nbsp;: __HISTO_MSCI_VALUE__ €</div>
-              <p class="history-sub">
-                __HISTO_MSCI_COMMENT__
-              </p>
-              <div class="history-tag history-tag-equity">
-                <span class="dot"></span> Portefeuille diversifié grandes capitalisations
-              </div>
-            </article>
-
-            <!-- Carte Tesla -->
-            <article class="history-card">
-              <div class="history-label">Tesla (exemple d’action de croissance)</div>
-              <div class="history-metric">≈ __HISTO_TSLA_ANNUAL__ % / an</div>
-              <div class="history-value">Capital simulé&nbsp;: __HISTO_TSLA_VALUE__ €</div>
-              <p class="history-sub">
-                __HISTO_TSLA_COMMENT__
-              </p>
-              <div class="history-tag history-tag-growth">
-                <span class="dot"></span> Cas extrême de croissance · risque idiosyncratique élevé
-              </div>
-            </article>
-
-            <!-- Carte cash / inflation -->
-            <article class="history-card">
-              <div class="history-label">Cash en euro (compte courant)</div>
-              <div class="history-metric">≈ __HISTO_INFLATION_ANNUAL__ % d’inflation / an</div>
-              <div class="history-value">Pouvoir d’achat résiduel&nbsp;: __HISTO_INFLATION_VALUE__ €</div>
-              <p class="history-sub">
-                __HISTO_INFLATION_COMMENT__
-              </p>
-              <div class="history-tag history-tag-cash">
-                <span class="dot"></span> Sécurité nominale · érosion silencieuse du pouvoir d’achat
-              </div>
-            </article>
-          </div>
-
-          <p class="history-footnote small muted">
-            Les performances passées ne préjugent pas des performances futures. Ces ordres de grandeur sont basés sur
-            des données publiques agrégées, arrondies pour simplification pédagogique. Ils servent à positionner
-            la poche numérique proposée pour __NOM_ENTREPRISE__ par rapport à des trajectoires historiques connues.
-          </p>
-        </div>
-
         <div class="badge" style="margin-top:0.8rem">
           <span class="dot"></span>
           Ces scénarios sont fournis à titre pédagogique (périmètre informatif). La décision d’allocation reste à la main de votre direction.
@@ -773,9 +702,110 @@
           <div class="insight-comment" id="comment-global"></div>
         </div>
 
+        <!-- Bloc 1 : Indice d’opportunité temporelle Numérion™ -->
+        <div class="timing-block">
+          <div class="timing-header">
+            <div>
+              <div class="timing-kicker">Extension IA Numérion™</div>
+              <div class="timing-title">Indice d’opportunité temporelle</div>
+            </div>
+            <div class="timing-tag">Fenêtre de marché · 0–100</div>
+          </div>
+
+          <div class="timing-main">
+            <div class="timing-score-main" id="timing-index-score">__TIMING_INDEX_PLACEHOLDER__</div>
+            <div class="timing-bar">
+              <div class="timing-bar-fill" id="timing-index-bar"></div>
+            </div>
+            <div class="timing-comment" id="timing-index-comment">
+              Lecture IA Numérion en cours de calcul…
+            </div>
+          </div>
+
+          <div class="timing-subgrid">
+            <div class="timing-pill">
+              <div class="timing-pill-label">Cycle crypto &amp; valorisation</div>
+              <div class="timing-pill-score" id="timing-market-score"></div>
+              <div class="timing-pill-sub" id="timing-market-comment"></div>
+            </div>
+            <div class="timing-pill">
+              <div class="timing-pill-label">Inflation &amp; taux directeurs</div>
+              <div class="timing-pill-score" id="timing-macro-score"></div>
+              <div class="timing-pill-sub" id="timing-macro-comment"></div>
+            </div>
+            <div class="timing-pill">
+              <div class="timing-pill-label">Position financière de __NOM_ENTREPRISE__</div>
+              <div class="timing-pill-score" id="timing-enterprise-score"></div>
+              <div class="timing-pill-sub" id="timing-enterprise-comment"></div>
+            </div>
+          </div>
+
+          <p class="timing-note small muted">
+            L’indice d’opportunité temporelle résume trois axes pondérés : cycle de marché crypto,
+            environnement macro (inflation / taux) et capacité de résilience de __NOM_ENTREPRISE__.
+          </p>
+        </div>
+
+        <!-- Bloc 2 : Comparatif de performance historique sectorielle -->
+        <div class="sector-performance">
+          <div class="sector-header">
+            Comparatif historique sur 10 ans — cash, secteur &amp; actifs numériques
+          </div>
+          <table class="perf-table" aria-label="Comparatif historique sur 10 ans">
+            <tr>
+              <th>Référence</th>
+              <th>Performance cumulée estimative</th>
+              <th>Volatilité relative</th>
+              <th>Rôle dans la poche numérique</th>
+            </tr>
+            <tr>
+              <td>
+                <span class="perf-label">Cash (trésorerie non investie)</span>
+              </td>
+              <td class="perf-value">__PERF_CASH_10Y__ %</td>
+              <td>Très faible</td>
+              <td>Réserve de sécurité, liquidité immédiate.</td>
+            </tr>
+            <tr>
+              <td>
+                <span class="perf-label">Indice secteur __SECTEUR__</span>
+              </td>
+              <td class="perf-value">__PERF_SECTEUR_10Y__ %</td>
+              <td>Moyenne</td>
+              <td>Proxy économique du métier de __NOM_ENTREPRISE__.</td>
+            </tr>
+            <tr>
+              <td>
+                <span class="perf-label">Inflation zone euro</span>
+              </td>
+              <td class="perf-value">__PERF_INFLATION_10Y__ %</td>
+              <td>—</td>
+              <td>Référence d’érosion monétaire de long terme.</td>
+            </tr>
+            <tr>
+              <td>
+                <span class="perf-label">BTC / ETH (allocation numérique pédagogique)</span>
+              </td>
+              <td class="perf-value">__PERF_CRYPTO_10Y__ %</td>
+              <td>Élevée</td>
+              <td>
+                Fraction limitée de la trésorerie (poche __ALLOCATION_CIBLE__ %) avec règles strictes
+                de gouvernance et de prise de profits.
+              </td>
+            </tr>
+          </table>
+
+          <p class="small muted sector-note">
+            Ces ordres de grandeur sont fournis à titre pédagogique, sur la base d’hypothèses internes Numérion
+            et de données historiques publiques. Ils n’ont pas vocation à constituer une prévision ferme ni une
+            garantie de performance future.
+          </p>
+        </div>
+
         <div class="badge" style="margin-top:0.8rem">
           <span class="dot"></span>
-          Interprétation IA Numérion : estimation pondérée selon profil entreprise, gouvernance, tolérance risque et horizon financier.
+          Interprétation IA Numérion : estimation pondérée selon profil entreprise, cycle de marché
+          et environnement macro-financier.
         </div>
       </div>
     </section>
@@ -886,32 +916,6 @@
                 <p class="disclaimer">
                   <strong>MiCA</strong> : règlement européen relatif aux marchés de crypto-actifs, définissant un cadre
                   pour les émetteurs et les prestataires sur actifs numériques.
-                </p>
-              </div>
-            </div>
-          </article>
-
-          <!-- Annexe 5 repères historiques -->
-          <article class="accordion-item">
-            <header class="accordion-header">
-              <div class="accordion-header-title">Annexe 5 — Repères historiques &amp; limites d’interprétation</div>
-              <div class="accordion-icon">▶</div>
-            </header>
-            <div class="accordion-panel">
-              <div class="accordion-panel-inner">
-                <p class="disclaimer">
-                  Les repères historiques présentés (Bitcoin, actions mondiales, Tesla, cash / inflation) sont
-                  construits à partir de données publiques agrégées et arrondies, dans un but purement pédagogique.
-                </p>
-                <p class="disclaimer">
-                  Ils ne constituent ni une recommandation d’investissement, ni une prévision, ni une garantie de
-                  performance. Les trajectoires réelles observées dépendent fortement des dates d’investissement
-                  et de désinvestissement, des frais, de la fiscalité et des décisions de gestion.
-                </p>
-                <p class="disclaimer">
-                  L’objectif est de donner au board, à la direction financière et au comité d’audit un ordre de
-                  grandeur visuel des conséquences potentielles, à long terme, d’une thèse d’allocation ou de la
-                  conservation d’un excédent significatif en cash non rémunéré.
                 </p>
               </div>
             </div>
