@@ -430,47 +430,6 @@ main {
   color: var(--text-muted);
 }
 
-.snapshot-riskline {
-  margin-top: 0.8rem;
-  border-radius: var(--radius-soft);
-  border: 1px dashed #d1d5db;
-  background: #f9fafb;
-  padding: 0.6rem 0.7rem;
-  display: grid;
-  grid-template-columns: auto auto 1fr;
-  align-items: center;
-  gap: 0.55rem;
-  font-size: 0.8rem;
-}
-
-.snapshot-risk-label {
-  font-weight: 600;
-  color: var(--text-main);
-}
-
-.snapshot-risk-pill {
-  border-radius: var(--radius-pill);
-  padding: 0.15rem 0.6rem;
-  font-size: 0.72rem;
-  background: rgba(234,179,8,0.1);
-  color: #854d0e;
-  border: 1px solid rgba(234,179,8,0.6);
-  white-space: nowrap;
-}
-
-.snapshot-risk-note {
-  color: var(--text-muted);
-  font-size: 0.78rem;
-}
-
-.snapshot-bullets {
-  margin: 0.6rem 0 0;
-  padding-left: 1.1rem;
-  font-size: 0.8rem;
-  display: grid;
-  gap: 0.1rem;
-}
-
 /* Onepager (par défaut masqué) */
 .onepager {
   display: none;
@@ -1020,6 +979,75 @@ main {
   margin-top: 0.4rem;
 }
 
+/* ====== Section Analyse stratégique Numérion™ ====== */
+
+.strategy-grid {
+  margin-top: 0.8rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.9rem;
+}
+
+.strategy-card {
+  padding: 0.85rem 1rem;
+  border-radius: 0.9rem;
+  background: rgba(15, 23, 42, 0.92);
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.strategy-label {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #9ca3af;
+}
+
+.strategy-score {
+  font-size: 1.2rem;
+  font-weight: 650;
+  color: #e5e7eb;
+}
+
+.strategy-sub {
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
+.global-insight {
+  margin-top: 1.1rem;
+}
+
+.insight-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+}
+
+.insight-bar {
+  width: 100%;
+  height: 0.6rem;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.95);
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  overflow: hidden;
+}
+
+.insight-bar-fill {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, #22c55e, #facc15, #f97316);
+  transition: width 0.8s ease-out;
+}
+
+.insight-comment {
+  margin-top: 0.4rem;
+  font-size: 0.8rem;
+  color: #e5e7eb;
+}
+
 /* Responsive */
 @media (max-width: 880px) {
   .audit-header-inner {
@@ -1094,72 +1122,4 @@ main {
     max-width: 100%;
     margin: 0;
   }
-}
-/* ====== Section Analyse stratégique Numérion™ ====== */
-
-.strategy-grid {
-  margin-top: 0.8rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 0.9rem;
-}
-
-.strategy-card {
-  padding: 0.85rem 1rem;
-  border-radius: 0.9rem;
-  background: rgba(15, 23, 42, 0.92);
-  border: 1px solid rgba(148, 163, 184, 0.35);
-  display: flex;
-  flex-direction: column;
-  gap: 0.15rem;
-}
-
-.strategy-label {
-  font-size: 0.78rem;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: #9ca3af;
-}
-
-.strategy-score {
-  font-size: 1.2rem;
-  font-weight: 650;
-  color: #e5e7eb;
-}
-
-.strategy-sub {
-  font-size: 0.75rem;
-  color: #9ca3af;
-}
-
-.global-insight {
-  margin-top: 1.1rem;
-}
-
-.insight-label {
-  font-size: 0.8rem;
-  font-weight: 600;
-  margin-bottom: 0.35rem;
-}
-
-.insight-bar {
-  width: 100%;
-  height: 0.6rem;
-  border-radius: 999px;
-  background: rgba(15, 23, 42, 0.95);
-  border: 1px solid rgba(148, 163, 184, 0.4);
-  overflow: hidden;
-}
-
-.insight-bar-fill {
-  height: 100%;
-  width: 0;
-  background: linear-gradient(90deg, #22c55e, #facc15, #f97316);
-  transition: width 0.8s ease-out;
-}
-
-.insight-comment {
-  margin-top: 0.4rem;
-  font-size: 0.8rem;
-  color: #e5e7eb;
 }
