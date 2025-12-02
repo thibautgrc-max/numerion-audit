@@ -547,6 +547,119 @@ main {
   gap: 0.1rem;
 }
 
+/* ====== Bloc repères historiques de performance ====== */
+
+.history-block {
+  margin-top: 0.6rem;
+  border-radius: var(--radius-soft);
+  border: 1px dashed #d1d5db;
+  background: #f9fafb;
+  padding: 0.8rem 0.9rem 0.85rem;
+}
+
+.history-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.history-card {
+  border-radius: 0.8rem;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  padding: 0.7rem 0.8rem;
+  font-size: 0.8rem;
+  display: grid;
+  gap: 0.2rem;
+}
+
+.history-label {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--text-soft);
+}
+
+.history-metric {
+  font-size: 0.95rem;
+  font-weight: 650;
+  color: #022c22;
+}
+
+.history-value {
+  font-size: 0.8rem;
+  font-weight: 550;
+  color: #065f46;
+}
+
+.history-sub {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+}
+
+.history-tag {
+  margin-top: 0.25rem;
+  border-radius: var(--radius-pill);
+  padding: 0.14rem 0.58rem;
+  font-size: 0.7rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+}
+
+.history-tag .dot {
+  width: 0.32rem;
+  height: 0.32rem;
+  border-radius: 999px;
+}
+
+/* Variantes visuelles selon le type d’actif */
+.history-tag-volatile {
+  border-color: rgba(220,38,38,0.55);
+  background: rgba(254,226,226,0.7);
+  color: #991b1b;
+}
+
+.history-tag-volatile .dot {
+  background: #dc2626;
+}
+
+.history-tag-equity {
+  border-color: rgba(37,99,235,0.4);
+  background: rgba(219,234,254,0.75);
+  color: #1d4ed8;
+}
+
+.history-tag-equity .dot {
+  background: #2563eb;
+}
+
+.history-tag-growth {
+  border-color: rgba(234,179,8,0.6);
+  background: rgba(254,249,195,0.75);
+  color: #854d0e;
+}
+
+.history-tag-growth .dot {
+  background: #eab308;
+}
+
+.history-tag-cash {
+  border-color: rgba(107,114,128,0.5);
+  background: rgba(243,244,246,0.9);
+  color: #4b5563;
+}
+
+.history-tag-cash .dot {
+  background: #6b7280;
+}
+
+.history-footnote {
+  margin-top: 0.55rem;
+}
+
 /* Bandeau score de maturité */
 .maturity-strip {
   border-radius: 0.7rem;
@@ -1049,6 +1162,12 @@ main {
 }
 
 /* Responsive */
+@media (max-width: 960px) {
+  .history-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 880px) {
   .audit-header-inner {
     grid-template-columns: minmax(0,1fr);
@@ -1093,6 +1212,9 @@ main {
   .stress-grid,
   .signature-grid {
     grid-template-columns: minmax(0,1fr);
+  }
+  .history-grid {
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
