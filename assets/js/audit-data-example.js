@@ -165,39 +165,101 @@ window.AUDIT_DATA = {
   REPORT_T3_INCIDENTS: "—",
   REPORT_T4_INCIDENTS: "—",
 
-  // ===== Repères historiques (ordre de grandeur pédagogique) =====
-  HISTO_BASE_CAPITAL: "1 000 000",
-  HISTO_PERIODE: "10 ans",
+  // --- Bloc Timing & macro (à ajuster en fonction de ton analyse réelle) ---
+  TIMING_MARKET_SCORE: 68, // Lecture interne Numérion du cycle crypto (0–100)
+  TIMING_MACRO_SCORE: 60,  // Inflation, taux directeurs, liquidité globale
+  TIMING_ENTERPRISE_SCORE: 72, // Résilience propre à l’entreprise
 
-  // Bitcoin : ordre de grandeur sur ~10 ans, très forte volatilité
-  HISTO_BTC_ANNUAL: "30–40",
-  HISTO_BTC_VALUE: "≈ 13 000 000",
-  HISTO_BTC_COMMENT:
-    "Sur la dernière décennie, Bitcoin a connu des phases de hausse spectaculaires et des corrections violentes. " +
-    "Pour un investisseur très précoce et discipliné, l’ordre de grandeur historique se compte en multiples de x10 à x20 " +
-    "sur 10 ans, au prix d’une volatilité extrême et d’un risque de drawdown très élevé.",
+  TIMING_MARKET_COMMENT:
+    "Marché crypto en phase de normalisation après correction, avec valorisations jugées " +
+    "raisonnables au regard des cycles historiques.",
+  TIMING_MACRO_COMMENT:
+    "Inflation en décélération et trajectoire de taux directeurs plus lisible, " +
+    "avec une fenêtre potentielle pour des décisions graduelles.",
+  TIMING_ENTERPRISE_COMMENT:
+    "Trésorerie supérieure à 5 M€ et profil de risque compatible avec une poche numérique " +
+    "limitée, sous réserve de renforcer la gouvernance.",
 
-  // Actions mondiales (MSCI World) : ordre de grandeur long terme 6–9 % / an
-  HISTO_MSCI_ANNUAL: "7–8",
-  HISTO_MSCI_VALUE: "≈ 2 000 000",
-  HISTO_MSCI_COMMENT:
-    "Un portefeuille actions mondiales type MSCI World délivre historiquement une performance de l’ordre de 6–9 %/an " +
-    "sur longue période. 1 000 000 € investis pendant 10 ans se seraient situés autour de 1,8 à 2,1 M€ " +
-    "selon le point d’entrée et les frais.",
-
-  // Tesla : cas extrême d’action de croissance
-  HISTO_TSLA_ANNUAL: "30–40",
-  HISTO_TSLA_VALUE: "≈ 10 000 000",
-  HISTO_TSLA_COMMENT:
-    "Tesla illustre un cas extrême d’action de croissance : sur la décennie passée, la performance cumulée a été " +
-    "très largement supérieure à celle du marché, mais avec des drawdowns importants et une dépendance forte " +
-    "à une seule histoire d’entreprise.",
-
-  // Cash / inflation zone euro
-  HISTO_INFLATION_ANNUAL: "2–3",
-  HISTO_INFLATION_VALUE: "≈ 800 000",
-  HISTO_INFLATION_COMMENT:
-    "En conservant 1 000 000 € en cash non rémunéré sur 10 ans, le montant nominal reste identique, " +
-    "mais le pouvoir d’achat réel est rogné par l’inflation. Sur une inflation moyenne de 2–3 %/an, " +
-    "le pouvoir d’achat résiduel se situe autour de 75–85 % du montant d’origine."
+  // --- Bloc comparatif de performance historique (ordres de grandeur pédagogiques) ---
+  PERF_CASH_10Y: -15,          // Exemple : érosion cumulée liée à l’inflation
+  PERF_SECTEUR_10Y: 85,        // Exemple : indice secteur Tech sur 10 ans
+  PERF_INFLATION_10Y: 25,      // Exemple : inflation cumulée zone euro
+  PERF_CRYPTO_10Y: 1000        // Exemple : performances historiques BTC/ETH (ordre de grandeur)
 };
+
+// Hydratation de l’indice d’opportunité temporelle
+function buildTimingComment(score, data) {
+  if (score >= 75) {
+    return "Fenêtre jugée favorable pour initier ou renforcer progressivement une poche numérique, " +
+           "avec discipline de gouvernance et paliers d’allocation.";
+  }
+  if (score >= 55) {
+    return "Contexte intermédiaire : démarrage possible en mode test / pilote avec suivi rapproché " +
+           "et comités de revue fréquents.";
+  }
+  if (score >= 35) {
+    return "Fenêtre prudente : la priorité reste la consolidation de la trésorerie et de la gouvernance, " +
+           "avec une allocation numérique très limitée si elle est décidée.";
+  }
+  return "Contexte défavorable : focus recommandé sur la liquidité et la réduction des risques avant " +
+         "toute décision d’allocation numérique significative.";
+}
+
+function hydrateTimingAndPerformance(data) {
+  var market = typeof data.TIMING_MARKET_SCORE === "number" ? data.TIMING_MARKET_SCORE : 60;
+  var macro = typeof data.TIMING_MACRO_SCORE === "number" ? data.TIMING_MACRO_SCORE : 55;
+  var enterprise = typeof data.TIMING_ENTERPRISE_SCORE === "number" ? data.TIMING_ENTERPRISE_SCORE : 70;
+
+  // Pondération : 50 % marché, 30 % macro, 20 % profil entreprise
+  var timingIndex = Math.round(
+    0.5 * market +
+    0.3 * macro +
+    0.2 * enterprise
+  );
+
+  var scoreEl = document.getElementById("timing-index-score");
+  if (scoreEl) {
+    scoreEl.textContent = timingIndex + "/100";
+  }
+
+  var barEl = document.getElementById("timing-index-bar");
+  if (barEl) {
+    barEl.style.width = Math.max(0, Math.min(100, timingIndex)) + "%";
+  }
+
+  var commentEl = document.getElementById("timing-index-comment");
+  if (commentEl) {
+    commentEl.textContent = buildTimingComment(timingIndex, data);
+  }
+
+  var marketEl = document.getElementById("timing-market-score");
+  if (marketEl) {
+    marketEl.textContent = market + "/100";
+  }
+  var marketCommentEl = document.getElementById("timing-market-comment");
+  if (marketCommentEl && data.TIMING_MARKET_COMMENT) {
+    marketCommentEl.textContent = data.TIMING_MARKET_COMMENT;
+  }
+
+  var macroEl = document.getElementById("timing-macro-score");
+  if (macroEl) {
+    macroEl.textContent = macro + "/100";
+  }
+  var macroCommentEl = document.getElementById("timing-macro-comment");
+  if (macroCommentEl && data.TIMING_MACRO_COMMENT) {
+    macroCommentEl.textContent = data.TIMING_MACRO_COMMENT;
+  }
+
+  var enterpriseEl = document.getElementById("timing-enterprise-score");
+  if (enterpriseEl) {
+    enterpriseEl.textContent = enterprise + "/100";
+  }
+  var enterpriseCommentEl = document.getElementById("timing-enterprise-comment");
+  if (enterpriseCommentEl && data.TIMING_ENTERPRISE_COMMENT) {
+    enterpriseCommentEl.textContent = data.TIMING_ENTERPRISE_COMMENT;
+  }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  hydrateTimingAndPerformance(window.AUDIT_DATA || {});
+});
