@@ -77,14 +77,13 @@
       </nav>
 
       <div style="display:flex;gap:0.5rem;flex-wrap:wrap;justify-content:flex-end">
-        <!-- Ajouts -->
-        <button class="btn-print" id="btn-board-mode">
+        <button class="btn-print" id="btn-board-mode" type="button">
           <span>▣</span><span>Board Mode</span>
         </button>
-        <button class="btn-print" id="btn-export-json">
+        <button class="btn-print" id="btn-export-json" type="button">
           <span>{ }</span><span>Export JSON</span>
         </button>
-        <button class="btn-print" onclick="window.print()">
+        <button class="btn-print" type="button" onclick="window.print()">
           <span>⎙</span><span>Exporter en PDF / Imprimer</span>
         </button>
       </div>
@@ -902,7 +901,7 @@
 </main>
 
 <!-- Bouton haut de page -->
-<button id="back-to-top">
+<button id="back-to-top" type="button">
   <span class="icon">↑</span>
   <span>Haut de page</span>
 </button>
@@ -922,8 +921,47 @@
 <script src="assets/js/modules/insights.js"></script>
 <script src="assets/js/modules/timing.js"></script>
 <script src="assets/js/modules/export.js"></script>
+<script src="assets/js/modules/board.js"></script>
 
 <script src="assets/js/audit-engine.js"></script>
+
+<!-- Wiring boutons (Board + Export JSON) -->
+<script>
+  (function () {
+    "use strict";
+
+    function bind() {
+      const btnBoard = document.getElementById("btn-board-mode");
+      const btnJson = document.getElementById("btn-export-json");
+
+      if (btnBoard) {
+        btnBoard.addEventListener("click", function () {
+          if (window.NUMERION_BOARD && typeof window.NUMERION_BOARD.enter === "function") {
+            window.NUMERION_BOARD.enter();
+          } else {
+            console.warn("[Numérion] board.js non chargé (NUMERION_BOARD introuvable).");
+          }
+        });
+      }
+
+      if (btnJson) {
+        btnJson.addEventListener("click", function () {
+          if (window.NUMERION_EXPORT && typeof window.NUMERION_EXPORT.json === "function") {
+            window.NUMERION_EXPORT.json();
+          } else {
+            console.warn("[Numérion] export.js non initialisé (NUMERION_EXPORT introuvable).");
+          }
+        });
+      }
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", bind, { once: true });
+    } else {
+      bind();
+    }
+  })();
+</script>
 
 </body>
 </html>
