@@ -8,6 +8,7 @@
   <meta name="theme-color" content="#020617" />
   <link rel="stylesheet" href="assets/css/audit.css" />
 </head>
+
 <body>
 <main>
   <div class="page-shell">
@@ -70,12 +71,23 @@
         <button class="toolbar-link" data-scroll-to="section-risques"><span class="dot"></span> Risques &amp; contrôle</button>
         <button class="toolbar-link" data-scroll-to="section-gouvernance"><span class="dot"></span> Gouvernance &amp; readiness</button>
         <button class="toolbar-link" data-scroll-to="section-roadmap"><span class="dot"></span> Feuille de route</button>
+        <button class="toolbar-link" data-scroll-to="section-ai"><span class="dot"></span> IA Numérion</button>
         <button class="toolbar-link" data-scroll-to="section-analyse-strategique"><span class="dot"></span> Analyse stratégique</button>
         <button class="toolbar-link" data-scroll-to="section-annexes"><span class="dot"></span> Annexes</button>
       </nav>
-      <button class="btn-print" onclick="window.print()">
-        <span>⎙</span><span>Exporter en PDF / Imprimer</span>
-      </button>
+
+      <div style="display:flex;gap:0.5rem;flex-wrap:wrap;justify-content:flex-end">
+        <!-- Ajouts -->
+        <button class="btn-print" id="btn-board-mode">
+          <span>▣</span><span>Board Mode</span>
+        </button>
+        <button class="btn-print" id="btn-export-json">
+          <span>{ }</span><span>Export JSON</span>
+        </button>
+        <button class="btn-print" onclick="window.print()">
+          <span>⎙</span><span>Exporter en PDF / Imprimer</span>
+        </button>
+      </div>
     </div>
 
     <!-- SECTION 1 -->
@@ -245,7 +257,6 @@
           </tr>
         </table>
 
-        <!-- Lecture scénarios -->
         <h3 style="margin-top:1.2rem;font-size:0.9rem;font-weight:650;">Lecture scénarios (ordre de grandeur pédagogique)</h3>
         <table class="key-metrics" aria-label="Scénarios de performance pédagogique">
           <tr>
@@ -274,15 +285,12 @@
           </tr>
         </table>
 
-        <!-- Stress tests -->
         <div class="stress-tests">
           <div class="stress-title">Stress tests &amp; scénarios extrêmes (pédagogiques)</div>
           <div class="stress-grid">
             <div class="stress-card">
               <div class="stress-label">Scénario “choc marché”</div>
-              <div class="stress-sub">
-                BTC -50 % / ETH -60 % sur une période courte.
-              </div>
+              <div class="stress-sub">BTC -50 % / ETH -60 % sur une période courte.</div>
               <div class="stress-impact">
                 Impact max estimé sur la poche :
                 <strong>__STRESS_CHOC_IMPACT_EURO__ €</strong>
@@ -295,23 +303,15 @@
             </div>
             <div class="stress-card">
               <div class="stress-label">Scénario “marché latéral”</div>
-              <div class="stress-sub">
-                Performance globale proche de 0 % sur la poche numérique.
-              </div>
+              <div class="stress-sub">Performance globale proche de 0 % sur la poche numérique.</div>
               <div class="stress-impact">__STRESS_LATERAL_COMMENT__</div>
-              <div class="stress-note">
-                Lecture direction : la priorité devient le coût d’opportunité vs autres placements.
-              </div>
+              <div class="stress-note">Lecture direction : la priorité devient le coût d’opportunité vs autres placements.</div>
             </div>
             <div class="stress-card">
               <div class="stress-label">Scénario “cycle complet”</div>
-              <div class="stress-sub">
-                Réalisation d’un cycle haussier complet puis consolidation contrôlée.
-              </div>
+              <div class="stress-sub">Réalisation d’un cycle haussier complet puis consolidation contrôlée.</div>
               <div class="stress-impact">__STRESS_CYCLE_COMMENT__</div>
-              <div class="stress-note">
-                Lecture board : justifie une vision long terme avec revue annuelle structurée.
-              </div>
+              <div class="stress-note">Lecture board : justifie une vision long terme avec revue annuelle structurée.</div>
             </div>
           </div>
         </div>
@@ -330,9 +330,7 @@
           <div class="section-kicker">Section 4</div>
           <h2 class="section-title" id="risques-title">Matrice des risques &amp; dispositifs de contrôle recommandés</h2>
         </div>
-        <div class="section-tag">
-          <span class="dot"></span> Support pour comité d’audit &amp; CAC
-        </div>
+        <div class="section-tag"><span class="dot"></span> Support pour comité d’audit &amp; CAC</div>
       </header>
       <div class="section-body">
         <p>
@@ -412,9 +410,7 @@
           <div class="section-kicker">Section 5</div>
           <h2 class="section-title" id="gouvernance-title">Gouvernance MiCA, readiness opérationnelle &amp; organisation</h2>
         </div>
-        <div class="section-tag">
-          <span class="dot"></span> Dossier opposable audit
-        </div>
+        <div class="section-tag"><span class="dot"></span> Dossier opposable audit</div>
       </header>
       <div class="section-body">
         <p>
@@ -462,9 +458,7 @@
           <div class="info-block">
             <div class="info-label">Mode de conservation envisagé</div>
             <div class="info-value">__MODE_CONSERVATION__</div>
-            <div class="info-sub">
-              Ex : PSAN agréé AMF + procédures d’accès multi-signatures.
-            </div>
+            <div class="info-sub">Ex : PSAN agréé AMF + procédures d’accès multi-signatures.</div>
           </div>
           <div class="info-block">
             <div class="info-label">Niveau de conformité MiCA déclaré</div>
@@ -474,9 +468,7 @@
           <div class="info-block">
             <div class="info-label">Nombre de signataires &amp; portée décisionnelle</div>
             <div class="info-value">__NOMBRE_SIGNATAIRES__ · __PORTEE_DECISION__</div>
-            <div class="info-sub">
-              Important pour la définition des seuils, pouvoirs et contrôles internes.
-            </div>
+            <div class="info-sub">Important pour la définition des seuils, pouvoirs et contrôles internes.</div>
           </div>
         </div>
 
@@ -495,9 +487,7 @@
           <div class="section-kicker">Section 6</div>
           <h2 class="section-title" id="roadmap-title">Feuille de route opérationnelle proposée</h2>
         </div>
-        <div class="section-tag">
-          <span class="dot"></span> Plan d’action en 3 phases
-        </div>
+        <div class="section-tag"><span class="dot"></span> Plan d’action en 3 phases</div>
       </header>
       <div class="section-body">
         <p>
@@ -553,7 +543,6 @@
           </article>
         </div>
 
-        <!-- Modèle de reporting trimestriel -->
         <h3 style="margin-top:1.2rem;font-size:0.9rem;font-weight:650;">Modèle de reporting trimestriel standard</h3>
         <p class="small muted" style="margin-bottom:0.4rem">
           Le tableau ci-dessous illustre un format de suivi trimestriel pouvant être repris tel quel dans vos comités financiers et comités d’audit.
@@ -596,7 +585,6 @@
           </tr>
         </table>
 
-        <!-- Check-list & indicateurs -->
         <div class="checklist-block">
           <div class="checklist-title">Check-list comité d’audit / commissaire aux comptes</div>
           <ul class="checklist-list">
@@ -654,6 +642,23 @@
       </div>
     </section>
 
+    <!-- SECTION IA NUMÉRION (AJOUT) -->
+    <section id="section-ai" class="audit-section card" aria-labelledby="ai-title">
+      <header class="audit-section-header">
+        <div>
+          <div class="section-kicker">AI Layer</div>
+          <h2 class="section-title" id="ai-title">Analyse IA Numérion™ — Executive Intelligence</h2>
+        </div>
+        <div class="section-tag">
+          <span class="dot"></span> Board-mode insights
+        </div>
+      </header>
+      <div class="section-body">
+        <!-- Rempli par modules/insights.js -->
+        <div id="ai-insights"></div>
+      </div>
+    </section>
+
     <!-- SECTION 6B : ANALYSE STRATÉGIQUE NUMÉRION -->
     <section id="section-analyse-strategique" class="audit-section card" aria-labelledby="analyse-title">
       <header class="audit-section-header">
@@ -667,7 +672,7 @@
       </header>
       <div class="section-body">
         <p>
-          Cette section fournit une <strong>lecture consolidée des données financières, de gouvernance et de maturité</strong> 
+          Cette section fournit une <strong>lecture consolidée des données financières, de gouvernance et de maturité</strong>
           issues du dossier __NOM_ENTREPRISE__, traduite en indicateurs stratégiques pondérés par le moteur Numérion IA.
         </p>
 
@@ -702,7 +707,6 @@
           <div class="insight-comment" id="comment-global"></div>
         </div>
 
-        <!-- Bloc 1 : Indice d’opportunité temporelle Numérion™ -->
         <div class="timing-block">
           <div class="timing-header">
             <div>
@@ -717,9 +721,7 @@
             <div class="timing-bar">
               <div class="timing-bar-fill" id="timing-index-bar"></div>
             </div>
-            <div class="timing-comment" id="timing-index-comment">
-              Lecture IA Numérion en cours de calcul…
-            </div>
+            <div class="timing-comment" id="timing-index-comment">Lecture IA Numérion en cours de calcul…</div>
           </div>
 
           <div class="timing-subgrid">
@@ -746,7 +748,6 @@
           </p>
         </div>
 
-        <!-- Bloc 2 : Comparatif de performance historique sectorielle -->
         <div class="sector-performance">
           <div class="sector-header">
             Comparatif historique sur 10 ans — cash, secteur &amp; actifs numériques
@@ -759,33 +760,25 @@
               <th>Rôle dans la poche numérique</th>
             </tr>
             <tr>
-              <td>
-                <span class="perf-label">Cash (trésorerie non investie)</span>
-              </td>
+              <td><span class="perf-label">Cash (trésorerie non investie)</span></td>
               <td class="perf-value">__PERF_CASH_10Y__ %</td>
               <td>Très faible</td>
               <td>Réserve de sécurité, liquidité immédiate.</td>
             </tr>
             <tr>
-              <td>
-                <span class="perf-label">Indice secteur __SECTEUR__</span>
-              </td>
+              <td><span class="perf-label">Indice secteur __SECTEUR__</span></td>
               <td class="perf-value">__PERF_SECTEUR_10Y__ %</td>
               <td>Moyenne</td>
               <td>Proxy économique du métier de __NOM_ENTREPRISE__.</td>
             </tr>
             <tr>
-              <td>
-                <span class="perf-label">Inflation zone euro</span>
-              </td>
+              <td><span class="perf-label">Inflation zone euro</span></td>
               <td class="perf-value">__PERF_INFLATION_10Y__ %</td>
               <td>—</td>
               <td>Référence d’érosion monétaire de long terme.</td>
             </tr>
             <tr>
-              <td>
-                <span class="perf-label">BTC / ETH (allocation numérique pédagogique)</span>
-              </td>
+              <td><span class="perf-label">BTC / ETH (allocation numérique pédagogique)</span></td>
               <td class="perf-value">__PERF_CRYPTO_10Y__ %</td>
               <td>Élevée</td>
               <td>
@@ -817,9 +810,7 @@
           <div class="section-kicker">Section 7</div>
           <h2 class="section-title" id="annexes-title">Annexes, glossaire &amp; limites de l’audit</h2>
         </div>
-        <div class="section-tag">
-          <span class="dot"></span> À disposition des auditeurs &amp; du comité d’audit
-        </div>
+        <div class="section-tag"><span class="dot"></span> À disposition des auditeurs &amp; du comité d’audit</div>
       </header>
       <div class="section-body">
         <div class="accordion" data-accordion>
@@ -872,9 +863,7 @@
             </header>
             <div class="accordion-panel">
               <div class="accordion-panel-inner">
-                <p class="disclaimer">
-                  Les données utilisées pour cet audit proviennent principalement :
-                </p>
+                <p class="disclaimer">Les données utilisées pour cet audit proviennent principalement :</p>
                 <ul class="disclaimer-list">
                   <li>Du formulaire Numérion transmis par __NOM_ENTREPRISE__ en date du <strong>__DATE_FORMULAIRE__</strong>.</li>
                   <li>Des informations complémentaires partagées lors des échanges éventuels (visio / emails).</li>
@@ -897,26 +886,11 @@
             </header>
             <div class="accordion-panel">
               <div class="accordion-panel-inner">
-                <p class="disclaimer">
-                  <strong>Poche de trésorerie numérique</strong> : fraction de la trésorerie confiée à des actifs numériques
-                  (BTC, ETH, stablecoins, etc.) dans une logique de diversification et de protection contre l’inflation.
-                </p>
-                <p class="disclaimer">
-                  <strong>PSAN</strong> : Prestataire de Services sur Actifs Numériques, régulé par l’AMF pour exercer
-                  certaines activités (conservation, achat/vente, etc.).
-                </p>
-                <p class="disclaimer">
-                  <strong>Stablecoin</strong> : actif numérique visant à répliquer la valeur d’une devise (EUR, USD, etc.),
-                  avec un mécanisme de réserve ou d’algorithme selon les projets.
-                </p>
-                <p class="disclaimer">
-                  <strong>Juste valeur (IFRS)</strong> : valeur de marché d’un actif à la date de clôture, supposant une
-                  transaction normale entre parties informées et consentantes.
-                </p>
-                <p class="disclaimer">
-                  <strong>MiCA</strong> : règlement européen relatif aux marchés de crypto-actifs, définissant un cadre
-                  pour les émetteurs et les prestataires sur actifs numériques.
-                </p>
+                <p class="disclaimer"><strong>Poche de trésorerie numérique</strong> : fraction de la trésorerie confiée à des actifs numériques.</p>
+                <p class="disclaimer"><strong>PSAN</strong> : Prestataire de Services sur Actifs Numériques, régulé par l’AMF.</p>
+                <p class="disclaimer"><strong>Stablecoin</strong> : actif numérique visant à répliquer la valeur d’une devise.</p>
+                <p class="disclaimer"><strong>Juste valeur (IFRS)</strong> : valeur de marché d’un actif à la date de clôture.</p>
+                <p class="disclaimer"><strong>MiCA</strong> : règlement européen relatif aux marchés de crypto-actifs.</p>
               </div>
             </div>
           </article>
@@ -933,9 +907,23 @@
   <span>Haut de page</span>
 </button>
 
-<!-- Données d’audit (exemple / client) -->
+<!-- =========================
+     Scripts (ordre critique)
+     ========================= -->
+
+<script src="assets/js/audit-config.js"></script>
+<script src="assets/js/audit-schema.js"></script>
+
+<!-- Data : remplace par audit-data.js pour un client réel -->
 <script src="assets/js/audit-data-example.js"></script>
-<!-- Moteur d’injection & interactions -->
+
+<script src="assets/js/modules/dom.js"></script>
+<script src="assets/js/modules/scoring.js"></script>
+<script src="assets/js/modules/insights.js"></script>
+<script src="assets/js/modules/timing.js"></script>
+<script src="assets/js/modules/export.js"></script>
+
 <script src="assets/js/audit-engine.js"></script>
+
 </body>
 </html>
